@@ -2,7 +2,7 @@
 name: KPT 회고 이슈카드 양식
 about: 'KPT 회고 이슈카드 '
 title: ''
-labels: retrospect
+labels: ''
 assignees: ''
 
 ---
