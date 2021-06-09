@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import axios from "axios"
+import React from "react"
+require("dotenv").config()
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+class App extends React.Component {
+  constructor(props) {
+    super(props) 
+    this.state = {
+      hello: null,
+    }
+    this.getSomething = this.getSomething.bind(this)
+  }
+  getSomething() {  
+    console.log(`${process.env.REACT_APP_API_URL}`)
+    axios
+      .get(`${process.env.REACT_APP_API_URL}`)
+      .then(res => {  
+        this.setState({
+          hello: res.data
+        })
+      })
+      .catch(err => console.log(err))
+  }
+
+  componentDidMount() {
+    this.getSomething()
+  }
+
+  render() { 
+    return(
+      <div>
+        {this.state.hello}
+        hello world!
+      </div>
+    );
+  }
 }
 
 export default App;
