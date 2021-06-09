@@ -1,5 +1,8 @@
 import axios from "axios"
 import React from "react"
+
+import { Switch, Route, Redirect, withRouter } from "react-router-dom";
+
 require("dotenv").config()
 
 
@@ -31,11 +34,10 @@ class App extends React.Component {
   render() { 
     return(
       <div>
-        {this.state.hello}
         hello world!
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
