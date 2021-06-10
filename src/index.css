@@ -45,3 +45,66 @@ body {
   padding: 0.4rem;
   margin: 0.4rem;
 }
+
+article {
+  width: 35%;
+  height: 65%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  border: 1px black solid;
+  padding: 0;
+  margin: 0;
+}
+
+article > button {
+  width: 260px;
+  height: 40px;
+  border: 1px solid white;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+article > button:hover {
+  cursor: pointer;
+}
+
+.GithubBtn {
+  background-color: black;
+  color: white;
+}
+
+article > input {
+  width: 260px;
+  height: 40px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  margin: 8px;
+  outline-style: none;
+}
+
+.middleLine {
+  display: flex;
+  flex-basis: 100%;
+  margin: 10px 0px;
+  align-items: center;
+  font-size: 12px;
+  color: balck;
+}
+.middleLine::before,
+.middleLine::after {
+  content: "";
+  flex-grow: 1;
+  background: black;
+  height: 1px;
+  font-size: 0px;
+  line-height: 0px;
+  margin: 0px 70px;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 12px;
+}
