@@ -1,42 +1,36 @@
-import axios from "axios"
-import React from "react"
+import axios from "axios";
+import React from "react";
 
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
-require("dotenv").config()
-
-
+require("dotenv").config();
 
 class App extends React.Component {
   constructor(props) {
-    super(props) 
+    super(props);
     this.state = {
       hello: null,
-    }
-    this.getSomething = this.getSomething.bind(this)
+    };
+    this.getSomething = this.getSomething.bind(this);
   }
-  getSomething() {  
-    console.log(`${process.env.REACT_APP_API_URL}`)
+  getSomething() {
+    console.log(`${process.env.REACT_APP_API_URL}`);
     axios
       .get(`${process.env.REACT_APP_API_URL}`)
-      .then(res => {  
+      .then((res) => {
         this.setState({
-          hello: res.data
-        })
+          hello: res.data,
+        });
       })
-      .catch(err => console.log(err))
+      .catch((err) => console.log(err));
   }
 
   componentDidMount() {
-    this.getSomething()
+    this.getSomething();
   }
 
-  render() { 
-    return(
-      <div>
-        hello world!
-      </div>
-    );
+  render() {
+    return <div>hello world!</div>;
   }
 }
 
