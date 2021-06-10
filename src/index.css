@@ -5,9 +5,11 @@
 html,
 body,
 #root {
-  display: flex;
-  height: 100vh;
+  margin: 0;
+  padding: 0;
   width: 100vw;
+  height: 100vh;
+  display: flex;
 }
 
 .landing-container {
@@ -136,9 +138,7 @@ body,
   height: 60px;
 }
 
-/*
-//// Login Page ////
- article {
+article {
   width: 35%;
   height: 65%;
   display: flex;
@@ -187,7 +187,7 @@ article > input {
 }
 .middleLine::before,
 .middleLine::after {
-  content: "";
+  content: '';
   flex-grow: 1;
   background: black;
   height: 1px;
@@ -199,9 +199,7 @@ article > input {
 .errorMessage {
   color: red;
   font-size: 12px;
-} 
-//// Login Page ////
-*/
+}
 
 #signupComp {
   padding: 20px 5px 10px 5px;
