@@ -1,16 +1,16 @@
-.landing-container{
+.landing-container {
   width: 100vw;
   height: 100vh;
-  display:flex;
+  display: flex;
   flex-direction: column;
 }
-.signbtn-container{
+.signbtn-container {
   background-color: rgb(210, 214, 211);
-  display:flex;
-  justify-content:flex-end;
+  display: flex;
+  justify-content: flex-end;
 }
 
-#signBtn{
+#signBtn {
   font-weight: bold;
   background-color: #596e9b;
   color: white;
@@ -20,21 +20,21 @@
   cursor: pointer;
 }
 
-#signBtn:hover{
+#signBtn:hover {
   background-color: rgba(39, 39, 185, 0.918);
 }
 
-.main-container{
+.main-container {
   background-color: rgb(210, 214, 211);
-  display:flex;
-  justify-content:center;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  flex:1;
+  flex: 1;
 }
 
-.main{
+.main {
   background-color: rgb(218, 231, 222);
-  width:50%;
+  width: 50%;
   padding: 2rem;
   box-shadow: 12px 12px 20px 1px rgba(0, 0, 255, 0.116);
   align-items: center;
@@ -42,13 +42,13 @@
   flex-direction: column;
 }
 
-.logo-container{
-  display:flex;
+.logo-container {
+  display: flex;
   flex-direction: column;
   align-items: center;
   font-size: 4rem;
   color: red;
-  color:rgba(13, 13, 224, 0.918);
+  color: rgba(13, 13, 224, 0.918);
   /*animation: fadein 3s;
   -moz-animation: fadein 3s;  Firefox 
   -webkit-animation: fadein 3s;  Safari and Chrome
@@ -87,19 +87,19 @@
   }
 }*/
 
-.logosample{
-  width:100px;
-  height:100px;
+.logosample {
+  width: 100px;
+  height: 100px;
   background-color: rgba(39, 39, 185, 0.918);
   border-radius: 1rem;
 }
 
-.intro{
-  line-height:2rem;
+.intro {
+  line-height: 2rem;
   text-align: center;
 }
 
-#start-btn{
+#start-btn {
   box-sizing: border-box;
   width: 50%;
   font-size: 24px;
@@ -112,14 +112,77 @@
   cursor: pointer;
 }
 
-#start-btn:hover{
+#start-btn:hover {
   background-color: rgba(39, 39, 185, 0.918);
 }
 
-#footer{
+#footer {
   text-align: center;
   line-height: 60px;
   background-color: rgb(188, 206, 207);
   padding: 1rem;
   height: 60px;
+}
+
+article {
+  width: 35%;
+  height: 65%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  border: 1px black solid;
+  padding: 0;
+  margin: 0;
+}
+
+article > button {
+  width: 260px;
+  height: 40px;
+  border: 1px solid white;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+article > button:hover {
+  cursor: pointer;
+}
+
+.GithubBtn {
+  background-color: black;
+  color: white;
+}
+
+article > input {
+  width: 260px;
+  height: 40px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  margin: 8px;
+  outline-style: none;
+}
+
+.middleLine {
+  display: flex;
+  flex-basis: 100%;
+  margin: 10px 0px;
+  align-items: center;
+  font-size: 12px;
+  color: balck;
+}
+.middleLine::before,
+.middleLine::after {
+  content: "";
+  flex-grow: 1;
+  background: black;
+  height: 1px;
+  font-size: 0px;
+  line-height: 0px;
+  margin: 0px 70px;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 12px;
 }
