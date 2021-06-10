@@ -1,3 +1,15 @@
+*{
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  display:flex;
+}
+
 .landing-container {
   width: 100vw;
   height: 100vh;
@@ -16,7 +28,7 @@
   color: white;
   border-style: none;
   padding: 1rem;
-  margin: 1rem;
+  margin: 1rem; 
   cursor: pointer;
 }
 
@@ -124,8 +136,7 @@
   height: 60px;
 }
 
-/*
-//// Login Page ////
+
  article {
   width: 35%;
   height: 65%;
@@ -188,5 +199,5 @@ article > input {
   color: red;
   font-size: 12px;
 } 
-//// Login Page ////
-*/
+
+
