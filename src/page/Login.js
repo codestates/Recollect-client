@@ -1,5 +1,7 @@
 import axios from "axios";
 import React from "react";
+import Footer from "../components/Footer";
+import BackBtn from "../components/BackBtn";
 
 class Login extends React.Component {
   constructor(props) {
@@ -9,7 +11,7 @@ class Login extends React.Component {
       password: "",
       errorMessage: "",
       GITHUB_LOGIN_URL:
-        "https://github.com/login/oauth/authorize?client_id=깃허브클라이언트아이디",
+        "https://github.com/login/oauth/authorize?client_id=749cea90f0ee8535f1fa",
     };
     this.handleInputValue = this.handleInputValue.bind(this);
     this.handleSocialLogin = this.handleSocialLogin.bind(this);
@@ -20,7 +22,7 @@ class Login extends React.Component {
 
   // 소셜로그인 페이지로 이동 메소드 //
   handleSocialLogin = () => {
-    window.location.assign(this.GITHUB_LOGIN_URL);
+    window.location.assign(this.state.GITHUB_LOGIN_URL);
   };
 
   //// 홈페이지 로그인 메소드 - 시작 ////
@@ -51,39 +53,46 @@ class Login extends React.Component {
     }
   };
 
-  componentDidUpdate() {}
-
   render() {
     return (
       <div className="LoginContainer">
-        <h1>LOGIN</h1>
-        <article>
-          <button className="GithubBtn" onClick={this.handleSocialLogin}>
-            GitHub
-          </button>
-          <div>
-            <div className="middleLine">OR</div>
-          </div>
-          <input
-            type="email"
-            placeholder="Email"
-            className="email"
-            onChange={this.handleInputValue("email")}
+        <div className="mainContainer">
+          <BackBtn
+            dummyprops={this.props}
+            // onClick={this.props.routeToSomewhere}
+            // target={"/"}
+            // routeToSomewhere={this.props.routeToSomewhere}
           />
-          <input
-            type="password"
-            placeholder="Password"
-            className="pwd"
-            onChange={this.handleInputValue("password")}
-          />
-          <button onClick={this.handleLogin}>Log In</button>
-          <div>
-            <div className="middleLine">OR</div>
-          </div>
-          <button>Create Account</button>
+          <h1>LOGIN</h1>
+          <article>
+            <button id="GithubBtn" onClick={this.handleSocialLogin}>
+              GitHub
+            </button>
+            <div>
+              <div className="seperatingLine">OR</div>
+            </div>
+            <input
+              type="email"
+              placeholder="Email"
+              className="email"
+              onChange={this.handleInputValue("email")}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              className="pwd"
+              onChange={this.handleInputValue("password")}
+            />
+            <button onClick={this.handleLogin}>Log In</button>
+            <div>
+              <div className="seperatingLine">OR</div>
+            </div>
+            <button>Create Account</button>
 
-          <p className="errorMessage"> {this.state.errorMessage} </p>
-        </article>
+            <p className="errorMessage"> {this.state.errorMessage} </p>
+          </article>
+        </div>
+        <Footer />
       </div>
     );
   }
