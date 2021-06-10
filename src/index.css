@@ -17,14 +17,14 @@ html, body, #root {
   flex-direction: column;
 }
 .signbtn-container {
-  background-color: rgb(210, 214, 211);
+  background-color: var(--main-bg-color);
   display: flex;
   justify-content: flex-end;
 }
 
 #signBtn {
   font-weight: bold;
-  background-color: #596e9b;
+  background-color: var(--btn-color);
   color: white;
   border-style: none;
   padding: 1rem;
@@ -33,11 +33,11 @@ html, body, #root {
 }
 
 #signBtn:hover {
-  background-color: rgba(39, 39, 185, 0.918);
+  background-color: var(--btn-hover-color);
 }
 
 .main-container {
-  background-color: rgb(210, 214, 211);
+  background-color:var(--main-bg-color);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,10 +45,10 @@ html, body, #root {
 }
 
 .main {
-  background-color: rgb(218, 231, 222);
+  background-color: var(--container-color);
   width: 50%;
   padding: 2rem;
-  box-shadow: 12px 12px 20px 1px rgba(0, 0, 255, 0.116);
+  box-shadow: var(--box-shadow);
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -59,14 +59,13 @@ html, body, #root {
   flex-direction: column;
   align-items: center;
   font-size: 4rem;
-  color: red;
   color: rgba(13, 13, 224, 0.918);
-  /*animation: fadein 3s;
-  -moz-animation: fadein 3s;  Firefox 
-  -webkit-animation: fadein 3s;  Safari and Chrome
-  -o-animation: fadein 3s;  Opera */
+  animation: fadein 3s;
+  -moz-animation: fadein 3s;  /*Firefox*/ 
+  -webkit-animation: fadein 3s;  /*Safari and Chrome*/
+  -o-animation: fadein 3s;  /*Opera*/
 }
-/*@keyframes fadein {
+@keyframes fadein {
   from {
       opacity:0;
   }
@@ -74,7 +73,7 @@ html, body, #root {
       opacity:1;
   }
 }
-@-moz-keyframes fadein { Firefox
+@-moz-keyframes fadein { /*Firefox*/
   from {
       opacity:0;
   }
@@ -82,7 +81,7 @@ html, body, #root {
       opacity:1;
   }
 }
-@-webkit-keyframes fadein { Safari and Chrome
+@-webkit-keyframes fadein { /*Safari and Chrome*/
   from {
       opacity:0;
   }
@@ -90,14 +89,14 @@ html, body, #root {
       opacity:1;
   }
 }
-@-o-keyframes fadein { Opera 
+@-o-keyframes fadein { /*Opera*/ 
   from {
       opacity:0;
   }
   to {
       opacity: 1;
   }
-}*/
+}
 
 .logosample {
   width: 100px;
@@ -112,7 +111,6 @@ html, body, #root {
 }
 
 #start-btn {
-  box-sizing: border-box;
   width: 50%;
   font-size: 24px;
   padding: 1rem;
@@ -125,7 +123,7 @@ html, body, #root {
 }
 
 #start-btn:hover {
-  background-color: rgba(39, 39, 185, 0.918);
+  background-color: var(--btn-hover-color);
 }
 
 #footer {
@@ -200,4 +198,78 @@ article > input {
   font-size: 12px;
 } 
 
+.profile-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--main-bg-color);
+}
 
+.profile-view-container{
+  width: 100vw;
+  height: 100vh;
+  background-color:var(--main-bg-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  border: solid red;
+}
+
+.profile-view-container h1{
+  color: rgba(13, 13, 224, 0.918);
+}
+
+.social-profile-view{
+  background-color: var(--container-color);
+  width: 50%;
+  padding: 2rem;
+  box-shadow: var(--box-shadow);
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  border: solid blue;
+}
+
+.profile-view{
+  background-color: var(--container-color);
+  width: 30%;
+  padding: 2rem;
+  box-shadow: var(--box-shadow);
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  border: solid blue;
+}
+
+.profile-header{
+  border: solid skyblue;
+  text-align: center;
+  color: rgba(13, 13, 224, 0.918);
+}
+
+.change-btn{
+  width: 260px;
+  border-style:none;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.delete-account-btn{
+  background-color: var(--btn-color);
+  width: 260px;
+  border-style: none;
+  color: white;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.delete-account-btn:hover{
+  background-color: var(--btn-hover-color);
+  cursor: pointer;
+}
+
+.change-btn:hover{
+  background-color: rgb(233, 235, 236);
+  cursor: pointer;
+}

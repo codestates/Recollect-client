@@ -1,13 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-function SignBtn() {
-
-
-
+function SignBtn(props) {
   return (
     <div className="signbtn-container">
-      <button id="signBtn">
+      <button id="signBtn" onClick={props.handleStart}>
         Log In
       </button>
     </div>

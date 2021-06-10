@@ -11,7 +11,7 @@ class Landing extends React.Component{
   render(){
     return (
       <div className="landing-container">
-        <SignBtn />
+        <SignBtn handleStart={this.props.handleStart}/>
         <div className="main-container">
           <div className="main">
           
