@@ -28,7 +28,7 @@ class SignupComp extends Component {
         <div>
         <input className="signupComp-input" placeholder="username"/>
         </div>
-        { isSocialLogin ? '' 
+        {/* { isSocialLogin ? '' 
           :    
           <div>
             <div>
@@ -41,7 +41,7 @@ class SignupComp extends Component {
               <input className="signupComp-input" type="password" placeholder="password-check"/>
             </div>
           </div>
-        }
+        } */}
         <div>
           <input type="checkbox" name="agree"/>
           <label for="agree">terms and conditions</label>
@@ -54,3 +54,5 @@ class SignupComp extends Component {
   }
   
 }
+
+export default SignupComp;

@@ -1,47 +1,125 @@
-* {
-  box-sizing: border-box;
+.landing-container{
+  width: 100vw;
+  height: 100vh;
+  display:flex;
+  flex-direction: column;
+}
+.signbtn-container{
+  background-color: rgb(210, 214, 211);
+  display:flex;
+  justify-content:flex-end;
 }
 
-body {
-  height: 100vh;
+#signBtn{
+  font-weight: bold;
+  background-color: #596e9b;
+  color: white;
+  border-style: none;
+  padding: 1rem;
+  margin: 1rem;
+  cursor: pointer;
 }
 
-#root {
-  height: 100vh;
+#signBtn:hover{
+  background-color: rgba(39, 39, 185, 0.918);
+}
+
+.main-container{
+  background-color: rgb(210, 214, 211);
+  display:flex;
+  justify-content:center;
+  align-items: center;
+  flex:1;
+}
+
+.main{
+  background-color: rgb(218, 231, 222);
+  width:50%;
+  padding: 2rem;
+  box-shadow: 12px 12px 20px 1px rgba(0, 0, 255, 0.116);
+  align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
-#signupComp {
-  padding: 20px 5px 10px 5px;
-  width: fit-content;
-  /* display: flex; */
-  border: 1px solid red;
-  margin: auto;
+.logo-container{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 4rem;
+  color: red;
+  color:rgba(13, 13, 224, 0.918);
+  /*animation: fadein 3s;
+  -moz-animation: fadein 3s;  Firefox 
+  -webkit-animation: fadein 3s;  Safari and Chrome
+  -o-animation: fadein 3s;  Opera */
 }
-#signupComp > div,
-#signupComp > div > div {
-  margin-top: 5px;
-  margin-bottom: 10px;
+/*@keyframes fadein {
+  from {
+      opacity:0;
+  }
+  to {
+      opacity:1;
+  }
+}
+@-moz-keyframes fadein { Firefox
+  from {
+      opacity:0;
+  }
+  to {
+      opacity:1;
+  }
+}
+@-webkit-keyframes fadein { Safari and Chrome
+  from {
+      opacity:0;
+  }
+  to {
+      opacity:1;
+  }
+}
+@-o-keyframes fadein { Opera 
+  from {
+      opacity:0;
+  }
+  to {
+      opacity: 1;
+  }
+}*/
+
+.logosample{
+  width:100px;
+  height:100px;
+  background-color: rgba(39, 39, 185, 0.918);
+  border-radius: 1rem;
+}
+
+.intro{
+  line-height:2rem;
   text-align: center;
 }
 
-#signupComp button {
-  width: 200px;
-  height: 40px;
-  font-size: 20px;
+#start-btn{
+  box-sizing: border-box;
+  width: 50%;
+  font-size: 24px;
+  padding: 1rem;
+  border-style: none;
+  margin-bottom: 20px;
+  margin-top: 30px;
+  background-color: #596e9b;
+  color: white;
+  cursor: pointer;
 }
 
-#signupComp label {
-  font-size: 20px;
+#start-btn:hover{
+  background-color: rgba(39, 39, 185, 0.918);
 }
 
-.signupComp-input {
-  width: 400px;
-  height: 40px;
-  font-size: 1.1rem;
-  padding: 0.4rem;
-  margin: 0.4rem;
+#footer{
+  text-align: center;
+  line-height: 60px;
+  background-color: rgb(188, 206, 207);
+  padding: 1rem;
+  height: 60px;
 }
