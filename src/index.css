@@ -1,3 +1,15 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
 .landing-container {
   width: 100vw;
   height: 100vh;
@@ -190,3 +202,35 @@ article > input {
 } 
 //// Login Page ////
 */
+
+#signupComp {
+  padding: 20px 5px 10px 5px;
+  width: fit-content;
+  /* display: flex; */
+  border: 1px solid red;
+  margin: auto;
+}
+#signupComp > div,
+#signupComp > div > div {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#signupComp button {
+  width: 200px;
+  height: 40px;
+  font-size: 20px;
+}
+
+#signupComp label {
+  font-size: 20px;
+}
+
+.signupComp-input {
+  width: 400px;
+  height: 40px;
+  font-size: 1.1rem;
+  padding: 0.4rem;
+  margin: 0.4rem;
+}

@@ -1,9 +1,9 @@
 import axios from "axios"
 import React from "react"
-// import Landing from "./page/Landing";
-// import Login from "./page/Login";
-// import Signup from "./page/Signup";
-// import Mypage from "./page/Mypage";
+import Landing from "./page/Landing";
+import Login from "./page/Login";
+import Signup from "./page/Signup";
+import Mypage from "./page/Mypage";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
 require("dotenv").config()
@@ -15,36 +15,22 @@ class App extends React.Component {
     super(props) 
     this.state = {
       hello: null,
+      isLogin: true,
     }
-    this.getSomething = this.getSomething.bind(this)
-  }
-  getSomething() {  
-    console.log(`${process.env.REACT_APP_API_URL}`)
-    axios
-      .get(`${process.env.REACT_APP_API_URL}`)
-      .then(res => {  
-        this.setState({
-          hello: res.data
-        })
-      })
-      .catch(err => console.log(err))
   }
 
-  componentDidMount() {
-    this.getSomething()
-  }
 
   render() { 
     return(
       <div>
-        {/* <Switch>
+        {<Switch>
           <Route
               path='/'
               render={() => {
-                // if (isLogin) {
-                //   return <Redirect to='/mypage' />;
-                // }
-                // return <Redirect to='/' render={() => (<Landing />)}/>;
+                if (this.state.isLogin) {
+                  return <Redirect to='/mypage' />;
+                }
+                return <Redirect to='/' render={() => (<Landing />)}/>;
               }}
           />
           <Route
@@ -61,7 +47,7 @@ class App extends React.Component {
             path='/mypage'
             render={() => <Mypage />} 
           />
-          <Route
+          {/* <Route
             exact
             path='/recollect'
             render={() => <Recollect />} 
@@ -70,8 +56,8 @@ class App extends React.Component {
             exact
             path='/profile'
             render={() => <Profile />} 
-          />
-        </Switch> */}
+          /> */}
+        </Switch> }
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React, { useState } from "react"
-import Footer from "../component/Footer"
-import SignBtn from "../component/SignBtn"
+import Footer from "../components/Footer"
+import SignBtn from "../components/SignBtn"
 
 function Landing(){
 

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import Signup from './page/Signup'
+import Login from './page/Login'
 
 import { BrowserRouter } from 'react-router-dom';
 
@@ -10,7 +11,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <Signup />
   </BrowserRouter>,
   document.getElementById('root')
 );

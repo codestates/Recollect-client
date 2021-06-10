@@ -1,15 +1,17 @@
-import React, { Component } from "react";
+import React from "react";
 import axios from 'axios';
 
-class SignupComp extends Component {
+class SignupComp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       username: '',
       email: '',
       password: '',
+      passwordcheck: '',
+      errormessage: '',
     };
-    this.handleInputValue = this.handleCreateBtn.bind(this);
+    this.handleInputValue = this.handleInputValue.bind(this);
   }
 
   handleInputValue = (key) => (e) => {
@@ -17,38 +19,71 @@ class SignupComp extends Component {
   };
 
   handleCreateBtn = () => {
-    // axios.post(){
+    const { username, email, password } = this.state;
+
+    axios
+      .post('/signup', {
+        username: username,
+        email: email,
+        password: password,
+      })
+      .then(res => {
+        this.props.history.push('/')
+      })
+      .catch( err => {
+        this.setState({
+          errormessage: err.response.date,
+        })
+      })
 
     }
     
   
-  redner() {
+  render() {
     return(
-      <div id="signupComp">
-        <div>
-        <input className="signupComp-input" placeholder="username"/>
-        </div>
-        {/* { isSocialLogin ? '' 
-          :    
+      <div>
+        <form id="signupComp" onSubmit={(e) => e.preventDefault()}>
           <div>
-            <div>
-              <input className="signupComp-input" type="email" placeholder="email"/>
-            </div>
-            <div>
-              <input className="signupComp-input" type="password" placeholder="password"/>
-            </div>
-            <div>
-              <input className="signupComp-input" type="password" placeholder="password-check"/>
-            </div>
+          <input 
+            className="signupComp-input" 
+            type="text"
+            onChange={this.handleInputValue("username")} 
+            placeholder="username"/>
           </div>
-        } */}
-        <div>
-          <input type="checkbox" name="agree"/>
-          <label for="agree">terms and conditions</label>
-        </div>
-        <div>
-          <button>Create account</button>
-        </div>
+          { this.props.isSocialLogin ? '' 
+            :    
+            <div>
+              <div>
+                <input 
+                  className="signupComp-input" 
+                  onChange={this.handleInputValue("email")}
+                  type="email" 
+                  placeholder="email"/>
+              </div>
+              <div>
+                <input 
+                  className="signupComp-input" 
+                  onChange={this.handleInputValue("password")}
+                  type="password" 
+                  placeholder="password"/>
+              </div>
+              <div>
+                <input 
+                  className="signupComp-input"
+                  onChange={this.handleInputValue("passwordcheck")} 
+                  type="password" 
+                  placeholder="password-check"/>
+              </div>
+            </div>
+          }
+          <div>
+            <input type="checkbox" name="agreement"/>
+            <label for="agreement">terms and conditions</label>
+          </div>
+          <div>
+            <button onClick={this.handleCreateBtn}>Create account</button>
+          </div>
+        </form>
       </div> 
     );
   }
