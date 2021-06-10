@@ -227,7 +227,7 @@ body,
 }
 .seperatingLine::before,
 .seperatingLine::after {
-  content: "";
+  content: '';
   flex-grow: 1;
   background: black;
   height: 1px;

@@ -1,21 +1,46 @@
-import React, { Component } from "react";
+import React from "react";
 import axios from 'axios';
 
-import SignupComp from '../components/SignupComp'
 
-export default class Signup extends Component {
+import SignupComp from '../components/SignupComp'
+import Footer from '../components/Footer'
+
+class Signup extends React.Component {
   constructor(props) {
     super(props)
       this.state = {
-        isSocialLogin: true,
+        isSocialLogin: false,
       }
+    this.handleCreateAccount = this.handleCreateAccount.bind(this);
+  }
+
+  handleCreateAccount({ username, email, password }) {
+    this.props.loginSuccess(username) 
+    // axios
+    // .post('/signup', {
+    //   username: username,
+    //   email: email,
+    //   password: password,
+    // })
+    // .then(res => {
+    //   this.props.handleLoginSuccess(res.data.username) 
+    // })
+    // .catch( err => {
+    //   console.log(err)
+    // })
   }
 
   render() {
     return (
-    /*<Back/>*/
-    <SignupComp isSocialLogin={this.state.isSocialLogin}/>
+      /*<BackBtn/>*/
+      <div id="signup">
+      <SignupComp 
+        isSocialLogin={this.state.isSocialLogin}
+        handleCreateAccount={this.handleCreateAccount}/>
+      <Footer/>
+      </div>
     )
 
   }
 }
+export default Signup
