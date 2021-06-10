@@ -8,12 +8,24 @@ class Login extends React.Component {
       email: "",
       password: "",
       errorMessage: "",
+      GITHUB_LOGIN_URL:
+        "https://github.com/login/oauth/authorize?client_id=깃허브클라이언트아이디",
     };
     this.handleInputValue = this.handleInputValue.bind(this);
+    this.handleSocialLogin = this.handleSocialLogin.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
   }
 
-  //// 아이디, 패스워드 입력시 상태변화 ////
+  //// 소셜로그인 메소드 - 시작 ////
+
+  // 소셜로그인 페이지로 이동 메소드 //
+  handleSocialLogin = () => {
+    window.location.assign(this.GITHUB_LOGIN_URL);
+  };
+
+  //// 홈페이지 로그인 메소드 - 시작 ////
+
+  // 아이디, 패스워드 입력시 state변경 메소드 //
   handleInputValue = (key) => (e) => {
     this.setState({
       [key]: e.target.value,
@@ -21,30 +33,32 @@ class Login extends React.Component {
   };
 
   handleLogin = () => {
-    const email = this.state.email;
-    const pwd = this.state.password;
-
+    const { email, password } = this.state;
     //// email 또는 password가 공백상태로 제출된경우 에러메시지 ////
-    if (!email || !pwd) {
+    if (!email || !password) {
       this.setState({
         errorMessage: "아이디와 비밀번호를 입력하세요",
       });
+    } else {
+      //// POST 요청 (서버 열리면 주석제거) ////
+      axios
+        .post("http://recollect.today/login", {
+          email: email,
+          password: password,
+        })
+        .then((res) => this.props.loginSuccess(res.data.username)) // Login요청성공시 라우팅
+        .catch((err) => console.log(err));
     }
-    //// POST 요청 (서버 열리면 주석제거) ////
-    // axios
-    //   .post("http://", { email: email, password: pwd })
-    //   .then((res) => console.log(res)) // app.js에서 받은 props함수호출 ( 함수 호출 => isLogin 상태변경 => user정보 GET요청 => MyPage )
-    //   .catch((err) => console.log(err));
   };
-
-  componentDidUpdate() {}
 
   render() {
     return (
       <div className="LoginContainer">
         <h1>LOGIN</h1>
         <article>
-          <button className="GithubBtn">GitHub</button>
+          <button className="GithubBtn" onClick={this.handleSocialLogin}>
+            GitHub
+          </button>
           <div>
             <div className="middleLine">OR</div>
           </div>
