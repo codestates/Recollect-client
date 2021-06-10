@@ -124,7 +124,7 @@
   height: 60px;
 }
 
-article {
+/* article {
   width: 35%;
   height: 65%;
   display: flex;
@@ -185,4 +185,4 @@ article > input {
 .errorMessage {
   color: red;
   font-size: 12px;
-}
+} */
