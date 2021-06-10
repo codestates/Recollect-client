@@ -1,13 +1,21 @@
 import React, { Component } from "react";
 import axios from 'axios';
 
-class Signup extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            isSocialLogin: false,
-        }
-    }
+import SignupComp from '../components/SignupComp'
 
-    render
+export default class Signup extends Component {
+  constructor(props) {
+    super(props)
+      this.state = {
+        isSocialLogin: true,
+      }
+  }
+
+  render() {
+    return (
+    /*<Back/>*/
+    <SignupComp isSocialLogin={this.state.isSocialLogin}/>
+    )
+
+  }
 }
