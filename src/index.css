@@ -125,7 +125,7 @@
 }
 
 /*
- 여기부터 Login Page
+//// Login Page ////
  article {
   width: 35%;
   height: 65%;
@@ -187,4 +187,6 @@ article > input {
 .errorMessage {
   color: red;
   font-size: 12px;
-} */
+} 
+//// Login Page ////
+*/
