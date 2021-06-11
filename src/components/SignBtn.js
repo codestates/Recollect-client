@@ -7,7 +7,6 @@ function SignBtn(props) {
         Log In
       </button>
     </div>
-    
   );
 }
 

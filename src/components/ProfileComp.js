@@ -17,23 +17,7 @@ class ProfileComp extends React.Component {
   render() {
     return(
       <div>
-        {/* <div>
-          { isSocialLogin ? 
-            <div>
-              <h1>username</h1>
-              <button>Change username</button>
-            </div>
-          :    
-            <div>
-              <h1>username</h1>
-              <span>email</span>
-              <button>Change username</button>
-              <button>Change password</button>
-            </div>
-          }
-        </div>
-        <button>Delete Account</button> */}
-        
+        modal here
       </div> 
     );
   }
