@@ -227,7 +227,7 @@ body,
 }
 .seperatingLine::before,
 .seperatingLine::after {
-  content: '';
+  content: "";
   flex-grow: 1;
   background: black;
   height: 1px;
@@ -236,8 +236,7 @@ body,
   margin: 0px 70px;
 }
 
-.mainContainer > .errorMessage {
-  color: red;
+.LoginerrorMessage {
   font-size: 12px;
 }
 
