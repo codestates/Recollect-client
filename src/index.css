@@ -20,6 +20,14 @@ body,
   --box-shadow: 12px 12px 20px 1px rgba(0, 0, 255, 0.116);
 }
 
+:root {
+  --main-bg-color: rgb(210, 214, 211);
+  --container-color: rgb(218, 231, 222);
+  --btn-color: #596e9b;
+  --btn-hover-color: rgba(39, 39, 185, 0.918);
+  --box-shadow: 12px 12px 20px 1px rgba(0, 0, 255, 0.116);
+}
+
 /* //// Landing Page Start //// */
 .landing-container {
   width: 100vw;
