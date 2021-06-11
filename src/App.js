@@ -22,7 +22,7 @@ class App extends React.Component {
 
     this.loginSuccess = this.loginSuccess.bind(this);
     this.handleStart = this.handleStart.bind(this);
-    this.routeToSomewhere = this.routeToSomewhere.bind(this);
+    // this.routeToSomewhere = this.routeToSomewhere.bind(this);
   }
 
   handleStart() {
@@ -53,10 +53,10 @@ class App extends React.Component {
       });
   }
 
-  routeToSomewhere(target) {
-    // console.log("target");
-    this.props.history.goback();
-  }
+  // goback() {
+  //   // console.log("target");
+  //   this.props.history.goBack();
+  // }
 
   componentDidMount() {
     //// 깃허브 인증코드 반환 ////
@@ -69,7 +69,7 @@ class App extends React.Component {
     const { isLogin } = this.state;
 
     return (
-      <div>
+      <>
         <Switch>
           <Route
             exact
@@ -88,15 +88,16 @@ class App extends React.Component {
               <Login
                 loginSuccess={this.loginSuccess}
                 routeToSomewhere={this.routeToSomewhere}
+                history={this.props.history}
               />
             )}
           />
-          <Route exact path="/signup" render={() => <Signup />} />
+          <Route exact path="/signup" render={() => <Signup history={this.props.history} loginSuccess={this.loginSuccess}/>} />
           <Route exact path="/mypage" render={() => <Mypage />} />
           <Route exact path="/recollect" render={() => <Recollect />} />
           <Route exact path="/profile" render={() => <Profile />} />
         </Switch>
-      </div>
+      </>
     );
   }
 }

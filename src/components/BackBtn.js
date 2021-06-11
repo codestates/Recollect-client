@@ -9,8 +9,7 @@ class BackBtn extends React.Component {
       <div
         id="backBtn"
         onClick={() => {
-          console.log(this.props.history.goBack);
-          // props.history.goBack();
+          this.props.history.goBack();
           // props.routeToSomewhere();
         }}
       >

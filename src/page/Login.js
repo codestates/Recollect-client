@@ -58,7 +58,7 @@ class Login extends React.Component {
       <div className="LoginContainer">
         <div className="mainContainer">
           <BackBtn
-            dummyprops={this.props}
+            history={this.props.history}
             // onClick={this.props.routeToSomewhere}
             // target={"/"}
             // routeToSomewhere={this.props.routeToSomewhere}

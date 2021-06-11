@@ -242,3 +242,86 @@ body,
 }
 
 /* //// Login Page End //// */
+
+#signup-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--main-bg-color);
+}
+
+#signup-backbtn-container {
+  display: flex;
+}
+
+#signup-backbtn-container {
+  position: absolute;
+  left: 5%;
+  top: 5%;
+}
+
+#signupComp-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+#signupComp {
+  width: 20%;
+  min-width: 320px;
+  padding: 30px 30px 10px 30px;
+  align-items: center;
+  /* display: flex; */
+  background-color: var(--container-color);
+  box-shadow: 12px 12px 20px 1px rgba(0, 0, 255, 0.116);
+}
+
+#signupComp > div,
+#signupComp > div > div {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#signupComp button {
+  width: 200px;
+  height: 40px;
+  font-size: 20px;
+  color: white;
+  background-color: var(--btn-color);
+  border-style: none;
+}
+
+/* box-sizing: border-box;
+width: 50%;
+font-size: 24px;
+padding: 1rem;
+border-style: none;
+margin-bottom: 20px;
+margin-top: 30px;
+background-color: #596e9b;
+color: white;
+cursor: pointer; */
+
+#signupComp button:hover {
+  cursor: pointer;
+  color: var(--btn-hover-color);
+}
+
+#signupComp label {
+  font-size: 15px;
+  color: rgb(143, 23, 23);
+}
+
+.signupComp-input {
+  width: 260px;
+  height: 40px;
+  font-size: 1.1rem;
+  padding: 0.4rem;
+  margin: 8px 0px 8px;
+  border: 1px solid var(--container-color);
+  border-radius: 5px;
+  outline-style: none;
+}
