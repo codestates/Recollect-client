@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -6,16 +5,7 @@ import App from './App';
 import Signup from './page/Signup'
 import Login from './page/Login'
 
-import { BrowserRouter } from 'react-router-dom';
 
-=======
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import Signup from "./page/Signup";
-import Login from "./page/Login";
->>>>>>> 5bdd0bab52059a2d7a27b3efa04108f2312812ff
 
 import { BrowserRouter } from "react-router-dom";
 

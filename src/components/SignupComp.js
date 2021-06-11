@@ -6,6 +6,7 @@ const { IsValidiateUsername, IsValidiatePassword } = require('../util/validiatio
 class SignupComp extends React.Component {
   constructor(props) {
     super(props);
+    
     this.state = {
       username: '',
       email: '',
@@ -13,6 +14,7 @@ class SignupComp extends React.Component {
       passwordcheck: '',
       errormessage: '',
     };
+
     this.handleInputValue = this.handleInputValue.bind(this);
     this.handleCreateAccount = this.handleCreateAccount.bind(this);
     this.handleCreateSocialAccount = this.handleCreateSocialAccount.bind(this);
@@ -27,7 +29,7 @@ class SignupComp extends React.Component {
 
     if (!IsValidiateUsername(username)) {
       this.setState({
-        errormessage: "유저네임은 영문 대소문자, 숫자, 언더바, 하이픈을 사용해 4글자이상 16글자 이하로 만드실수 있습니다."
+        errormessage: "사용자 이름은 영문 대소문자, 숫자, 언더바, 하이픈을 사용한 4~16글자로 만들수 있습니다."
       })
       return;
     } else {
@@ -35,7 +37,7 @@ class SignupComp extends React.Component {
         errormessage: '',
       })
     }
-    this.props.handleCreateAccount(this.state);
+    this.props.handleCreateSocialAccount(this.state);
   }
 
   handleCreateAccount = () => {
@@ -57,7 +59,7 @@ class SignupComp extends React.Component {
       return;
     } else if (!IsValidiatePassword(this.state.password)) {
       this.setState({
-        errormessage: "비밀번호는 최소 한 글자 이상의 영문 대소문자, 숫자, 특수문자(!, @, #, $, %, &, *) 를 포함한 8글자 이상으로 만들어야 합니다."
+        errormessage: "비밀번호는 최소 한 글자 이상의 영문 대소문자, 숫/자, 특수문자(!, @, #, $, %, &, *) 를 포함한 8글자 이상으로 만들어야 합니다."
       })
       return;
     } else {
@@ -72,9 +74,14 @@ class SignupComp extends React.Component {
     
   
   render() {
+
     return(
-      <div>
+      <div id="signupComp-container">
         <form id="signupComp" onSubmit={(e) => e.preventDefault()}>
+          <div className="logo-container">
+              <div className="logosample"></div>
+              Recollect
+          </div>
           <div>
           <input 
             className="signupComp-input" 
@@ -82,8 +89,7 @@ class SignupComp extends React.Component {
             onChange={this.handleInputValue("username")} 
             placeholder="username"/>
           </div>
-          { this.props.isSocialLogin ? '' 
-            :    
+          { this.props.isSocialLogin === undefined ? 
             <div>
               <div>
                 <input 
@@ -107,6 +113,8 @@ class SignupComp extends React.Component {
                   placeholder="password-check"/>
               </div>
             </div>
+            : 
+            ''
           }
           <div>
             <label>{this.state.errormessage}</label>

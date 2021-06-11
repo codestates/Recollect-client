@@ -97,7 +97,7 @@ class App extends React.Component {
     const { isLogin } = this.state;
 
     return (
-      <div>
+      <>
         <Switch>
           <Route
             exact
@@ -115,16 +115,17 @@ class App extends React.Component {
             render={() => (
               <Login
                 loginSuccess={this.loginSuccess}
+                routeToSomewhere={this.routeToSomewhere}
                 history={this.props.history}
               />
             )}
           />
-          <Route exact path="/signup" render={() => <Signup />} />
+          <Route exact path="/signup" render={() => <Signup history={this.props.history} loginSuccess={this.loginSuccess}/>} />
           <Route exact path="/mypage" render={() => <Mypage />} />
           <Route exact path="/recollect" render={() => <Recollect />} />
           <Route exact path="/profile" render={() => <Profile />} />
         </Switch>
-      </div>
+      </>
     );
   }
 }

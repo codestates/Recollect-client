@@ -10,6 +10,7 @@ class BackBtn extends React.Component {
         id="backBtn"
         onClick={() => {
           this.props.history.goBack();
+          // props.routeToSomewhere();
         }}
       >
         <i className="fas fa-arrow-left"></i>
