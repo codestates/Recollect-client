@@ -22,23 +22,24 @@ class App extends React.Component {
 
     this.loginSuccess = this.loginSuccess.bind(this);
     this.handleStart = this.handleStart.bind(this);
-    this.routeToSomewhere = this.routeToSomewhere.bind(this);
+    this.getGitHubUserInfo = this.getGitHubUserInfo.bind(this);
+    this.isOurUser = this.isOurUser.bind(this);
   }
 
   handleStart() {
     this.props.history.push("/login");
   }
 
-  //// 홈페이지 로그인 성공시 호출메소드 ////
+  //// 홈페이지 로그인 성공시 ////
   loginSuccess(username) {
     this.setState({
-      // 200 응답시 상태변경 //
       isLogin: true,
       username: username,
     });
-    this.props.history.push("/mypage"); // login 성공 => mypage로 라우팅 //
+    this.props.history.push("/mypage");
   }
-  //// 깃허브 로그인시 호출메소드 ////
+
+  //// 깃허브 로그인시 ////
   async getAccessToken(authorizationCode) {
     await axios
       .post("http://recollect.today/getToken", {
@@ -49,13 +50,40 @@ class App extends React.Component {
           isLogin: true,
           accessToken: res.data.accessToken,
         });
-        this.props.history.push("/mypage"); // login 성공 => mypage로 라우팅 //
+        this.getGitHubUserInfo();
       });
   }
 
-  routeToSomewhere(target) {
-    // console.log("target");
-    this.props.history.goback();
+  //// 깃허브에 유저정보 요청 ////
+  getGitHubUserInfo() {
+    let response = axios.get("https://api.github.com/user", {
+      headers: {
+        authorization: `token ${this.state.accessToken}`,
+      },
+    });
+    this.isOurUser(response.data.id);
+  }
+
+  //// 기존 회원인지 아닌지 판별 ////
+  isOurUser(socialId) {
+    axios
+      .post(
+        "https://recollect.today/isOurUser",
+        {
+          socialId: socialId,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        if (res.message === "recollect user")
+          this.props.history.push({
+            pathname: "/signup",
+            state: { socialId: socialId },
+          });
+      });
   }
 
   componentDidMount() {
@@ -87,7 +115,7 @@ class App extends React.Component {
             render={() => (
               <Login
                 loginSuccess={this.loginSuccess}
-                routeToSomewhere={this.routeToSomewhere}
+                history={this.props.history}
               />
             )}
           />
