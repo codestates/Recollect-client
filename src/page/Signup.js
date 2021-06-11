@@ -10,7 +10,6 @@ class Signup extends React.Component {
   constructor(props) {
     super(props)
       this.state = {
-        isSocialLogin: true,
         socialId: null,
       }
     this.handleCreateAccount = this.handleCreateAccount.bind(this);
@@ -49,10 +48,9 @@ class Signup extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.history)
+    console.log(this.props.history.location)
     this.setState({
-      isSocialLogin: null,
-      socialId: null,
+      socialId: this.props.history.location.state,
     })
   }
 
@@ -63,7 +61,7 @@ class Signup extends React.Component {
           <BackBtn history={this.props.history} id="signup-backbtn"/> 
         </div>
         <SignupComp 
-          isSocialLogin={this.state.isSocialLogin}
+          isSocialLogin={this.state.socialId}
           handleCreateAccount={this.handleCreateAccount}
           handleCreateSocialAccount={this.handleCreateSocialAccount}/>
         <Footer/>

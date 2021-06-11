@@ -89,8 +89,7 @@ class SignupComp extends React.Component {
             onChange={this.handleInputValue("username")} 
             placeholder="username"/>
           </div>
-          { this.props.isSocialLogin ? '' 
-            :    
+          { this.props.isSocialLogin === undefined ? 
             <div>
               <div>
                 <input 
@@ -114,6 +113,8 @@ class SignupComp extends React.Component {
                   placeholder="password-check"/>
               </div>
             </div>
+            : 
+            ''
           }
           <div>
             <label>{this.state.errormessage}</label>
