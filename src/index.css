@@ -20,6 +20,15 @@ body,
   --box-shadow: 12px 12px 20px 1px rgba(0, 0, 255, 0.116);
 }
 
+:root {
+  --main-bg-color: rgb(210, 214, 211);
+  --container-color: rgb(218, 231, 222);
+  --btn-color: #596e9b;
+  --btn-hover-color: rgba(39, 39, 185, 0.918);
+  --box-shadow: 12px 12px 20px 1px rgba(0, 0, 255, 0.116);
+}
+
+/* //// Landing Page Start //// */
 .landing-container {
   width: 100vw;
   height: 100vh;
@@ -27,27 +36,28 @@ body,
   flex-direction: column;
 }
 .signbtn-container {
-  background-color: rgb(210, 214, 211);
+  background-color: var(--main-bg-color);
   display: flex;
   justify-content: flex-end;
 }
 
 #signBtn {
   font-weight: bold;
-  background-color: #596e9b;
+  background-color: var(--btn-color);
   color: white;
   border-style: none;
+  border-radius: 5px;
   padding: 1rem;
   margin: 1rem;
   cursor: pointer;
 }
 
 #signBtn:hover {
-  background-color: rgba(39, 39, 185, 0.918);
+  background-color: var(--btn-hover-color);
 }
 
 .main-container {
-  background-color: rgb(210, 214, 211);
+  background-color:var(--main-bg-color);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -55,10 +65,10 @@ body,
 }
 
 .main {
-  background-color: rgb(218, 231, 222);
+  background-color: var(--container-color);
   width: 50%;
   padding: 2rem;
-  box-shadow: 12px 12px 20px 1px rgba(0, 0, 255, 0.116);
+  box-shadow: var(--box-shadow);
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -69,14 +79,13 @@ body,
   flex-direction: column;
   align-items: center;
   font-size: 4rem;
-  color: red;
   color: rgba(13, 13, 224, 0.918);
-  /*animation: fadein 3s;
-  -moz-animation: fadein 3s;  Firefox 
-  -webkit-animation: fadein 3s;  Safari and Chrome
-  -o-animation: fadein 3s;  Opera */
+  animation: fadein 3s;
+  -moz-animation: fadein 3s;  /*Firefox*/ 
+  -webkit-animation: fadein 3s;  /*Safari and Chrome*/
+  -o-animation: fadein 3s;  /*Opera*/
 }
-/*@keyframes fadein {
+@keyframes fadein {
   from {
       opacity:0;
   }
@@ -84,7 +93,7 @@ body,
       opacity:1;
   }
 }
-@-moz-keyframes fadein { Firefox
+@-moz-keyframes fadein { /*Firefox*/
   from {
       opacity:0;
   }
@@ -92,7 +101,7 @@ body,
       opacity:1;
   }
 }
-@-webkit-keyframes fadein { Safari and Chrome
+@-webkit-keyframes fadein { /*Safari and Chrome*/
   from {
       opacity:0;
   }
@@ -100,14 +109,14 @@ body,
       opacity:1;
   }
 }
-@-o-keyframes fadein { Opera 
+@-o-keyframes fadein { /*Opera*/ 
   from {
       opacity:0;
   }
   to {
       opacity: 1;
   }
-}*/
+}
 
 .logosample {
   width: 100px;
@@ -122,20 +131,21 @@ body,
 }
 
 #start-btn {
-  box-sizing: border-box;
   width: 50%;
   font-size: 24px;
   padding: 1rem;
   border-style: none;
   margin-bottom: 20px;
   margin-top: 30px;
+  border-radius: 5px;
   background-color: #596e9b;
   color: white;
   cursor: pointer;
 }
 
 #start-btn:hover {
-  background-color: rgba(39, 39, 185, 0.918);
+  background-color: var(--btn-hover-color);
+  
 }
 
 #footer {
@@ -223,11 +233,11 @@ body,
   margin: 10px 0px;
   align-items: center;
   font-size: 12px;
-  color: balck;
+  color: black;
 }
 .seperatingLine::before,
 .seperatingLine::after {
-  content: "";
+  content: '';
   flex-grow: 1;
   background: black;
   height: 1px;
@@ -236,11 +246,165 @@ body,
   margin: 0px 70px;
 }
 
-.LoginerrorMessage {
+.mainContainer > .errorMessage {
+  color: red;
   font-size: 12px;
 }
+/* //// Login Page End //// */ 
 
-/* //// Login Page End //// */
+/* //// Profile Page Start //// */
+.profile-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.profile-container > .main-container{
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--main-bg-color);
+  box-shadow: var(--box-shadow);
+}
+
+.profile{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  height: 60vh;
+  background-color: var(--container-color);
+}
+
+.profile-header{
+  text-align: center;
+  color: rgba(13, 13, 224, 0.918);
+  flex: 2;
+  margin-top: 20px;
+}
+
+.profile-btns{
+  display:flex;
+  flex-direction: column;
+  flex:1.5;
+}
+
+.profile-btns > button{
+  width: 260px;
+  height: 40px;
+  border: 1px solid var(--container-color);
+  border-radius: 5px;
+  margin: 10px;
+  color: white;
+  background-color: var(--btn-color);
+}
+
+.profile-btns > .change-btn:hover{
+  color: var(--btn-hover-color);
+  cursor: pointer;
+}
+
+.seperating-line{
+  font-size: 12px;
+  margin: 15px;
+}
+
+.profile-btns > .delete-account-btn:hover{
+  background-color: var(--btn-hover-color);
+  cursor: pointer;
+}
+
+/* //// modal test css //// */
+.popup {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: rgba(222, 220, 220, 0.5);
+}
+
+.popup-inner {
+  position: absolute;
+  left: 35vw;
+  right: 35vw;
+  top: 28vh;
+  bottom: 20vh;
+  margin: auto;
+  background: var(--container-color);
+  box-shadow: var(--box-shadow);
+
+}
+
+#popup-close-btn{
+  text-align: center;
+  font-size: 1.3rem;
+  margin-top: 10px;
+}
+
+#popup-close-btn:hover{
+  color: var(--btn-hover-color);
+  cursor: pointer;
+}
+
+.popup-inner-body{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.popup-inner > .ask{
+  font-size: 1rem;
+  line-height: 2.5vh;
+}
+
+.popup-inner h1{
+  font-size: 1.5rem;
+  color: var(--btn-hover-color);
+  margin-top: 30px;
+}
+
+.popup-inner-body > .edit{
+  width: 20vw;
+  height: 40px;
+  border: 1px solid var(--container-color);
+  border-radius: 5px;
+  margin: 8px;
+  outline-style: none;
+}
+
+.popup-inner-body > .edit::placeholder{
+  color:rgba(136, 136, 140, 0.961);
+}
+
+.popup-inner-body > button{
+  width: 20vw;
+  height: 40px;
+  border-style: none;
+  border-radius: 5px;
+  margin: 10px;
+  color: white;
+  background-color: var(--btn-color);
+}
+
+.popup-inner-body > button:hover{
+  color: var(--btn-hover-color);
+  cursor: pointer;
+}
+
+/* //// Profile Page End //// */
+
+
 
 #signup-container {
   width: 100vw;
