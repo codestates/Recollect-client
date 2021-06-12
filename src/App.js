@@ -10,6 +10,8 @@ import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
 require("dotenv").config();
 
+// axios.defaults.withCredentials = true;
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -19,10 +21,10 @@ class App extends React.Component {
       accessToken: "",
       isSocialLogin: true,
     };
-
     this.handleStart = this.handleStart.bind(this);
     this.getGitHubUserInfo = this.getGitHubUserInfo.bind(this);
     this.logcheck = this.logcheck.bind(this);
+    this.loginSuccess = this.loginSuccess.bind(this);
   }
 
   handleStart() {
@@ -40,33 +42,54 @@ class App extends React.Component {
 
   //// 깃허브 로그인시 ////
   async getAccessToken(authorizationCode) {
-    await axios
-      .post("http://recollect.today/getToken", {
-        authorizationCode: authorizationCode,
-      })
-      .then((res) => {
-        this.setState({
-          accessToken: res.data.accessToken,
-        });
-        this.getGitHubUserInfo();
+    const result = await axios.post(
+      "http://localhost:4000/getToken",
+      {
+        data: {
+          authorizationCode: authorizationCode,
+        },
+      },
+      { withCredentials: true }
+    );
+    if (result) {
+      this.setState({
+        accessToken: result.data.accessToken,
       });
+      console.log(result);
+      this.getGitHubUserInfo();
+    }
   }
+
+  // ☠️ 여기부터 ☠️ //
 
   //// 깃허브에 유저정보 요청 ////
   getGitHubUserInfo() {
-    let response = axios.get("https://api.github.com/user", {
-      headers: {
-        authorization: `token ${this.state.accessToken}`,
-      },
-    });
-    this.logcheck(response.data.id);
+    // axios({
+    //   method: "get",
+    //   url: "https://api.github.com/user",
+    //   headers: {
+    //     authorization: `token ${this.state.accessToken}`,
+    //     Origin: "http://localhost:3000",
+    //   },
+    // })
+    axios
+      .get("https://api.github.com/user", {
+        headers: {
+          authorization: `token ${this.state.accessToken}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        this.logcheck(res.data.id);
+      })
+      .catch((err) => console.log(err));
   }
 
   //// 기존 회원인지 아닌지 판별 ////
   logcheck(socialId) {
     axios
       .post(
-        "https://recollect.today/logcheck",
+        "http://localhost:4000/logcheck",
         {
           socialId: socialId,
         },
@@ -80,7 +103,7 @@ class App extends React.Component {
           // login post 요청
           axios
             .post(
-              "https://recollect.today/login",
+              "http://localhost:4000/login",
               {
                 uuid: res.data.uuid,
               },
@@ -107,6 +130,7 @@ class App extends React.Component {
     //// 깃허브 인증코드 반환 ////
     const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get("code");
+    console.log(authorizationCode);
     if (authorizationCode) this.getAccessToken(authorizationCode);
   }
 

@@ -10,7 +10,8 @@ class Login extends React.Component {
       email: "",
       password: "",
       errorMessage: "",
-      GITHUB_LOGIN_URL: "https://github.com/login/oauth/authorize?client_id=",
+      GITHUB_LOGIN_URL:
+        "https://github.com/login/oauth/authorize?client_id=749cea90f0ee8535f1fa",
     };
     this.handleInputValue = this.handleInputValue.bind(this);
     this.handleSocialLogin = this.handleSocialLogin.bind(this);
