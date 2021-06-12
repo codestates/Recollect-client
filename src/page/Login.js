@@ -3,6 +3,8 @@ import React from "react";
 import Footer from "../components/Footer";
 import BackBtn from "../components/BackBtn";
 
+axios.defaults.withCredentials = true;
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -10,7 +12,7 @@ class Login extends React.Component {
       email: "",
       password: "",
       errorMessage: "",
-      GITHUB_LOGIN_URL: "https://github.com/login/oauth/authorize?client_id=",
+      GITHUB_LOGIN_URL: "https://github.com/login/oauth/authorize?client_id=14c2272e3235eef4dcb6",
     };
     this.handleInputValue = this.handleInputValue.bind(this);
     this.handleSocialLogin = this.handleSocialLogin.bind(this);
@@ -40,7 +42,7 @@ class Login extends React.Component {
       //// POST 요청 (서버 열리면 주석제거) ////
       axios
         .post(
-          "http://recollect.today/login",
+          "http://localhost:4000/login",
           {
             email: email,
             password: password,
@@ -50,7 +52,9 @@ class Login extends React.Component {
             withCredentials: true,
           }
         )
-        .then((res) => this.props.loginSuccess(res.data.accessToken)) // Login요청 성공
+        .then((res) => {
+          this.props.loginSuccess(res.data.data.accessToken)
+        }) // Login요청 성공
         .catch(() => {
           this.setState({
             errorMessage: "아이디와 비밀번호를 확인해주세요",

@@ -10,6 +10,8 @@ import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
 require("dotenv").config();
 
+axios.defaults.withCredentials = true;
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -19,10 +21,10 @@ class App extends React.Component {
       accessToken: "",
       isSocialLogin: true,
     };
-
     this.handleStart = this.handleStart.bind(this);
     this.getGitHubUserInfo = this.getGitHubUserInfo.bind(this);
     this.logcheck = this.logcheck.bind(this);
+    this.loginSuccess = this.loginSuccess.bind(this);
   }
 
   handleStart() {
@@ -40,34 +42,41 @@ class App extends React.Component {
 
   //// 깃허브 로그인시 ////
   async getAccessToken(authorizationCode) {
-    await axios
-      .post("http://recollect.today/getToken", {
-        authorizationCode: authorizationCode,
-      })
-      .then((res) => {
-        this.setState({
-          isLogin: true,
-          accessToken: res.data.accessToken,
-        });
-        this.getGitHubUserInfo();
+    const result = await axios({
+      method: 'post',
+      url: "http://localhost:4000/getToken",
+      data: {
+        authorizationCode: authorizationCode
+      }
+    });
+    if(result) {
+      this.setState({
+        //isLogin: true,
+        accessToken: result.data.accessToken
       });
+      console.log(result);
+      this.getGitHubUserInfo();
+    }  
   }
 
   //// 깃허브에 유저정보 요청 ////
   getGitHubUserInfo() {
-    let response = axios.get("https://api.github.com/user", {
+    axios.get("https://api.github.com/user", {
       headers: {
         authorization: `token ${this.state.accessToken}`,
       },
-    });
-    this.logcheck(response.data.id);
+    })
+    .then((res) => {
+      console.log(res);
+      this.logcheck(res.data.id);
+    })
   }
 
   //// 기존 회원인지 아닌지 판별 ////
   logcheck(socialId) {
     axios
       .post(
-        "https://recollect.today/logcheck",
+        "http://localhost:4000/logcheck",
         {
           socialId: socialId,
         },
@@ -81,7 +90,7 @@ class App extends React.Component {
           // login post 요청
           axios
             .post(
-              "https://recollect.today/login",
+              "http://localhost:4000/login",
               {
                 uuid: res.data.uuid,
               },
@@ -90,7 +99,7 @@ class App extends React.Component {
                 withCredentials: true,
               }
             )
-            .then(() => this.props.history.push("/mypage"))
+            .then(() => this.props.history.push("/"))
             .catch((err) => console.log(err));
       })
       .catch(() => {
@@ -105,6 +114,7 @@ class App extends React.Component {
     //// 깃허브 인증코드 반환 ////
     const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get("code");
+    console.log(authorizationCode);
     if (authorizationCode) this.getAccessToken(authorizationCode);
   }
 

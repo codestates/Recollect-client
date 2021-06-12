@@ -5,6 +5,8 @@ import SignupComp from "../components/SignupComp";
 import Footer from "../components/Footer";
 import BackBtn from "../components/BackBtn";
 
+axios.defaults.withCredentials = true;
+
 class Signup extends React.Component {
   constructor(props) {
     super(props);
@@ -15,7 +17,7 @@ class Signup extends React.Component {
   }
 
   async handleCreateSocialAccount({ username }) {
-    const uuid = await axios.post('http://recollect.today/signup', {
+    const uuid = await axios.post('http://localhost:4000/signup', {
         username: username,
         socialId: this.state.socialId,
         isSocialAccount: 1,
@@ -27,7 +29,7 @@ class Signup extends React.Component {
         console.log(err);
       })
 
-    await axios.post('http://recollect.today/login', {
+    await axios.post('http://localhost:4000/login', {
         uuid: uuid
       })
       .then(res => {
@@ -40,10 +42,10 @@ class Signup extends React.Component {
         console.log(err);
       });
   }
-
+  //! 비소셜 회원 socialId = 0 안넣어줘도 됌 
   handleCreateAccount({ username, email, password }) {
     axios
-      .post("http://recollect.today/signup", {
+      .post("http://localhost:4000/signup", {
         username: username,
         email: email,
         password: password,

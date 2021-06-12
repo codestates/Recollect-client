@@ -3,11 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import Signup from "./page/Signup";
-import Login from "./page/Login";
+
 
 
 import { BrowserRouter } from "react-router-dom";
