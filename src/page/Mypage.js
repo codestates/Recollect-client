@@ -24,48 +24,6 @@ class MyPage extends React.Component {
           url: "https://www.google.com/",
           created_at: "2021 - 06 - 08",
         },
-        {
-          id: 1,
-          desc: "Hello World",
-          emojis: ["☕️", "⚡️"],
-          url: "https://github.com",
-          created_at: "2021 - 06 - 08",
-        },
-        {
-          id: 2,
-          desc: "Welcome to Recollect",
-          emojis: ["❓"],
-          url: "http://recollect.today",
-          created_at: "2021 - 06 - 08",
-        },
-        {
-          id: 1,
-          desc: "Hello World",
-          emojis: ["☕️", "⚡️"],
-          url: "http://recollect.today",
-          created_at: "2021 - 06 - 08",
-        },
-        {
-          id: 2,
-          desc: "Welcome to Recollect",
-          emojis: ["❓"],
-          url: "http://recollect.today",
-          created_at: "2021 - 06 - 08",
-        },
-        {
-          id: 1,
-          desc: "Hello World",
-          emojis: ["☕️", "⚡️"],
-          url: "http://recollect.today",
-          created_at: "2021 - 06 - 08",
-        },
-        {
-          id: 2,
-          desc: "Welcome to Recollect",
-          emojis: ["❓"],
-          url: "http://recollect.today",
-          created_at: "2021 - 06 - 08",
-        },
       ],
     };
   }
