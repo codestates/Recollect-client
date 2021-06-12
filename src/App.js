@@ -46,7 +46,6 @@ class App extends React.Component {
       })
       .then((res) => {
         this.setState({
-          isLogin: true,
           accessToken: res.data.accessToken,
         });
         this.getGitHubUserInfo();
@@ -90,7 +89,10 @@ class App extends React.Component {
                 withCredentials: true,
               }
             )
-            .then(() => this.props.history.push("/mypage"))
+            .then(() => {
+              this.setState({ isLogin: true });
+              this.props.history.push("/");
+            })
             .catch((err) => console.log(err));
       })
       .catch(() => {
@@ -147,18 +149,18 @@ class App extends React.Component {
           />
           <Route exact path="/mypage" render={() => <Mypage />} />
           <Route exact path="/recollect" render={() => <Recollect />} />
-          <Route 
-            exact 
-            path="/profile" 
-            render={() => 
-              <Profile 
+          <Route
+            exact
+            path="/profile"
+            render={() => (
+              <Profile
                 history={this.props.history}
                 isLogin={this.state.isLogin}
                 isSocialLogin={this.state.isSocialLogin}
                 username={this.state.username}
                 loginSuccess={this.loginSuccess}
               />
-              } 
+            )}
           />
         </Switch>
       </>
