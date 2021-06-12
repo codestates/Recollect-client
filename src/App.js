@@ -22,7 +22,7 @@ class App extends React.Component {
 
     this.handleStart = this.handleStart.bind(this);
     this.getGitHubUserInfo = this.getGitHubUserInfo.bind(this);
-    this.isOurUser = this.isOurUser.bind(this);
+    this.logcheck = this.logcheck.bind(this);
   }
 
   handleStart() {
@@ -30,10 +30,10 @@ class App extends React.Component {
   }
 
   //// 홈페이지 로그인 성공시 ////
-  loginSuccess(username) {
+  loginSuccess(accessToken) {
     this.setState({
       isLogin: true,
-      username: username,
+      accessToken: accessToken,
     });
     this.props.history.push("/mypage");
   }
@@ -60,14 +60,14 @@ class App extends React.Component {
         authorization: `token ${this.state.accessToken}`,
       },
     });
-    this.isOurUser(response.data.id);
+    this.logcheck(response.data.id);
   }
 
   //// 기존 회원인지 아닌지 판별 ////
-  isOurUser(socialId) {
+  logcheck(socialId) {
     axios
       .post(
-        "https://recollect.today/isOurUser",
+        "https://recollect.today/logcheck",
         {
           socialId: socialId,
         },
@@ -78,10 +78,26 @@ class App extends React.Component {
       )
       .then((res) => {
         if (res.message === "recollect user")
-          this.props.history.push({
-            pathname: "/signup",
-            state: { socialId: socialId },
-          });
+          // login post 요청
+          axios
+            .post(
+              "https://recollect.today/login",
+              {
+                uuid: res.data.uuid,
+              },
+              {
+                headers: { "Content-Type": "application/json" },
+                withCredentials: true,
+              }
+            )
+            .then(() => this.props.history.push("/mypage"))
+            .catch((err) => console.log(err));
+      })
+      .catch(() => {
+        this.props.history.push({
+          pathname: "/signup",
+          state: { socialId: socialId },
+        });
       });
   }
 
@@ -119,15 +135,15 @@ class App extends React.Component {
               />
             )}
           />
-          <Route 
-            exact 
-            path="/signup" 
-            render={() => 
-              <Signup 
-                history={this.props.history} 
+          <Route
+            exact
+            path="/signup"
+            render={() => (
+              <Signup
+                history={this.props.history}
                 loginSuccess={this.loginSuccess}
               />
-              } 
+            )}
           />
           <Route exact path="/mypage" render={() => <Mypage />} />
           <Route exact path="/recollect" render={() => <Recollect />} />

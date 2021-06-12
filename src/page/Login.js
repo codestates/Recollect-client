@@ -50,7 +50,7 @@ class Login extends React.Component {
             withCredentials: true,
           }
         )
-        .then((res) => this.props.loginSuccess(res.data.username)) // Login요청성공시 라우팅
+        .then((res) => this.props.loginSuccess(res.data.accessToken)) // Login요청 성공
         .catch(() => {
           this.setState({
             errorMessage: "아이디와 비밀번호를 확인해주세요",
