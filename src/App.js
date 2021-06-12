@@ -14,12 +14,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLogin: true,
+      isLogin: false,
+      username: "state username",
       accessToken: "",
-      isSocialLogin: false,
+      isSocialLogin: true,
     };
 
-    this.loginSuccess = this.loginSuccess.bind(this);
     this.handleStart = this.handleStart.bind(this);
     this.getGitHubUserInfo = this.getGitHubUserInfo.bind(this);
     this.logcheck = this.logcheck.bind(this);
@@ -147,7 +147,19 @@ class App extends React.Component {
           />
           <Route exact path="/mypage" render={() => <Mypage />} />
           <Route exact path="/recollect" render={() => <Recollect />} />
-          <Route exact path="/profile" render={() => <Profile />} />
+          <Route 
+            exact 
+            path="/profile" 
+            render={() => 
+              <Profile 
+                history={this.props.history}
+                isLogin={this.state.isLogin}
+                isSocialLogin={this.state.isSocialLogin}
+                username={this.state.username}
+                loginSuccess={this.loginSuccess}
+              />
+              } 
+          />
         </Switch>
       </>
     );
