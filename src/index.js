@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -7,6 +8,14 @@ import Login from './page/Login'
 
 import Collect from './components/Collect'
 
+=======
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import Signup from "./page/Signup";
+import Login from "./page/Login";
+>>>>>>> 703daa65d8dffc4c55bb788bdc6c884af4dab3a7
 
 import { BrowserRouter } from "react-router-dom";
 
