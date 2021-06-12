@@ -10,7 +10,7 @@ import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
 require("dotenv").config();
 
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 
 class App extends React.Component {
   constructor(props) {
@@ -42,34 +42,47 @@ class App extends React.Component {
 
   //// 깃허브 로그인시 ////
   async getAccessToken(authorizationCode) {
-    const result = await axios({
-      method: 'post',
-      url: "http://localhost:4000/getToken",
-      data: {
-        authorizationCode: authorizationCode
-      }
-    });
-    if(result) {
+    const result = await axios.post(
+      "http://localhost:4000/getToken",
+      {
+        data: {
+          authorizationCode: authorizationCode,
+        },
+      },
+      { withCredentials: true }
+    );
+    if (result) {
       this.setState({
-        //isLogin: true,
-        accessToken: result.data.accessToken
+        accessToken: result.data.accessToken,
       });
       console.log(result);
       this.getGitHubUserInfo();
-    }  
+    }
   }
+
+  // ☠️ 여기부터 ☠️ //
 
   //// 깃허브에 유저정보 요청 ////
   getGitHubUserInfo() {
-    axios.get("https://api.github.com/user", {
-      headers: {
-        authorization: `token ${this.state.accessToken}`,
-      },
-    })
-    .then((res) => {
-      console.log(res);
-      this.logcheck(res.data.id);
-    })
+    // axios({
+    //   method: "get",
+    //   url: "https://api.github.com/user",
+    //   headers: {
+    //     authorization: `token ${this.state.accessToken}`,
+    //     Origin: "http://localhost:3000",
+    //   },
+    // })
+    axios
+      .get("https://api.github.com/user", {
+        headers: {
+          authorization: `token ${this.state.accessToken}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        this.logcheck(res.data.id);
+      })
+      .catch((err) => console.log(err));
   }
 
   //// 기존 회원인지 아닌지 판별 ////
@@ -99,7 +112,10 @@ class App extends React.Component {
                 withCredentials: true,
               }
             )
-            .then(() => this.props.history.push("/"))
+            .then(() => {
+              this.setState({ isLogin: true });
+              this.props.history.push("/");
+            })
             .catch((err) => console.log(err));
       })
       .catch(() => {
@@ -157,18 +173,18 @@ class App extends React.Component {
           />
           <Route exact path="/mypage" render={() => <Mypage />} />
           <Route exact path="/recollect" render={() => <Recollect />} />
-          <Route 
-            exact 
-            path="/profile" 
-            render={() => 
-              <Profile 
+          <Route
+            exact
+            path="/profile"
+            render={() => (
+              <Profile
                 history={this.props.history}
                 isLogin={this.state.isLogin}
                 isSocialLogin={this.state.isSocialLogin}
                 username={this.state.username}
                 loginSuccess={this.loginSuccess}
               />
-              } 
+            )}
           />
         </Switch>
       </>
