@@ -5,13 +5,14 @@ import App from './App';
 import Signup from './page/Signup'
 import Login from './page/Login'
 
+import Collect from './components/Collect'
 
 
 import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <Collect />
   </BrowserRouter>,
   document.getElementById("root")
 );
