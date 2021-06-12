@@ -14,15 +14,27 @@ class Signup extends React.Component {
     this.handleCreateAccount = this.handleCreateAccount.bind(this);
   }
 
-  handleCreateSocialAccount({ username }) {
-    axios
-      .post("http://recollect.today/signup", {
+  async handleCreateSocialAccount({ username }) {
+    const uuid = await axios.post('http://recollect.today/signup', {
         username: username,
-        email: this.state.socialId,
+        socialId: this.state.socialId,
         isSocialAccount: 1,
       })
-      .then((res) => {
+      .then(res => {
+        return res.data.uuid;
+      })
+      .catch(err => {
+        console.log(err);
+      })
+
+    await axios.post('http://recollect.today/login', {
+        uuid: uuid
+      })
+      .then(res => {
         this.props.loginSuccess(res.data.username);
+      })
+      .catch(err =>{
+        console.log(err);
       })
       .catch((err) => {
         console.log(err);
@@ -37,8 +49,11 @@ class Signup extends React.Component {
         password: password,
         isSocialAccount: 0,
       })
-      .then((res) => {
-        this.props.loginSuccess(res.data.username);
+      .then(res => {
+        this.props.history.push('/login') 
+      })
+      .catch( err => {
+        console.log(err)
       })
       .catch((err) => {
         console.log(err);
