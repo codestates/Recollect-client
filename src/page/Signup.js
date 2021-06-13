@@ -5,7 +5,6 @@ import SignupComp from "../components/SignupComp";
 import Footer from "../components/Footer";
 import BackBtn from "../components/BackBtn";
 
-axios.defaults.withCredentials = true;
 
 class Signup extends React.Component {
   constructor(props) {
@@ -14,38 +13,31 @@ class Signup extends React.Component {
       socialId: null,
     };
     this.handleCreateAccount = this.handleCreateAccount.bind(this);
+    this.handleCreateSocialAccount = this.handleCreateSocialAccount.bind(this);
   }
 
-  async handleCreateSocialAccount({ username }) {
-    const uuid = await axios.post('http://localhost:4000/signup', {
+  handleCreateSocialAccount({ username }) {
+    axios.post('process.env.REACT_APP_API_URI/signup', {
         username: username,
         socialId: this.state.socialId,
         isSocialAccount: 1,
       })
       .then(res => {
-        return res.data.uuid;
+        axios.post('process.env.REACT_APP_API_URI/login', {
+          uuid: res.data.uuid
+        })
+        .then(res => {
+          this.props.loginSuccess(res.data.username);
+        })
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
       })
-
-    await axios.post('http://localhost:4000/login', {
-        uuid: uuid
-      })
-      .then(res => {
-        this.props.loginSuccess(res.data.username);
-      })
-      .catch(err =>{
-        console.log(err);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   }
   //! 비소셜 회원 socialId = 0 안넣어줘도 됌 
   handleCreateAccount({ username, email, password }) {
     axios
-      .post("http://localhost:4000/signup", {
+      .post("process.env.REACT_APP_API_URI/signup", {
         username: username,
         email: email,
         password: password,

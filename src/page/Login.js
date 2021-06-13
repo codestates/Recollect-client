@@ -3,6 +3,10 @@ import React from "react";
 import Footer from "../components/Footer";
 import BackBtn from "../components/BackBtn";
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> bd4a1fe340714dd5925e876c69cf765352d1d846
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -10,8 +14,12 @@ class Login extends React.Component {
       email: "",
       password: "",
       errorMessage: "",
+<<<<<<< HEAD
+      GITHUB_LOGIN_URL: "https://github.com/login/oauth/authorize?client_id=75d98169bb09be4ab543",
+=======
       GITHUB_LOGIN_URL:
         "https://github.com/login/oauth/authorize?client_id=749cea90f0ee8535f1fa",
+>>>>>>> bd4a1fe340714dd5925e876c69cf765352d1d846
     };
     this.handleInputValue = this.handleInputValue.bind(this);
     this.handleSocialLogin = this.handleSocialLogin.bind(this);
@@ -41,7 +49,11 @@ class Login extends React.Component {
       //// POST 요청 (서버 열리면 주석제거) ////
       axios
         .post(
+<<<<<<< HEAD
+          "process.env.REACT_APP_API_URI/login",
+=======
           "http://recollect.today/login",
+>>>>>>> bd4a1fe340714dd5925e876c69cf765352d1d846
           {
             email: email,
             password: password,
