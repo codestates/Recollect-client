@@ -3,7 +3,6 @@ import React from "react";
 import Footer from "../components/Footer";
 import BackBtn from "../components/BackBtn";
 
-axios.defaults.withCredentials = true;
 
 class Login extends React.Component {
   constructor(props) {
@@ -12,7 +11,7 @@ class Login extends React.Component {
       email: "",
       password: "",
       errorMessage: "",
-      GITHUB_LOGIN_URL: "https://github.com/login/oauth/authorize?client_id=14c2272e3235eef4dcb6",
+      GITHUB_LOGIN_URL: "https://github.com/login/oauth/authorize?client_id=75d98169bb09be4ab543",
     };
     this.handleInputValue = this.handleInputValue.bind(this);
     this.handleSocialLogin = this.handleSocialLogin.bind(this);
@@ -42,7 +41,7 @@ class Login extends React.Component {
       //// POST 요청 (서버 열리면 주석제거) ////
       axios
         .post(
-          "http://localhost:4000/login",
+          "process.env.REACT_APP_API_URI/login",
           {
             email: email,
             password: password,
