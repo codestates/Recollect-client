@@ -67,23 +67,23 @@ class App extends React.Component {
   logcheck(socialId) {
     axios
       .post(
-        "https://recollect.today/logcheck",
-        {
+        "http://recollect.today/logcheck",
+        { 
           socialId: socialId,
-        },
-        {
+        },                                                                              
+        {   
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
-        }
+        } 
       )
       .then((res) => {
         if (res.message === "recollect user")
-          // login post 요청
-          axios
-            .post(
-              "https://recollect.today/login",
-              {
-                uuid: res.data.uuid,
+          // login post 요청    
+          axios                       
+            .post(    
+              "http://recollect.today/login",
+              {   
+                uuid: res.data.uuid,          
               },
               {
                 headers: { "Content-Type": "application/json" },

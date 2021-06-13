@@ -25,6 +25,7 @@ class Signup extends React.Component {
       })
       .catch(err => {
         console.log(err);
+        return;
       })
 
     await axios.post('http://recollect.today/login', {
@@ -36,9 +37,7 @@ class Signup extends React.Component {
       .catch(err =>{
         console.log(err);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+
   }
 
   handleCreateAccount({ username, email, password }) {
@@ -55,9 +54,6 @@ class Signup extends React.Component {
       .catch( err => {
         console.log(err)
       })
-      .catch((err) => {
-        console.log(err);
-      });
   }
 
   componentDidMount() {
