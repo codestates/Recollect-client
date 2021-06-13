@@ -226,18 +226,18 @@ class App extends React.Component {
           />
           <Route exact path="/mypage" render={() => <Mypage />} />
           <Route exact path="/recollect" render={() => <Recollect />} />
-          <Route 
-            exact 
-            path="/profile" 
-            render={() => 
-              <Profile 
+          <Route
+            exact
+            path="/profile"
+            render={() => (
+              <Profile
                 history={this.props.history}
                 isLogin={this.state.isLogin}
                 isSocialLogin={this.state.isSocialLogin}
                 username={this.state.username}
                 loginSuccess={this.loginSuccess}
               />
-              } 
+            )}
           />
         </Switch>
       </>
