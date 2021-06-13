@@ -1,10 +1,9 @@
-import React from "react";
-import axios from "axios";
+import React from 'react';
+import axios from 'axios';
 
-import SignupComp from "../components/SignupComp";
-import Footer from "../components/Footer";
-import BackBtn from "../components/BackBtn";
-
+import SignupComp from '../components/SignupComp';
+import Footer from '../components/Footer';
+import BackBtn from '../components/BackBtn';
 
 class Signup extends React.Component {
   constructor(props) {
@@ -17,37 +16,36 @@ class Signup extends React.Component {
   }
 
   handleCreateSocialAccount({ username }) {
-    axios.post('process.env.REACT_APP_API_URI/signup', {
+    axios
+      .post('process.env.REACT_APP_API_URI/signup', {
         username: username,
         socialId: this.state.socialId,
         isSocialAccount: 1,
       })
-      .then(res => {
-        axios.post('process.env.REACT_APP_API_URI/login', {
-          uuid: res.data.uuid
-        })
-        .then(res => {
-          this.props.loginSuccess(res.data.username);
-        })
+      .then((res) => {
+        axios
+          .post('process.env.REACT_APP_API_URI/login', {
+            uuid: res.data.uuid,
+          })
+          .then((res) => {
+            this.props.loginSuccess(res.data.username);
+          });
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
-      })
+      });
   }
-  //! 비소셜 회원 socialId = 0 안넣어줘도 됌 
+  //! 비소셜 회원 socialId = 0 안넣어줘도 됌
   handleCreateAccount({ username, email, password }) {
     axios
-      .post("process.env.REACT_APP_API_URI/signup", {
+      .post('process.env.REACT_APP_API_URI/signup', {
         username: username,
         email: email,
         password: password,
         isSocialAccount: 0,
       })
-      .then(res => {
-        this.props.history.push('/login') 
-      })
-      .catch( err => {
-        console.log(err)
+      .then((res) => {
+        this.props.history.push('/login');
       })
       .catch((err) => {
         console.log(err);
