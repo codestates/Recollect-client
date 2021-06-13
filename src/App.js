@@ -33,11 +33,18 @@ class App extends React.Component {
 
   //// 홈페이지 로그인 성공시 ////
   loginSuccess(accessToken) {
-    this.setState({
-      isLogin: true,
-      accessToken: accessToken,
-    });
-    this.props.history.push("/mypage");
+    // 수정
+    if (accessToken) {
+      this.setState({
+        isLogin: true,
+        accessToken: accessToken,
+      });
+    } else {
+      this.setState({
+        isLogin: true,
+      });
+    }
+    this.props.history.push("/");
   }
 
   //// 깃허브 로그인시 ////
@@ -64,18 +71,10 @@ class App extends React.Component {
 
   //// 깃허브에 유저정보 요청 ////
   getGitHubUserInfo() {
-    // axios({
-    //   method: "get",
-    //   url: "https://api.github.com/user",
-    //   headers: {
-    //     authorization: `token ${this.state.accessToken}`,
-    //     Origin: "http://localhost:3000",
-    //   },
-    // })
     axios
       .get("https://api.github.com/user", {
         headers: {
-          authorization: `token ${this.state.accessToken}`,
+          Authorization: `token ${this.state.accessToken}`,
         },
       })
       .then((res) => {
@@ -127,6 +126,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    axios.post("http://localhost:4000/login").then((res) => console.log(res));
     //// 깃허브 인증코드 반환 ////
     const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get("code");

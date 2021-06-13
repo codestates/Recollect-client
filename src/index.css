@@ -187,6 +187,60 @@ body,
   color: var(--btn-hover-color);
 }
 
+.LoginContainer > .mainContainer > article > .logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.5rem;
+  color: rgba(13, 13, 224, 0.918);
+  animation: fadein 3s;
+  -moz-animation: fadein 3s; /*Firefox*/
+  -webkit-animation: fadein 3s; /*Safari and Chrome*/
+  -o-animation: fadein 3s; /*Opera*/
+}
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-moz-keyframes fadein {
+  /*Firefox*/
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fadein {
+  /*Safari and Chrome*/
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-o-keyframes fadein {
+  /*Opera*/
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.LoginContainer > .mainContainer > article .logosample {
+  width: 60px;
+  height: 60px;
+  background-color: rgba(39, 39, 185, 0.918);
+  border-radius: 1rem;
+}
+
 .LoginContainer > .mainContainer > article {
   display: flex;
   flex-direction: column;
@@ -196,7 +250,7 @@ body,
   border: 1px var(--container-color) solid;
   padding: 0;
   margin: 0;
-  height: 60vh;
+  height: 70vh;
   background-color: var(--container-color);
 }
 
@@ -239,7 +293,7 @@ body,
 }
 .seperatingLine::before,
 .seperatingLine::after {
-  content: '';
+  content: "";
   flex-grow: 1;
   background: black;
   height: 1px;
@@ -571,7 +625,10 @@ cursor: pointer; */
   color: var(--btn-hover-color);
 }
 
+/* Collection & BookMark Start */
+
 .tempBackground {
+  /* MyPage Background 완성시 삭제 */
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -580,22 +637,28 @@ cursor: pointer; */
   background-color: var(--main-bg-color);
 }
 
-.bookmarkContainer {
-  width: 80vw;
-  height: 60vh;
+.collection {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-end;
-  align-content: flex-start;
-  background-color: var(--container-color);
+  justify-content: center;
+  justify-items: center;
+}
+
+.bookmarkContainer {
+  /* https://stackoverflow.com/questions/32802202/how-to-center-a-flex-container-but-left-align-flex-items */
+  width: 70vw;
+  height: 60vh;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, max-content));
+  grid-gap: 10px;
+  justify-content: center;
+  justify-items: center;
   overflow: scroll;
+  background-color: var(--container-color);
 }
 
 .bookmark {
-  width: 160px;
-  height: 160px;
+  width: 150px;
+  height: 150px;
   display: flex;
   flex-direction: column;
   background-color: #6096ba;
@@ -633,3 +696,5 @@ cursor: pointer; */
   flex-direction: column;
   justify-content: space-between;
 }
+
+/* Collection & BookMark End */

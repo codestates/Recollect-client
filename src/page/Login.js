@@ -67,6 +67,10 @@ class Login extends React.Component {
           <BackBtn history={this.props.history} />
           <h1>LOGIN</h1>
           <article>
+            <div className="logo-container">
+              <div className="logosample"></div>
+              Recollect
+            </div>
             <button id="GithubBtn" onClick={this.handleSocialLogin}>
               GitHub
             </button>
