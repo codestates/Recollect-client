@@ -10,15 +10,7 @@ import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
 require("dotenv").config();
 
-// axios.defaults.headers.common['Authorization'] = this.state.accessToken;
-
-// export default axios.create({
-//   baseURL,
-//   headers: {
-//       'Content-Type': 'application/json',
-//       'Authorization': `token ${this.state.accessToken}`,
-//   }
-// });
+ axios.defaults.headers.common['Authorization'] = this.state.accessToken;
 
 class App extends React.Component {
   constructor(props) {
