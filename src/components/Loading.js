@@ -3,11 +3,9 @@ import { Link } from 'react-router-dom';
 
 function Loading() {
 
-
-
   return (
-    <div>
-      <div>
+    <div className="loading-container">
+      <div className="loading-bar">
         ...loading
       </div>
     </div>
