@@ -823,6 +823,19 @@ cursor: pointer; */
 
 /* Bookmark Edit Mode  */
 
+.editBtn {
+  width: 80px;
+  height: 40px;
+  font-weight: bold;
+  background-color: var(--btn-color);
+  color: white;
+  border-style: none;
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  cursor: pointer;
+}
+
 .bookmarkEditContatiner {
   display: flex;
   flex-direction: column;
