@@ -10,6 +10,8 @@ body,
   width: 100vw;
   height: 100vh;
   display: flex;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 :root {
@@ -26,6 +28,19 @@ body,
   --btn-color: #596e9b;
   --btn-hover-color: rgba(39, 39, 185, 0.918);
   --box-shadow: 12px 12px 20px 1px rgba(0, 0, 255, 0.116);
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--btn-hover-color);
+  width: 100vw;
+}
+
+.loading-bar {
+  background-color: yellowgreen;
+  text-align: center;
 }
 
 /* //// Landing Page Start //// */
@@ -151,6 +166,7 @@ body,
 }
 
 #footer {
+  width: 100vw;
   text-align: center;
   line-height: 60px;
   background-color: rgb(188, 206, 207);
@@ -187,6 +203,60 @@ body,
   color: var(--btn-hover-color);
 }
 
+.LoginContainer > .mainContainer > article > .logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.5rem;
+  color: rgba(13, 13, 224, 0.918);
+  animation: fadein 3s;
+  -moz-animation: fadein 3s; /*Firefox*/
+  -webkit-animation: fadein 3s; /*Safari and Chrome*/
+  -o-animation: fadein 3s; /*Opera*/
+}
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-moz-keyframes fadein {
+  /*Firefox*/
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fadein {
+  /*Safari and Chrome*/
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-o-keyframes fadein {
+  /*Opera*/
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.LoginContainer > .mainContainer > article .logosample {
+  width: 60px;
+  height: 60px;
+  background-color: rgba(39, 39, 185, 0.918);
+  border-radius: 1rem;
+}
+
 .LoginContainer > .mainContainer > article {
   display: flex;
   flex-direction: column;
@@ -196,7 +266,7 @@ body,
   border: 1px var(--container-color) solid;
   padding: 0;
   margin: 0;
-  height: 60vh;
+  height: 70vh;
   background-color: var(--container-color);
 }
 
@@ -489,15 +559,18 @@ cursor: pointer; */
 }
 
 #Collect-container {
-  width: 50%;
+  width: 85vw;
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
   padding: 20px;
-  background-color: var(--main-bg-color);
+  background-color: var(--container-color);
+  flex: 1;
+  align-content: center;
 }
 
 .Collect-textinput {
-  width: 90%;
+  width: 50%;
   resize: none;
   border-style: none;
 }
@@ -518,7 +591,7 @@ cursor: pointer; */
   line-height: 100px;
   padding: 5px;
   vertical-align: text-top;
-  height: 200px;
+  height: 150px;
 }
 
 #Collect-emoji-container,
@@ -545,6 +618,7 @@ cursor: pointer; */
 }
 
 #Collect-emoji-container {
+  /* width: 50%; */
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 0 5%;
@@ -571,31 +645,49 @@ cursor: pointer; */
   color: var(--btn-hover-color);
 }
 
+/* Collection & BookMark Start */
+
 .tempBackground {
+  /* MyPage Background 완성시 삭제 */
+  margin: 0;
+  max-width: 100vw;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  height: fit-content;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  /* justify-content: center; */
   align-items: center;
   background-color: var(--main-bg-color);
 }
 
-.bookmarkContainer {
-  width: 80vw;
-  height: 60vh;
+/* .collection {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-end;
-  align-content: flex-start;
+  justify-content: center;
+  justify-items: center;
+  border: 3px solid blue;
+  flex: 2;
+} */
+
+.bookmarkContainer {
+  /* https://stackoverflow.com/questions/32802202/how-to-center-a-flex-container-but-left-align-flex-items */
+  width: 85vw;
+  margin-bottom: 50px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, max-content));
+  /* grid-template-rows: repeat(auto-fit, minmax(120px, max-content)); */
+  grid-gap: 10px;
+  justify-content: center;
+  justify-items: center;
+
   background-color: var(--container-color);
-  overflow: scroll;
+  box-shadow: var(--box-shadow);
+  flex: 2;
 }
 
 .bookmark {
-  width: 160px;
-  height: 160px;
+  width: 190px;
+  height: 190px;
   display: flex;
   flex-direction: column;
   background-color: #6096ba;
@@ -603,7 +695,6 @@ cursor: pointer; */
   border: 1px solid #6096ba;
   margin: 10px;
   padding: 4px;
-  overflow: scroll;
 }
 
 .bookmark:hover {
@@ -632,4 +723,52 @@ cursor: pointer; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.tempBackground article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1;
+}
+
+.nav.upper {
+  padding-right: 20px;
+  width: 100vw;
+  flex: 0.5;
+  justify-content: flex-end;
+  display: flex;
+}
+
+#alarm {
+  /* flex: 1; */
+  background-color: rgba(255, 255, 5, 0.479);
+  height: 80px;
+  width: 85vw;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 20px;
+  vertical-align: middle;
+  line-height: 80px;
+}
+
+.nav.lower {
+  flex: 0.3;
+  background-color: var(--container-color);
+  width: 85vw;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.tempBackground .logo-container {
+  font-size: 30px;
+}
+
+.tempBackground .logosample {
+  width: 60px;
+  height: 60px;
+  background-color: rgba(39, 39, 185, 0.918);
+  border-radius: 1rem;
+  font-size: 30px;
 }

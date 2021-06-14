@@ -7,11 +7,19 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+<<<<<<< HEAD
       email: '',
       password: '',
       errorMessage: '',
       GITHUB_LOGIN_URL:
         'https://github.com/login/oauth/authorize?client_id=749cea90f0ee8535f1fa',
+=======
+      email: "",
+      password: "",
+      errorMessage: "",
+      GITHUB_LOGIN_URL: `https://github.com/login/oauth/authorize?client_id=749cea90f0ee8535f1fa`,
+      //clientid가 시윤님껄로 해도 되는지? 서버 켜서 확인
+>>>>>>> 4130f81c39b7432bbd75429f875040706f618a17
     };
     this.handleInputValue = this.handleInputValue.bind(this);
     this.handleSocialLogin = this.handleSocialLogin.bind(this);
@@ -41,7 +49,11 @@ class Login extends React.Component {
       //// POST 요청 (서버 열리면 주석제거) ////
       axios
         .post(
+<<<<<<< HEAD
           'process.env.REACT_APP_API_URI/login',
+=======
+          "http://recollect.today/login",
+>>>>>>> 4130f81c39b7432bbd75429f875040706f618a17
           {
             email: email,
             password: password,
@@ -67,6 +79,10 @@ class Login extends React.Component {
           <BackBtn history={this.props.history} />
           <h1>LOGIN</h1>
           <article>
+            <div className="logo-container">
+              <div className="logosample"></div>
+              Recollect
+            </div>
             <button id="GithubBtn" onClick={this.handleSocialLogin}>
               GitHub
             </button>

@@ -10,7 +10,7 @@ class Landing extends React.Component {
   render() {
     return (
       <div className="landing-container">
-        <SignBtn handleStart={this.props.handleStart}/>
+        <SignBtn onClick={() => {this.props.history.push('/login')}}/>
         <div className="main-container">
           <div className="main">
             <div className="logo-container">
@@ -25,7 +25,7 @@ class Landing extends React.Component {
               간직하세요. <br />
               읽지 않은 북마크들은 알림을 통해 Recollect하실 수 있습니다!
             </div>
-            <button id="start-btn" onClick={this.props.handleStart}>
+            <button id="start-btn" onClick={() => {this.props.history.push('/login')}}>
               Start
             </button>
           </div>

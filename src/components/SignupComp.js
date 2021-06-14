@@ -1,5 +1,4 @@
 import React from "react";
-import axios from 'axios';
 
 const { IsValidiateUsername, IsValidiatePassword } = require('../util/validiation')
 
@@ -40,7 +39,7 @@ class SignupComp extends React.Component {
     this.props.handleCreateSocialAccount(this.state);
   }
 
-  handleCreateAccount = () => {
+  handleCreateAccount() {
     const { username, email, password, passwordcheck } = this.state;
     if (!username || !email || !password ) {
       this.setState({
@@ -114,7 +113,7 @@ class SignupComp extends React.Component {
               </div>
             </div>
             : 
-            ''
+            '' //socialId 있는 경우
           }
           <div>
             <label>{this.state.errormessage}</label>
