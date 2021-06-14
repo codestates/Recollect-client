@@ -55,7 +55,6 @@ class App extends React.Component {
     });
     this.props.history.push("/"); // isLogin 상태값에 따라 Landing / Mypage
   }
-
   //* 깃허브에서 access code를 받고 서버로 access 토큰 요청
   async getAccessToken(authorizationCode) {
     await axios
@@ -155,35 +154,36 @@ class App extends React.Component {
       )
       .then((res) => {
         console.log(res);
-          // login post 요청
-          axios
-            .post(
-              "http://recollect.today/login",
-              {
-                uuid: res.data.uuid,
-              },
-              {
-                headers: { "Content-Type": "application/json" },
-                withCredentials: true,
-              }
-            )
-            .then(() => {
-              this.socialLoginSuccess(); // 이미 리콜렉트 소셜 회원인 경우 isSocialLogin: true 로 변경 -> mypage로 이동
-            })
-            .catch((err) => {
-              this.props.history.push("/mypage"); //**[서버]logincontroller 를 자체/소셜로그인으로 분리, api 수정 추가 (총체적으로)
-            });   // **[서버]소셜로그인에서 세션아이디 저장시 자체 토큰 생성 확인 필요 
+        // login post 요청
+        axios
+          .post(
+            "http://recollect.today/login",
+            {
+              uuid: res.data.uuid,
+            },
+            {
+              headers: { "Content-Type": "application/json" },
+              withCredentials: true,
+            }
+          )
+          .then(() => {
+            this.socialLoginSuccess(); // 이미 리콜렉트 소셜 회원인 경우 isSocialLogin: true 로 변경 -> mypage로 이동
+          })
+          .catch((err) => {
+            this.props.history.push("/mypage"); //**[서버]logincontroller 를 자체/소셜로그인으로 분리, api 수정 추가 (총체적으로)
+          }); // **[서버]소셜로그인에서 세션아이디 저장시 자체 토큰 생성 확인 필요
       })
-      .catch((err) => {//신규 소셜 회원인경우
+      .catch((err) => {
+        //신규 소셜 회원인경우
         this.props.history.push({
-          pathname: "/signup", 
+          pathname: "/signup",
           state: { socialId: socialId },
         });
         //[서버 로그체크컨트롤러] then/catch 404, 500 분기 처리 리팩토링 필요
         this.setState({
-          isSocialLogin: true
-        })
-      })
+          isSocialLogin: true,
+        });
+      });
   }
 
   componentDidMount() {

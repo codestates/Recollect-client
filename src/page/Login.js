@@ -10,9 +10,8 @@ class Login extends React.Component {
       email: "",
       password: "",
       errorMessage: "",
-      GITHUB_LOGIN_URL:
-        `https://github.com/login/oauth/authorize?client_id=749cea90f0ee8535f1fa`, 
-        //clientid가 시윤님껄로 해도 되는지? 서버 켜서 확인
+      GITHUB_LOGIN_URL: `https://github.com/login/oauth/authorize?client_id=749cea90f0ee8535f1fa`,
+      //clientid가 시윤님껄로 해도 되는지? 서버 켜서 확인
     };
     this.handleInputValue = this.handleInputValue.bind(this);
     this.handleSocialLogin = this.handleSocialLogin.bind(this);
@@ -68,6 +67,10 @@ class Login extends React.Component {
           <BackBtn history={this.props.history} />
           <h1>LOGIN</h1>
           <article>
+            <div className="logo-container">
+              <div className="logosample"></div>
+              Recollect
+            </div>
             <button id="GithubBtn" onClick={this.handleSocialLogin}>
               GitHub
             </button>
