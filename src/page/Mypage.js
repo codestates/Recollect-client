@@ -104,30 +104,24 @@ class MyPage extends React.Component {
   render() {
     console.log('render');
     return (
-      <div>test</div>
-      // <div className="tempBackground">
-      //   <div className="nav upper">
-      //     {/* <ProfileBtn
-      //       onClick={() => {
-      //         this.props.history.push('/profile');
-      //       }}
-      //     /> */}
-      //     <SignBtn />
-      //   </div>
-      //   <div className="logo-container">
-      //     <div className="logosample"></div>
-      //     Recollect
-      //   </div>
-      //   <Collect />
-      //   <div id="alarm">일주일간 읽지 않은 collect 7개</div>
-      //   <div className="nav lower">select trashcan edit</div>
-      //   <div className="bookmarkContainer">
-      //     {this.state.bookmarks.map((bookmark) => (
-      //       <BookMark key={bookmark.id} bookmarkInfo={bookmark} />
-      //     ))}
-      //   </div>
-      //   <Footer />
-      // </div>
+      <div className="tempBackground">
+        <div className="nav upper">
+          <SignBtn />
+        </div>
+        <div className="logo-container">
+          <div className="logosample"></div>
+          Recollect
+        </div>
+        <Collect />
+        <div id="alarm">일주일간 읽지 않은 collect 7개</div>
+        <div className="nav lower">select trashcan edit</div>
+        <div className="bookmarkContainer">
+          {this.state.bookmarks.map((bookmark) => (
+            <BookMark key={bookmark.id} bookmarkInfo={bookmark} />
+          ))}
+        </div>
+        <Footer />
+      </div>
     );
   }
 }
