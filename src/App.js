@@ -57,6 +57,13 @@ class App extends React.Component {
       })
       .catch((err) => {
         console.log(err);
+        this.setState({
+          isLogin: false,
+          isSocialLogin: false,
+          accessToken: '',
+          socialId: '',
+        });
+        this.props.history.push('/');
       });
   }
 

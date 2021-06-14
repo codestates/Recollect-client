@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 import BackBtn from '../components/BackBtn';
 import BookMark from '../components/Bookmark';
 import Collect from '../components/Collect';
-import SignBtn from '../components/SignBtn';
+import SignOutBtn from '../components/SignOutBtn';
 import ProfileBtn from '../components/ProfileBtn';
 import Alarm from '../components/Alarm';
 import CollectionEditor from '../components/CollectionEditor';
@@ -27,6 +27,62 @@ class MyPage extends React.Component {
           url: 'https://www.google.com/',
           created_at: '2021 - 06 - 08',
         },
+        {
+          id: 1,
+          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
+          emojis: ['☕️', '⚡️'],
+          url: 'https://www.google.com/',
+          created_at: '2021 - 06 - 08',
+        },
+        {
+          id: 1,
+          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
+          emojis: ['☕️', '⚡️'],
+          url: 'https://www.google.com/',
+          created_at: '2021 - 06 - 08',
+        },
+        {
+          id: 1,
+          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
+          emojis: ['☕️', '⚡️'],
+          url: 'https://www.google.com/',
+          created_at: '2021 - 06 - 08',
+        },
+        {
+          id: 1,
+          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
+          emojis: ['☕️', '⚡️'],
+          url: 'https://www.google.com/',
+          created_at: '2021 - 06 - 08',
+        },
+        {
+          id: 1,
+          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
+          emojis: ['☕️', '⚡️'],
+          url: 'https://www.google.com/',
+          created_at: '2021 - 06 - 08',
+        },
+        {
+          id: 1,
+          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
+          emojis: ['☕️', '⚡️'],
+          url: 'https://www.google.com/',
+          created_at: '2021 - 06 - 08',
+        },
+        {
+          id: 1,
+          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
+          emojis: ['☕️', '⚡️'],
+          url: 'https://www.google.com/',
+          created_at: '2021 - 06 - 08',
+        },
+        {
+          id: 1,
+          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
+          emojis: ['☕️', '⚡️'],
+          url: 'https://www.google.com/',
+          created_at: '2021 - 06 - 08',
+        },
       ],
       errorMessage: '',
       isEdit: false,
@@ -39,6 +95,48 @@ class MyPage extends React.Component {
     this.editBtnHandler = this.editBtnHandler.bind(this);
     this.deleteBookmark = this.deleteBookmark.bind(this);
     this.editBookmark = this.editBookmark.bind(this);
+  }
+
+  editBtnHandler() {
+    this.setState({
+      isEdit: !this.state.isEdit,
+    });
+  }
+
+  editBookmark(selectedInfo) {
+    const { id, desc, url, emojis } = selectedInfo;
+    this.setState({
+      selectecdInfo: { id: id, desc: desc, url: url, emojis, emojis },
+    });
+  }
+
+  deleteBookmark(bookmarkId) {
+    // bookmarkID랑 토큰넣어서 보내기
+    // api 확인필요합니다! collect랑 겹침
+    axios
+      .post(
+        'http://recollect.today/mypage',
+        {
+          bookmarkId: bookmarkId,
+        },
+        {
+          headers: { Authorization: this.props.accessToken },
+        }
+      )
+      .then(() => {
+        // 삭제성공
+        this.setState({
+          isEdit: false,
+        });
+        this.getMypageInformation();
+      })
+      .catch((err) => {
+        // 삭제실패
+        if (err.dataValues.message === 'invalid access token') {
+          this.getRefreshToken();
+        }
+        console.log(err);
+      });
   }
 
   getRefreshToken() {
