@@ -4,8 +4,12 @@ import Footer from '../components/Footer';
 import BackBtn from '../components/BackBtn';
 import BookMark from '../components/Bookmark';
 import Collect from '../components/Collect';
-import SignOutBtn from '../components/SignOutBtn';
+import SignBtn from '../components/SignBtn';
 import ProfileBtn from '../components/ProfileBtn';
+import Alarm from '../components/Alarm';
+import CollectionEditor from '../components/CollectionEditor';
+import BookmarkReadMode from '../components/BookmarkReadMode';
+import BookmarkEditMode from '../components/BookmarkEditMode';
 
 const { generateRandomColorPairArr } = require('../util/randomColor');
 
@@ -25,16 +29,21 @@ class MyPage extends React.Component {
         },
       ],
       errorMessage: '',
+      isEdit: false,
+      selectecdInfo: {},
     };
 
     this.getMypageInformation = this.getMypageInformation.bind(this);
     this.addBookmark = this.addBookmark.bind(this);
     this.getRefreshToken = this.getRefreshToken.bind(this);
+    this.editBtnHandler = this.editBtnHandler.bind(this);
+    this.deleteBookmark = this.deleteBookmark.bind(this);
+    this.editBookmark = this.editBookmark.bind(this);
   }
 
   getRefreshToken() {
     axios
-      .get('http://recollect.today/getrefreshtoken') // 여기에다가도 withCredentials true 가 들어가야함
+      .get('http://recollect.today/getrefreshtoken')
       .then((res) => {
         this.props.loginSuccess(res.data.accessToken);
       })
@@ -114,17 +123,40 @@ class MyPage extends React.Component {
           <ProfileBtn history={this.props.history} />
         </div>
         <div className="logo-container">
-          <div className="logosample"></div>
-          Recollect
+          <img src="logo.png" alt="logo" />
         </div>
-        <Collect addBookmark={this.addBookmark} />
-        <div id="alarm">읽지 않은 collect 7개</div>
-        <div className="nav lower">select trashcan edit</div>
-        <div className="bookmarkContainer">
-          {this.state.bookmarks.map((bookmark) => (
-            <BookMark key={bookmark.id} bookmarkInfo={bookmark} />
-          ))}
-        </div>
+        <Collect
+          addBookmark={this.addBookmark}
+          isEdit={this.state.isEdit}
+          selectecdInfo={this.state.selectecdInfo}
+        />
+        <Alarm />
+        <CollectionEditor
+          editBtnHandler={this.editBtnHandler}
+          isEdit={this.state.isEdit}
+        />
+        {this.state.isEdit ? (
+          <div>
+            <div className="bookmarkContainer">
+              {this.state.bookmarks.map((bookmark) => (
+                <BookmarkEditMode
+                  key={bookmark.id}
+                  deleteBookmark={this.deleteBookmark}
+                  editBookmark={this.editBookmark}
+                  bookmarkInfo={bookmark}
+                />
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div>
+            <div className="bookmarkContainer">
+              {this.state.bookmarks.map((bookmark) => (
+                <BookmarkReadMode key={bookmark.id} bookmarkInfo={bookmark} />
+              ))}
+            </div>
+          </div>
+        )}
         <Footer />
       </div>
     );

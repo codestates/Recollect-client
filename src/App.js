@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import Landing from './page/Landing';
-import Loading from './components/Loading'; //TEMP
+// import Loading from "./components/Loading"; //TEMP
 import Login from './page/Login';
 import Signup from './page/Signup';
 import Mypage from './page/Mypage';
@@ -82,8 +82,8 @@ class App extends React.Component {
   async getAccessToken(authorizationCode) {
     await axios
       .post(
-        'http://recollect.today/getToken',
-        { data: { authorizationCode: authorizationCode } },
+        'http://localhost:4000/getToken',
+        { authorizationCode: authorizationCode },
         { withCredentials: true }
       )
       .then((res) => {
@@ -134,6 +134,7 @@ class App extends React.Component {
   //* GitHub 앱이 사용자의 액세스 토큰을 사용하여 API에 액세스
   //사용자의 액세스 토큰을 사용하면 GitHub 앱이 사용자를 대신하여 API에 요청을 할 수 있음
   getGitHubUserInfo() {
+    console.log('access token ', this.state.accessToken);
     axios
       .get('https://api.github.com/user', {
         headers: {
@@ -166,7 +167,7 @@ class App extends React.Component {
   logcheck(socialId) {
     axios
       .post(
-        'http://recollect.today/logcheck',
+        'http://localhost:4000/logcheck',
         {
           socialId: this.state.socialId,
         },
@@ -180,7 +181,7 @@ class App extends React.Component {
         // login post 요청
         axios
           .post(
-            'http://recollect.today/login',
+            'http://localhost:4000/login',
             {
               uuid: res.data.uuid,
             },
