@@ -10,9 +10,10 @@ class DelAccountPopup extends React.Component {
 
 
 handleDeleteBtn(){
+  // console.log('delete click')
     //회원 탈퇴 로직,
     axios
-        .delete("https://recollect.today/profile",{
+        .delete("http://recollect.today/profile",{
            authorization: this.props.accessToken //<- accessToken 내려받기 
         })
         .then(res => {
@@ -21,7 +22,7 @@ handleDeleteBtn(){
            //isLogin: false, //<-- DelAccountPopup <- profile <- App
            //랜딩 페이지로 리다이렉트
             this.props.history.push("/");
-            console.log(res.message)
+            // console.log(res.message)
         })
         .catch(err =>
           console.log(err)
@@ -30,7 +31,7 @@ handleDeleteBtn(){
   }
 
   render() {
-    console.log(this.props.isLogin)
+    //console.log(this.props.isLogin)
     return (
       <div className='popup'>
         <div className='popup-inner'>

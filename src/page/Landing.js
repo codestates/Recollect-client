@@ -10,15 +10,14 @@ class Landing extends React.Component {
   render() {
     return (
       <div className="landing-container">
-        <SignBtn onClick={() => {this.props.history.push('/login')}}/>
+        <SignBtn history={this.props.history}/>
         <div className="main-container">
           <div className="main">
             <div className="logo-container">
-              <div className="logosample"></div>
-              Recollect
+                <img src="logo.png" alt="logo"/>
             </div>
             <div className="intro">
-              늘어만가는 수많은 북마크, 정리해보겠다고 만든 북마크 폴더들...{" "}
+              늘어만가는 수많은 북마크, 정리해보겠다고 만든 북마크 폴더들...
               <br />
               혹시 읽지 않은 북마크들이 쌓여만 가고 있진 않으신가요? <br />
               걱정하지마세요. 나만의 설명을 덧붙인 북마크를 콜렉션에 담아

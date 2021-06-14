@@ -1,5 +1,17 @@
+@font-face{
+  font-family: "AzeretMono-Bold";
+  src: url("AzeretMono-Bold.ttf") format('ttf');
+}
+
+@font-face{
+  font-family: "AzeretMono-Light";
+  src: url("AzeretMono-Light.ttf") format('ttf');
+}
+
 * {
   box-sizing: border-box;
+  /* font-family: "AzeretMono-Light";  */
+  /* 폰트추가 ??*/
 }
 
 html,
@@ -12,14 +24,6 @@ body,
   display: flex;
   overflow-x: hidden;
   overflow-y: auto;
-}
-
-:root {
-  --main-bg-color: rgb(210, 214, 211);
-  --container-color: rgb(218, 231, 222);
-  --btn-color: #596e9b;
-  --btn-hover-color: rgba(39, 39, 185, 0.918);
-  --box-shadow: 12px 12px 20px 1px rgba(0, 0, 255, 0.116);
 }
 
 :root {
@@ -136,11 +140,20 @@ body,
   }
 }
 
-.logosample {
+/* .logosample {
   width: 100px;
   height: 100px;
   background-color: rgba(39, 39, 185, 0.918);
   border-radius: 1rem;
+} */
+
+.logo-container img{
+  width: 48%;
+  margin-bottom: 15px;
+  animation: fadein 3s;
+  -moz-animation: fadein 3s; /*Firefox*/
+  -webkit-animation: fadein 3s; /*Safari and Chrome*/
+  -o-animation: fadein 3s; /*Opera*/
 }
 
 .intro {
@@ -150,7 +163,8 @@ body,
 
 #start-btn {
   width: 50%;
-  font-size: 24px;
+  font-size: 26px;
+  font-family: "AzeretMono-Bold";
   padding: 1rem;
   border-style: none;
   margin-bottom: 20px;
@@ -339,7 +353,7 @@ body,
   align-items: center;
   flex-direction: column;
   background-color: var(--main-bg-color);
-  box-shadow: var(--box-shadow);
+  box-shadow: var(--box-shadow); 
 }
 
 .profile {
@@ -745,11 +759,46 @@ cursor: pointer; */
   background-color: rgba(255, 255, 5, 0.479);
   height: 80px;
   width: 85vw;
-  font-size: 20px;
+  font-size: 1.2rem;
   text-align: center;
   margin-top: 20px;
   vertical-align: middle;
   line-height: 80px;
+}
+
+#alarm-alert{
+  color: blue;
+  font-weight: bold;
+}
+
+#alarm-alert:before{
+  content: "There are 7 Collects you haven't checked.  ";
+  color: blue;
+  font-weight: bold;
+  -webkit-animation:blink 2s ease-in-out infinite alternate;
+  -moz-animation:blink 2s ease-in-out infinite alternate;
+  animation:blink 2s ease-in-out infinite alternate;
+  border: dotted 3px blue;
+  padding: 0.5rem;
+  margin-right: 1em;
+}
+
+#alarm button{
+  border-style: none;
+  color: white;
+  background-color: var(--btn-color);
+  border-radius: 5px;
+  padding: 0.8rem;
+
+}
+
+@-moz-keyframes blink{
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+@keyframes blink{
+  0% {opacity:0;}
+  100% {opacity:1;}
 }
 
 .nav.lower {
@@ -762,13 +811,5 @@ cursor: pointer; */
 }
 
 .tempBackground .logo-container {
-  font-size: 30px;
-}
-
-.tempBackground .logosample {
-  width: 60px;
-  height: 60px;
-  background-color: rgba(39, 39, 185, 0.918);
-  border-radius: 1rem;
-  font-size: 30px;
+  width: 35vw;
 }

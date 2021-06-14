@@ -49,11 +49,11 @@ class Profile extends React.Component{
       <div className="profile-container">
         <div className="main-container">
         <BackBtn history={this.props.history} id="profile-backbtn"/>
+
           <h1>PROFILE</h1>
           { (isSocialLogin) 
           ? (
             <div className="profile">
-              
               <div className="profile-header">
                 <h1>{this.props.username}</h1>
                 <span>-</span>
@@ -90,7 +90,6 @@ class Profile extends React.Component{
             </div>)
           :(
             <div className="profile">
-              
               <div className="profile-header">
                 <h1>{this.props.username}</h1> 
                 <span>{this.props.email}</span>
@@ -108,7 +107,7 @@ class Profile extends React.Component{
                   Delete Account
                 </button>
                 {showUserPopup
-                ? 
+                  ? 
                   <UserPopup
                   username={this.props.username}
                   handleUserPopup={this.handleUserPopup}
@@ -118,6 +117,8 @@ class Profile extends React.Component{
                 {showPwdPopup
                 ? 
                   <PwdPopup
+                  password={this.props.password}
+                  passwordcheck={this.props.passwordcheck}
                   handlePwdPopup={this.handlePwdPopup}
                   />
                 : null
