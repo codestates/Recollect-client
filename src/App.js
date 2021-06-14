@@ -233,13 +233,13 @@ class App extends React.Component {
           <Route
             exact
             path="/mypage"
-            render={() => {
+            render={() => (
               <Mypage
               // loginSuccess={this.loginSuccess}
               // history={this.props.history}
               // accessToken={this.state.accessToken}
-              />;
-            }}
+              />
+            )}
           />
           <Route exact path="/recollect" render={() => <Recollect />} />
           <Route
@@ -250,7 +250,7 @@ class App extends React.Component {
                 history={this.props.history}
                 isLogin={this.state.isLogin}
                 isSocialLogin={this.state.isSocialLogin}
-                username={this.state.username}
+                username={this.state.username} //mypage에서 받기?
                 loginSuccess={this.loginSuccess}
                 accessToken={this.state.accessToken}
               />
