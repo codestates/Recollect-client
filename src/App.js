@@ -230,7 +230,17 @@ class App extends React.Component {
               />
             )}
           />
-          <Route exact path="/mypage" render={() => <Mypage />} />
+          <Route
+            exact
+            path="/mypage"
+            render={() => {
+              <Mypage
+              // loginSuccess={this.loginSuccess}
+              // history={this.props.history}
+              // accessToken={this.state.accessToken}
+              />;
+            }}
+          />
           <Route exact path="/recollect" render={() => <Recollect />} />
           <Route
             exact
@@ -242,6 +252,7 @@ class App extends React.Component {
                 isSocialLogin={this.state.isSocialLogin}
                 username={this.state.username}
                 loginSuccess={this.loginSuccess}
+                accessToken={this.state.accessToken}
               />
             )}
           />
