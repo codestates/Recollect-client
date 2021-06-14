@@ -1,9 +1,9 @@
-import React from "react";
-import axios from "axios";
+import React from 'react';
+import axios from 'axios';
 
-import SignupComp from "../components/SignupComp";
-import Footer from "../components/Footer";
-import BackBtn from "../components/BackBtn";
+import SignupComp from '../components/SignupComp';
+import Footer from '../components/Footer';
+import BackBtn from '../components/BackBtn';
 
 class Signup extends React.Component {
   constructor(props) {
@@ -12,54 +12,50 @@ class Signup extends React.Component {
       socialId: null,
     };
     this.handleCreateAccount = this.handleCreateAccount.bind(this);
+    this.handleCreateSocialAccount = this.handleCreateSocialAccount.bind(this);
   }
 
-  async handleCreateSocialAccount({ username }) {
-    const uuid = await axios.post('http://recollect.today/signup', {
+  handleCreateSocialAccount({ username }) {
+    axios
+      .post('http://recollect.today/signup', {
         username: username,
         socialId: this.state.socialId,
         isSocialAccount: 1,
       })
-      .then(res => {
-        return res.data.uuid;
+      .then((res) => {
+        axios
+          .post('http://recollect.today/login', {
+            uuid: res.data.uuid,
+          })
+          .then(() => {
+            this.props.socialLoginSuccess();
+          });
       })
-      .catch(err => {
-        console.log(err);
-        return;
-      })
-
-    await axios.post('http://recollect.today/login', {
-        uuid: uuid
-      })
-      .then(res => {
-        this.props.loginSuccess(res.data.username);
-      })
-      .catch(err =>{
-        console.log(err);
-      })
-
+      .catch((err) => {
+        console.error(err);
+      });
   }
-
+  //! 자체 회원 socialId = 0 안넣어줘도 됨
   handleCreateAccount({ username, email, password }) {
     axios
-      .post("http://recollect.today/signup", {
+      .post('http://recollect.today/signup', {
         username: username,
         email: email,
         password: password,
-        isSocialAccount: 0,
+        isSocialAccount: 0, //[서버] 타입 궁금...?
       })
-      .then(res => {
-        this.props.history.push('/login') 
+      .then(() => {
+        this.props.history.push('/login');
       })
-      .catch( err => {
-        console.log(err)
-      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   componentDidMount() {
     console.log(this.props.history.location);
     this.setState({
-      socialId: this.props.history.location.state,
+      socialId: this.props.history.location.state, //socialId 존재 여부에 따라 signupcomp 렌더 분기
     });
   }
 

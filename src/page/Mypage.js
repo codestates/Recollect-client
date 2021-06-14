@@ -12,6 +12,35 @@ class MyPage extends React.Component {
       bookmarks: [
         {
           id: 1,
+          desc:
+            "Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World",
+          emojis: ["☕️", "⚡️"],
+          url: "https://www.google.com/",
+          created_at: "2021 - 06 - 08",
+        },
+        {
+          id: 2,
+          desc: "Welcome to Recollect",
+          emojis: ["❓"],
+          url: "https://www.github.com/",
+          created_at: "2021 - 06 - 08",
+        },
+        {
+          id: 1,
+          desc: "hi ",
+          emojis: ["☕️", "⚡️"],
+          url: "https://www.google.com/",
+          created_at: "2021 - 06 - 08",
+        },
+        {
+          id: 2,
+          desc: "Welcome to Recollect",
+          emojis: ["❓"],
+          url: "https://www.github.com/",
+          created_at: "2021 - 06 - 08",
+        },
+        {
+          id: 1,
           desc: "Hello World",
           emojis: ["☕️", "⚡️"],
           url: "https://www.google.com/",
@@ -21,7 +50,49 @@ class MyPage extends React.Component {
           id: 2,
           desc: "Welcome to Recollect",
           emojis: ["❓"],
+          url: "https://www.github.com/",
+          created_at: "2021 - 06 - 08",
+        },
+        {
+          id: 1,
+          desc: "Hello World",
+          emojis: ["☕️", "⚡️"],
           url: "https://www.google.com/",
+          created_at: "2021 - 06 - 08",
+        },
+        {
+          id: 2,
+          desc: "Welcome to Recollect",
+          emojis: ["❓"],
+          url: "https://www.github.com/",
+          created_at: "2021 - 06 - 08",
+        },
+        {
+          id: 1,
+          desc: "Hello World",
+          emojis: ["☕️", "⚡️"],
+          url: "https://www.google.com/",
+          created_at: "2021 - 06 - 08",
+        },
+        {
+          id: 2,
+          desc: "Welcome to Recollect",
+          emojis: ["❓"],
+          url: "https://www.github.com/",
+          created_at: "2021 - 06 - 08",
+        },
+        {
+          id: 1,
+          desc: "Hello World",
+          emojis: ["☕️", "⚡️"],
+          url: "https://www.google.com/",
+          created_at: "2021 - 06 - 08",
+        },
+        {
+          id: 2,
+          desc: "Welcome to Recollect",
+          emojis: ["❓"],
+          url: "https://www.github.com/",
           created_at: "2021 - 06 - 08",
         },
       ],
@@ -31,10 +102,12 @@ class MyPage extends React.Component {
   render() {
     return (
       <div className="tempBackground">
-        <div className="bookmarkContainer">
-          {this.state.bookmarks.map((bookmark) => (
-            <BookMark bookmarkInfo={bookmark} />
-          ))}
+        <div className="collection">
+          <div className="bookmarkContainer">
+            {this.state.bookmarks.map((bookmark) => (
+              <BookMark key={bookmark.id} bookmarkInfo={bookmark} />
+            ))}
+          </div>
         </div>
       </div>
     );
