@@ -1,39 +1,48 @@
-import axios from 'axios';
-import React from 'react';
-import Footer from '../components/Footer';
-import BackBtn from '../components/BackBtn';
-import BookMark from '../components/Bookmark';
-import Collect from '../components/Collect';
-import SignBtn from '../components/SignBtn';
-import ProfileBtn from '../components/ProfileBtn';
-import Alarm from '../components/Alarm';
+import axios from "axios";
+import React from "react";
+import Footer from "../components/Footer";
+import BackBtn from "../components/BackBtn";
+import BookMark from "../components/Bookmark";
+import Collect from "../components/Collect";
+import SignBtn from "../components/SignBtn";
+import ProfileBtn from "../components/ProfileBtn";
+import Alarm from "../components/Alarm";
+import CollectionEditor from "../components/CollectionEditor";
+import BookmarkReadMode from "../components/BookmarkReadMode";
+import BookmarkEditMode from "../components/BookmarkEditMode";
 
 class MyPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
+      username: "",
       isRecollect: false,
       bookmarks: [
         {
           id: 1,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '⚡️'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
+          desc:
+            "Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World",
+          emojis: ["☕️", "⚡️"],
+          url: "https://www.google.com/",
+          created_at: "2021 - 06 - 08",
         },
       ],
-      errorMessage: '',
+      errorMessage: "",
+      isEdit: false,
+      selectecdInfo: {},
     };
 
     this.getMypageInformation = this.getMypageInformation.bind(this);
     this.addbookmark = this.addbookmark.bind(this);
     this.getRefreshToken = this.getRefreshToken.bind(this);
+    this.editBtnHandler = this.editBtnHandler.bind(this);
+    this.deleteBookmark = this.deleteBookmark.bind(this);
+    this.editBookmark = this.editBookmark.bind(this);
   }
 
   getRefreshToken() {
     axios
-      .get('http://recollect.today/getrefreshtoken')
+      .get("http://recollect.today/getrefreshtoken")
       .then((res) => {
         this.props.loginSuccess(res.data.accessToken);
       })
@@ -45,7 +54,7 @@ class MyPage extends React.Component {
 
   getMypageInformation() {
     axios
-      .get('http://recollect.today/mypage', {
+      .get("http://recollect.today/mypage", {
         headers: { Authorization: this.props.accessToken },
       })
       .then((res) => {
@@ -67,12 +76,12 @@ class MyPage extends React.Component {
   addbookmark(desc, url, emoji) {
     if (!desc || !url) {
       this.setState({
-        errorMessage: '설명과 url을 추가해주세요!',
+        errorMessage: "설명과 url을 추가해주세요!",
       });
     }
     axios
       .post(
-        'http://recollect.today/mypage',
+        "http://recollect.today/mypage",
         {
           desc: desc,
           username: this.state.username,
@@ -87,7 +96,7 @@ class MyPage extends React.Component {
         this.getMypageInformation();
       })
       .catch((err) => {
-        if (err.dataValues.message === 'invalid access token') {
+        if (err.dataValues.message === "invalid access token") {
           this.getRefreshToken();
         } else {
           this.setState({
@@ -98,12 +107,54 @@ class MyPage extends React.Component {
       });
   }
 
+  editBtnHandler() {
+    this.setState({
+      isEdit: !this.state.isEdit,
+    });
+  }
+
+  editBookmark(selectedInfo) {
+    const { id, desc, url, emojis } = selectedInfo;
+    this.setState({
+      selectecdInfo: { id: id, desc: desc, url: url, emojis, emojis },
+    });
+  }
+
+  deleteBookmark(bookmarkId) {
+    // bookmarkID랑 토큰넣어서 보내기
+    // api 확인필요합니다! collect랑 겹침
+    axios
+      .post(
+        "http://recollect.today/mypage",
+        {
+          bookmarkId: bookmarkId,
+        },
+        {
+          headers: { Authorization: this.props.accessToken },
+        }
+      )
+      .then(() => {
+        // 삭제성공
+        this.setState({
+          isEdit: false,
+        });
+        this.getMypageInformation();
+      })
+      .catch((err) => {
+        // 삭제실패
+        if (err.dataValues.message === "invalid access token") {
+          this.getRefreshToken();
+        }
+        console.log(err);
+      });
+  }
+
   componentDidMount() {
     this.getMypageInformation();
   }
 
   render() {
-    console.log('render');
+    console.log("render");
     return (
       <div className="tempBackground">
         <div className="nav upper">
@@ -111,16 +162,39 @@ class MyPage extends React.Component {
           <SignBtn />
         </div>
         <div className="logo-container">
-          <img src="logo.png" alt="logo"/>
+          <img src="logo.png" alt="logo" />
         </div>
-        <Collect />
+        <Collect
+          isEdit={this.state.isEdit}
+          selectecdInfo={this.state.selectecdInfo}
+        />
         <Alarm />
-        <div className="nav lower">select trashcan edit</div>
-        <div className="bookmarkContainer">
-          {this.state.bookmarks.map((bookmark) => (
-            <BookMark key={bookmark.id} bookmarkInfo={bookmark} />
-          ))}
-        </div>
+        <CollectionEditor
+          editBtnHandler={this.editBtnHandler}
+          isEdit={this.state.isEdit}
+        />
+        {this.state.isEdit ? (
+          <div>
+            <div className="bookmarkContainer">
+              {this.state.bookmarks.map((bookmark) => (
+                <BookmarkEditMode
+                  key={bookmark.id}
+                  deleteBookmark={this.deleteBookmark}
+                  editBookmark={this.editBookmark}
+                  bookmarkInfo={bookmark}
+                />
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div>
+            <div className="bookmarkContainer">
+              {this.state.bookmarks.map((bookmark) => (
+                <BookmarkReadMode key={bookmark.id} bookmarkInfo={bookmark} />
+              ))}
+            </div>
+          </div>
+        )}
         <Footer />
       </div>
     );
