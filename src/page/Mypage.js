@@ -4,8 +4,10 @@ import Footer from '../components/Footer';
 import BackBtn from '../components/BackBtn';
 import BookMark from '../components/Bookmark';
 import Collect from '../components/Collect';
-import SignBtn from '../components/SignBtn';
-// import ProfileBtn from '../components/ProfileBtn';
+import SignOutBtn from '../components/SignOutBtn';
+import ProfileBtn from '../components/ProfileBtn';
+
+const { generateRandomColorPairArr } = require('../util/randomColor');
 
 class MyPage extends React.Component {
   constructor(props) {
@@ -26,13 +28,13 @@ class MyPage extends React.Component {
     };
 
     this.getMypageInformation = this.getMypageInformation.bind(this);
-    this.addbookmark = this.addbookmark.bind(this);
+    this.addBookmark = this.addBookmark.bind(this);
     this.getRefreshToken = this.getRefreshToken.bind(this);
   }
 
   getRefreshToken() {
     axios
-      .get('http://recollect.today/getrefreshtoken')
+      .get('http://recollect.today/getrefreshtoken') // 여기에다가도 withCredentials true 가 들어가야함
       .then((res) => {
         this.props.loginSuccess(res.data.accessToken);
       })
@@ -45,7 +47,7 @@ class MyPage extends React.Component {
   getMypageInformation() {
     axios
       .get('http://recollect.today/mypage', {
-        headers: { Authorization: this.props.accessToken },
+        headers: { Authorization: `Bearer ${this.props.accessToken}` }, // 여기에다가도 withCredentials true 가 들어가야함
       })
       .then((res) => {
         const { user, bookmark } = res.data;
@@ -55,7 +57,7 @@ class MyPage extends React.Component {
         });
       })
       .catch((err) => {
-        console.error(err.dataValues.message);
+        console.error(err.response);
         // this.setState({
         //   errorMessage: err.dataValues.message,
         // });
@@ -63,11 +65,12 @@ class MyPage extends React.Component {
       });
   }
 
-  addbookmark(desc, url, emoji) {
+  addBookmark(desc, url, emoji) {
     if (!desc || !url) {
       this.setState({
         errorMessage: '설명과 url을 추가해주세요!',
       });
+      return;
     }
     axios
       .post(
@@ -79,20 +82,21 @@ class MyPage extends React.Component {
           url: url,
         },
         {
-          headers: { Authorization: this.props.accessToken },
+          headers: { Authorization: `Bearer ${this.props.accessToken}` },
         }
       )
       .then(() => {
         this.getMypageInformation();
       })
       .catch((err) => {
-        if (err.dataValues.message === 'invalid access token') {
-          this.getRefreshToken();
-        } else {
-          this.setState({
-            errorMessage: err.dataValues.message,
-          });
-        }
+        console.log(err.response); //err 메시지 접근하는 방법 다시 찾아보기
+        // if (err.response.data === 'invalid access token') {
+        //   this.getRefreshToken();
+        // } else {
+        //   this.setState({
+        //     errorMessage: err.response.data,
+        //   });
+        // }
         //! 이 부분(오류메시지?)을 어떤 식으로 할지 체크하는 과정이 필요합니다!
       });
   }
@@ -102,18 +106,19 @@ class MyPage extends React.Component {
   }
 
   render() {
-    console.log('render');
+    console.log(generateRandomColorPairArr());
     return (
       <div className="tempBackground">
         <div className="nav upper">
-          <SignBtn />
+          <SignOutBtn handleLogOut={this.props.handleLogOut} />
+          <ProfileBtn history={this.props.history} />
         </div>
         <div className="logo-container">
           <div className="logosample"></div>
           Recollect
         </div>
-        <Collect />
-        <div id="alarm">일주일간 읽지 않은 collect 7개</div>
+        <Collect addBookmark={this.addBookmark} />
+        <div id="alarm">읽지 않은 collect 7개</div>
         <div className="nav lower">select trashcan edit</div>
         <div className="bookmarkContainer">
           {this.state.bookmarks.map((bookmark) => (

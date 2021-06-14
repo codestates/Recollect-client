@@ -36,6 +36,28 @@ class App extends React.Component {
 
     // this.getUserInfo = this.getUserInfo.bind(this);
     // this.getTheAuthenticatedUser = this.getTheAuthenticatedUser(this);
+
+    this.handleLogOut = this.handleLogOut.bind(this);
+  }
+
+  handleLogOut() {
+    //이따 확인
+    axios
+      .get('http://recollect.today/logout', {
+        headers: { Authorization: `Bearer ${this.state.accessToken}` },
+      })
+      .then(() => {
+        this.setState({
+          isLogin: false,
+          isSocialLogin: false,
+          accessToken: '',
+          socialId: '',
+        });
+        this.props.history.push('/');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   //// 자체 로그인 성공시 ////
@@ -52,6 +74,7 @@ class App extends React.Component {
     this.setState({
       isLogin: true,
       isSocialLogin: true,
+      //여기에 자체 엑세스토큰이 들어가야함
     });
     this.props.history.push('/'); // isLogin 상태값에 따라 Landing / Mypage
   }
@@ -166,7 +189,8 @@ class App extends React.Component {
               withCredentials: true,
             }
           )
-          .then(() => {
+          .then((res) => {
+            // 자체 발행한 엑세스토큰을 메서드에 전해줘
             this.socialLoginSuccess(); // 이미 리콜렉트 소셜 회원인 경우 isSocialLogin: true 로 변경 -> mypage로 이동
           })
           .catch((err) => {
@@ -233,13 +257,14 @@ class App extends React.Component {
           <Route
             exact
             path="/mypage"
-            render={() => {
+            render={() => (
               <Mypage
                 loginSuccess={this.loginSuccess}
+                handleLogOut={this.handleLogOut}
                 history={this.props.history}
                 accessToken={this.state.accessToken}
-              />;
-            }}
+              />
+            )}
           />
           <Route exact path="/recollect" render={() => <Recollect />} />
           <Route
