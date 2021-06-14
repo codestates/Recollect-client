@@ -12,7 +12,8 @@ class MyPage extends React.Component {
       bookmarks: [
         {
           id: 1,
-          desc: "Hello World",
+          desc:
+            "Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World",
           emojis: ["☕️", "⚡️"],
           url: "https://www.google.com/",
           created_at: "2021 - 06 - 08",
@@ -26,8 +27,7 @@ class MyPage extends React.Component {
         },
         {
           id: 1,
-          desc:
-            "어제 새벽 4시에 잠들었다. 오늘 9시 30분에 일어났다. 일어나서 샐러드와 계란후라이를 먹고, ",
+          desc: "hi ",
           emojis: ["☕️", "⚡️"],
           url: "https://www.google.com/",
           created_at: "2021 - 06 - 08",

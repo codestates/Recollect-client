@@ -645,10 +645,11 @@ cursor: pointer; */
 
 .bookmarkContainer {
   /* https://stackoverflow.com/questions/32802202/how-to-center-a-flex-container-but-left-align-flex-items */
-  width: 70vw;
+  width: 85vw;
   height: 60vh;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(210px, max-content));
+  /* grid-template-rows: repeat(auto-fit, minmax(120px, max-content)); */
   grid-gap: 10px;
   justify-content: center;
   justify-items: center;
@@ -657,8 +658,8 @@ cursor: pointer; */
 }
 
 .bookmark {
-  width: 150px;
-  height: 150px;
+  width: 190px;
+  height: 190px;
   display: flex;
   flex-direction: column;
   background-color: #6096ba;
