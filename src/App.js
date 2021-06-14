@@ -1,15 +1,15 @@
-import axios from 'axios';
-import React from 'react';
-import Landing from './page/Landing';
-import Loading from './components/Loading'; //TEMP
-import Login from './page/Login';
-import Signup from './page/Signup';
-import Mypage from './page/Mypage';
-import Recollect from './page/Recollect';
-import Profile from './page/Profile';
-import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import axios from "axios";
+import React from "react";
+import Landing from "./page/Landing";
+// import Loading from "./components/Loading"; //TEMP
+import Login from "./page/Login";
+import Signup from "./page/Signup";
+import Mypage from "./page/Mypage";
+import Recollect from "./page/Recollect";
+import Profile from "./page/Profile";
+import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
-require('dotenv').config();
+require("dotenv").config();
 
 //axios.defaults.headers.common['Authorization'] = this.state.accessToken;
 
@@ -18,9 +18,9 @@ class App extends React.Component {
     super(props);
     this.state = {
       isLogin: false,
-      username: 'state username',
-      accessToken: '',
-      socialId: '',
+      username: "state username",
+      accessToken: "",
+      socialId: "",
       isSocialLogin: false, //--> socialId로 profile 분기 변경 / 좀 더 생각해보기
 
       isLoading: false, //로딩용 상태값
@@ -44,7 +44,7 @@ class App extends React.Component {
       isLogin: true,
       accessToken: accessToken, //accessToken 할당
     });
-    this.props.history.push('/'); // isLogin 상태값에 따라 Landing / Mypage
+    this.props.history.push("/"); // isLogin 상태값에 따라 Landing / Mypage
   }
 
   //// 소셜 로그인 성공시 ////
@@ -53,14 +53,14 @@ class App extends React.Component {
       isLogin: true,
       isSocialLogin: true,
     });
-    this.props.history.push('/'); // isLogin 상태값에 따라 Landing / Mypage
+    this.props.history.push("/"); // isLogin 상태값에 따라 Landing / Mypage
   }
   //* 깃허브에서 access code를 받고 서버로 access 토큰 요청
   async getAccessToken(authorizationCode) {
     await axios
       .post(
-        'http://recollect.today/getToken',
-        { data: { authorizationCode: authorizationCode } },
+        "http://localhost:4000/getToken",
+        { authorizationCode: authorizationCode },
         { withCredentials: true }
       )
       .then((res) => {
@@ -111,8 +111,9 @@ class App extends React.Component {
   //* GitHub 앱이 사용자의 액세스 토큰을 사용하여 API에 액세스
   //사용자의 액세스 토큰을 사용하면 GitHub 앱이 사용자를 대신하여 API에 요청을 할 수 있음
   getGitHubUserInfo() {
+    console.log("access token ", this.state.accessToken);
     axios
-      .get('https://api.github.com/user', {
+      .get("https://api.github.com/user", {
         headers: {
           Authorization: `token ${this.state.accessToken}`, //A or a
         },
@@ -121,7 +122,7 @@ class App extends React.Component {
         this.setState({
           socialId: res.data.id,
         });
-        console.log('데이터를 출력하겠습니다', res.data);
+        console.log("데이터를 출력하겠습니다", res.data);
         this.logcheck(res.data.id);
       });
   }
@@ -143,12 +144,12 @@ class App extends React.Component {
   logcheck(socialId) {
     axios
       .post(
-        'http://recollect.today/logcheck',
+        "http://localhost:4000/logcheck",
         {
           socialId: this.state.socialId,
         },
         {
-          headers: { 'Content-Type': 'application/json' },
+          headers: { "Content-Type": "application/json" },
           withCredentials: true,
         }
       )
@@ -157,12 +158,12 @@ class App extends React.Component {
         // login post 요청
         axios
           .post(
-            'http://recollect.today/login',
+            "http://localhost:4000/login",
             {
               uuid: res.data.uuid,
             },
             {
-              headers: { 'Content-Type': 'application/json' },
+              headers: { "Content-Type": "application/json" },
               withCredentials: true,
             }
           )
@@ -170,13 +171,13 @@ class App extends React.Component {
             this.socialLoginSuccess(); // 이미 리콜렉트 소셜 회원인 경우 isSocialLogin: true 로 변경 -> mypage로 이동
           })
           .catch((err) => {
-            this.props.history.push('/mypage'); //**[서버]logincontroller 를 자체/소셜로그인으로 분리, api 수정 추가 (총체적으로)
+            this.props.history.push("/mypage"); //**[서버]logincontroller 를 자체/소셜로그인으로 분리, api 수정 추가 (총체적으로)
           }); // **[서버]소셜로그인에서 세션아이디 저장시 자체 토큰 생성 확인 필요
       })
       .catch((err) => {
         //신규 소셜 회원인경우
         this.props.history.push({
-          pathname: '/signup',
+          pathname: "/signup",
           state: { socialId: socialId },
         });
         //[서버 로그체크컨트롤러] then/catch 404, 500 분기 처리 리팩토링 필요
@@ -189,7 +190,7 @@ class App extends React.Component {
   componentDidMount() {
     //* 깃허브 accessCode 가져옴
     const url = new URL(window.location.href);
-    const authorizationCode = url.searchParams.get('code');
+    const authorizationCode = url.searchParams.get("code");
     if (authorizationCode) this.getAccessToken(authorizationCode);
   }
 
@@ -233,13 +234,15 @@ class App extends React.Component {
           <Route
             exact
             path="/mypage"
-            render={() => (
-              <Mypage
-              // loginSuccess={this.loginSuccess}
-              // history={this.props.history}
-              // accessToken={this.state.accessToken}
-              />
-            )}
+            render={() => {
+              return (
+                <Mypage
+                  loginSuccess={this.loginSuccess}
+                  history={this.props.history}
+                  accessToken={this.state.accessToken}
+                />
+              );
+            }}
           />
           <Route exact path="/recollect" render={() => <Recollect />} />
           <Route
@@ -250,7 +253,7 @@ class App extends React.Component {
                 history={this.props.history}
                 isLogin={this.state.isLogin}
                 isSocialLogin={this.state.isSocialLogin}
-                username={this.state.username} //mypage에서 받기?
+                username={this.state.username}
                 loginSuccess={this.loginSuccess}
                 accessToken={this.state.accessToken}
               />

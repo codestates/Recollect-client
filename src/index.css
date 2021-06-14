@@ -1,11 +1,11 @@
-@font-face{
+@font-face {
   font-family: "AzeretMono-Bold";
-  src: url("AzeretMono-Bold.ttf") format('ttf');
+  src: url("AzeretMono-Bold.ttf") format("ttf");
 }
 
-@font-face{
+@font-face {
   font-family: "AzeretMono-Light";
-  src: url("AzeretMono-Light.ttf") format('ttf');
+  src: url("AzeretMono-Light.ttf") format("ttf");
 }
 
 * {
@@ -147,7 +147,7 @@ body,
   border-radius: 1rem;
 } */
 
-.logo-container img{
+.logo-container img {
   width: 48%;
   margin-bottom: 15px;
   animation: fadein 3s;
@@ -323,7 +323,7 @@ body,
 }
 .seperatingLine::before,
 .seperatingLine::after {
-  content: '';
+  content: "";
   flex-grow: 1;
   background: black;
   height: 1px;
@@ -353,7 +353,7 @@ body,
   align-items: center;
   flex-direction: column;
   background-color: var(--main-bg-color);
-  box-shadow: var(--box-shadow); 
+  box-shadow: var(--box-shadow);
 }
 
 .profile {
@@ -766,39 +766,46 @@ cursor: pointer; */
   line-height: 80px;
 }
 
-#alarm-alert{
+#alarm-alert {
   color: blue;
   font-weight: bold;
 }
 
-#alarm-alert:before{
+#alarm-alert:before {
   content: "There are 7 Collects you haven't checked.  ";
   color: blue;
   font-weight: bold;
-  -webkit-animation:blink 2s ease-in-out infinite alternate;
-  -moz-animation:blink 2s ease-in-out infinite alternate;
-  animation:blink 2s ease-in-out infinite alternate;
+  -webkit-animation: blink 2s ease-in-out infinite alternate;
+  -moz-animation: blink 2s ease-in-out infinite alternate;
+  animation: blink 2s ease-in-out infinite alternate;
   border: dotted 3px blue;
   padding: 0.5rem;
   margin-right: 1em;
 }
 
-#alarm button{
+#alarm button {
   border-style: none;
   color: white;
   background-color: var(--btn-color);
   border-radius: 5px;
   padding: 0.8rem;
-
 }
 
-@-moz-keyframes blink{
-  0% {opacity:0;}
-  100% {opacity:1;}
+@-moz-keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
-@keyframes blink{
-  0% {opacity:0;}
-  100% {opacity:1;}
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .nav.lower {
@@ -812,4 +819,59 @@ cursor: pointer; */
 
 .tempBackground .logo-container {
   width: 35vw;
+}
+
+/* Bookmark Edit Mode  */
+
+.editBtn {
+  width: 80px;
+  height: 40px;
+  font-weight: bold;
+  background-color: var(--btn-color);
+  color: white;
+  border-style: none;
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  cursor: pointer;
+}
+
+.bookmarkEditContatiner {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.bookmarkWidthEdit {
+  width: 190px;
+  height: 190px;
+  display: flex;
+  flex-direction: column;
+  background-color: #6096ba;
+  color: white;
+  border: 1px solid #6096ba;
+  padding: 4px;
+}
+
+.bookmarkWidthEdit:hover,
+.bookmarkDeleteBtn button:hover {
+  cursor: pointer;
+}
+
+.bookmarkWidthEdit:focus {
+  background-color: pink;
+}
+
+.bookmarkDeleteBtn {
+  display: flex;
+  justify-content: flex-start;
+  margin: 6px 0px;
+}
+
+.bookmarkDeleteBtn button {
+  width: 30px;
+  height: 30px;
+  font-weight: bold;
+  background-color: rgb(43, 40, 40);
+  color: white;
 }
