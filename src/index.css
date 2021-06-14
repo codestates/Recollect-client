@@ -28,6 +28,19 @@ body,
   --box-shadow: 12px 12px 20px 1px rgba(0, 0, 255, 0.116);
 }
 
+.loading-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--btn-hover-color);
+  width: 100vw;
+}
+
+.loading-bar{
+  background-color: yellowgreen;
+  text-align: center;
+}
+
 /* //// Landing Page Start //// */
 .landing-container {
   width: 100vw;

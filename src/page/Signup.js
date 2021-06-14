@@ -17,37 +17,34 @@ class Signup extends React.Component {
   }
 
   handleCreateSocialAccount({ username }) {
-    axios.post('process.env.REACT_APP_API_URI/signup', {
+    axios.post('http://recollect.today/signup', {
         username: username,
         socialId: this.state.socialId,
         isSocialAccount: 1,
       })
       .then(res => {
-        axios.post('process.env.REACT_APP_API_URI/login', {
+        axios.post('http://recollect.today/login', {
           uuid: res.data.uuid
         })
-        .then(res => {
-          this.props.loginSuccess(res.data.username);
+        .then(() => {
+          this.props.socialLoginSuccess();
         })
       })
       .catch(err => {
         console.error(err);
       })
   }
-  //! 비소셜 회원 socialId = 0 안넣어줘도 됌 
+  //! 자체 회원 socialId = 0 안넣어줘도 됨
   handleCreateAccount({ username, email, password }) {
     axios
-      .post("process.env.REACT_APP_API_URI/signup", {
+      .post("http://recollect.today/signup", {
         username: username,
         email: email,
         password: password,
-        isSocialAccount: 0,
+        isSocialAccount: 0, //[서버] 타입 궁금...?
       })
-      .then(res => {
+      .then(() => {
         this.props.history.push('/login') 
-      })
-      .catch( err => {
-        console.log(err)
       })
       .catch((err) => {
         console.log(err);
@@ -57,7 +54,7 @@ class Signup extends React.Component {
   componentDidMount() {
     console.log(this.props.history.location);
     this.setState({
-      socialId: this.props.history.location.state,
+      socialId: this.props.history.location.state, //socialId 존재 여부에 따라 signupcomp 렌더 분기
     });
   }
 
