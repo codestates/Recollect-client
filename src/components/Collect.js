@@ -12,11 +12,11 @@ class Collect extends React.Component {
     this.handleAddBtn = this.handleAddBtn.bind(this);
     this.handleTrashcanBtn = this.handleTrashcanBtn.bind(this);
     this.handleEmojiBtn = this.handleEmojiBtn.bind(this);
-    this.handleTextareaValue = this.handleTextareaValue.bind(this);
+    this.handleInputtextValue = this.handleInputtextValue.bind(this);
     this.handleShowEmoji = this.handleShowEmoji.bind(this);
   }
 
-  handleTextareaValue = (key) => (e) => {
+  handleInputtextValue = (key) => (e) => {
     this.setState({ [key]: e.target.value });
   };
 
@@ -66,7 +66,7 @@ class Collect extends React.Component {
             className="Collect-textinput first"
             placeholder="Describe your collecting"
             value={this.state.desc}
-            onChange={this.handleTextareaValue('desc')}
+            onChange={this.handleInputtextValue('desc')}
           ></input>
         </div>
         <div id="Collect-showEmoji">{this.handleShowEmoji()}</div>
@@ -102,7 +102,7 @@ class Collect extends React.Component {
             className="Collect-textinput last"
             placeholder="Paste link... You can also drag texts or images here"
             value={this.state.url}
-            onChange={this.handleTextareaValue('url')}
+            onChange={this.handleInputtextValue('url')}
           ></input>
           <div id="Collect-btn-container">
             <div onClick={this.handleAddBtn} className="Collect-btn">
