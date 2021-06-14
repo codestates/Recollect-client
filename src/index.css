@@ -585,6 +585,7 @@ cursor: pointer; */
 
 .Collect-textinput {
   width: 50%;
+  min-width: 280px;
   resize: none;
   border-style: none;
 }
@@ -610,6 +611,7 @@ cursor: pointer; */
 
 #Collect-emoji-container,
 #Collect-btn-container {
+  min-width: 200px;
   display: flex;
 }
 
@@ -622,20 +624,26 @@ cursor: pointer; */
   display: flex;
   margin-top: 10px;
   flex-direction: row-reverse;
-  padding: 0 5%;
+  padding: 0 25%;
+}
+
+.Collect-btn {
+  font-size: 15px;
+  display: flex;
+  width: 30px;
+  color: var(--btn-color);
 }
 
 #Collect-showEmoji {
-  padding: 0 5%;
+  padding: 0 25%;
   height: 20px;
   text-align: right;
 }
 
 #Collect-emoji-container {
-  /* width: 50%; */
   margin-top: 10px;
   margin-bottom: 10px;
-  padding: 0 5%;
+  padding: 0 25%;
 }
 
 .Collect-emojibtn {
@@ -645,13 +653,7 @@ cursor: pointer; */
 }
 
 .Collect-emojibtn:active {
-  box-shadow: 0 1em var(--btn-hover-color);
-}
-
-.Collect-btn {
-  display: flex;
-  width: 30px;
-  color: var(--btn-color);
+  box-shadow: 0 5px var(--btn-hover-color);
 }
 
 .Collect-btn:hover {
@@ -874,4 +876,27 @@ cursor: pointer; */
   font-weight: bold;
   background-color: rgb(43, 40, 40);
   color: white;
+}
+
+.profilebtn-container {
+  background-color: var(--main-bg-color);
+  display: flex;
+  justify-content: flex-end;
+}
+
+#profileBtn {
+  background-color: var(--btn-color);
+  color: white;
+  border-style: none;
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin: 1rem;
+  cursor: pointer;
+}
+#profileBtn > i {
+  font-size: 25px;
+}
+
+#profileBtn:hover {
+  background-color: var(--btn-hover-color);
 }

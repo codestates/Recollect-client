@@ -20,12 +20,31 @@ class Collect extends React.Component {
     this.setState({ [key]: e.target.value });
   };
 
-  handleAddBtn() {
+  async handleAddBtn() {
     const { desc, url, emoji } = this.state;
-    let emojiNumArr = emoji.map((el, idx) => {
-      if (el) {
-        return idx;
+
+    if (!desc || !url) {
+      //마이페이지에 에러메시지 전달하는 메서드 필요
+      return;
+    }
+
+    let emojiNumStr = emoji.reduce((acc, cur, idx) => {
+      if (cur) {
+        acc = acc + ', ' + (idx + 1).toString();
+        return acc;
       }
+    }, '');
+
+    if (emojiNumStr === undefined) {
+      await this.props.addBookmark(desc, url);
+    } else {
+      await this.props.addBookmark(desc, url, emojiNumStr.slice(2));
+    }
+
+    this.setState({
+      desc: '',
+      url: '',
+      emoji: [false, false, false],
     });
     // 이모지 배열을
     //마이페이지에 있는 메서드를 스테이트 값들을 실어서 실행시킨다.
@@ -67,7 +86,7 @@ class Collect extends React.Component {
             placeholder="Describe your collecting"
             value={this.state.desc}
             onChange={this.handleInputtextValue('desc')}
-          ></input>
+          />
         </div>
         <div id="Collect-showEmoji">{this.handleShowEmoji()}</div>
         <div id="Collect-emoji-container">
@@ -103,7 +122,7 @@ class Collect extends React.Component {
             placeholder="Paste link... You can also drag texts or images here"
             value={this.state.url}
             onChange={this.handleInputtextValue('url')}
-          ></input>
+          />
           <div id="Collect-btn-container">
             <div onClick={this.handleAddBtn} className="Collect-btn">
               ADD

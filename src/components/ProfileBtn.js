@@ -2,9 +2,14 @@ import React from 'react';
 
 function ProfileBtn(props) {
   return (
-    <div className="signbtn-container">
-      <button id="signBtn" onClick={props.handleProfileBtn}>
-        Profile
+    <div className="profilebtn-container">
+      <button
+        id="profileBtn"
+        onClick={() => {
+          props.history.push('/profile');
+        }}
+      >
+        <i className="far fa-user-circle"></i>
       </button>
     </div>
   );

@@ -23,9 +23,10 @@ class Signup extends React.Component {
         isSocialAccount: 1,
       })
       .then((res) => {
+        console.log(res); //uuid접근 다시 해보하기
         axios
           .post('http://recollect.today/login', {
-            uuid: res.data.uuid,
+            uuid: res.data.userInfo.uuid, //테슼트
           })
           .then(() => {
             this.props.socialLoginSuccess();
