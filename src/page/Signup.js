@@ -1,10 +1,9 @@
-import React from "react";
-import axios from "axios";
+import React from 'react';
+import axios from 'axios';
 
-import SignupComp from "../components/SignupComp";
-import Footer from "../components/Footer";
-import BackBtn from "../components/BackBtn";
-
+import SignupComp from '../components/SignupComp';
+import Footer from '../components/Footer';
+import BackBtn from '../components/BackBtn';
 
 class Signup extends React.Component {
   constructor(props) {
@@ -17,34 +16,36 @@ class Signup extends React.Component {
   }
 
   handleCreateSocialAccount({ username }) {
-    axios.post('http://recollect.today/signup', {
+    axios
+      .post('http://recollect.today/signup', {
         username: username,
         socialId: this.state.socialId,
         isSocialAccount: 1,
       })
-      .then(res => {
-        axios.post('http://recollect.today/login', {
-          uuid: res.data.uuid
-        })
-        .then(() => {
-          this.props.socialLoginSuccess();
-        })
+      .then((res) => {
+        axios
+          .post('http://recollect.today/login', {
+            uuid: res.data.uuid,
+          })
+          .then(() => {
+            this.props.socialLoginSuccess();
+          });
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
-      })
+      });
   }
   //! 자체 회원 socialId = 0 안넣어줘도 됨
   handleCreateAccount({ username, email, password }) {
     axios
-      .post("http://recollect.today/signup", {
+      .post('http://recollect.today/signup', {
         username: username,
         email: email,
         password: password,
         isSocialAccount: 0, //[서버] 타입 궁금...?
       })
       .then(() => {
-        this.props.history.push('/login') 
+        this.props.history.push('/login');
       })
       .catch((err) => {
         console.log(err);
