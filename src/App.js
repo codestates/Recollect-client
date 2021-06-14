@@ -235,9 +235,9 @@ class App extends React.Component {
             path="/mypage"
             render={() => {
               <Mypage
-              // loginSuccess={this.loginSuccess}
-              // history={this.props.history}
-              // accessToken={this.state.accessToken}
+                loginSuccess={this.loginSuccess}
+                history={this.props.history}
+                accessToken={this.state.accessToken}
               />;
             }}
           />
