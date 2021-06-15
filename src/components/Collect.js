@@ -105,7 +105,7 @@ class Collect extends React.Component {
       if (el === '☕️') {
         emojisBooleanArr[0] = true;
       }
-
+      //f
       if (el === '🔥') {
         emojisBooleanArr[1] = true;
       }
@@ -120,9 +120,8 @@ class Collect extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (
-      this.props.isEdit === true &&
-      Object.keys(this.props.selectedInfo).length !==
-        Object.keys(prevProps.selectedInfo).length
+      Object.keys(this.props.selectedInfo).length !== 0 &&
+      this.props.selectedInfo.id !== prevProps.selectedInfo.id
     ) {
       this.handleShowEditing(this.props.selectedInfo);
     }
@@ -140,7 +139,10 @@ class Collect extends React.Component {
             onChange={this.handleInputtextValue('desc')}
           />
         </div>
-        <div id="Collect-showEmoji">{this.handleShowEmoji()}</div>
+        <div id="Collect-showEmoji">
+          <div>Add Emoji</div>
+          {this.handleShowEmoji()}
+        </div>
         <div id="Collect-emoji-container">
           <div
             className="Collect-emojibtn"
@@ -178,15 +180,16 @@ class Collect extends React.Component {
           <div id="Collect-btn-container">
             {this.props.isEdit ? (
               <div onClick={this.handleEditBtn} className="Collect-btn first">
-                EDIT
+                <i className="fas fa-check"></i>
               </div>
             ) : (
               <div onClick={this.handleAddBtn} className="Collect-btn second">
-                Add
+                <i className="fas fa-plus"></i>
               </div>
             )}
             <div onClick={this.handleInitialize} className="Collect-btn">
-              <i className="far fa-trash-alt"></i>
+              {/* <i className="far fa-trash-alt"></i> */}
+              <i className="fas fa-eraser"></i>
             </div>
           </div>
         </div>

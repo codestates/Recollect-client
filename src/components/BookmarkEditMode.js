@@ -4,20 +4,29 @@ class BookmarkEditMode extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+
+    this.scrollToTop = this.scrollToTop.bind(this);
   }
+
+  scrollToTop(){
+    console.log('스크롤 외않되', window)
+    window.scrollTo(0,0);
+  };
 
   render() {
     const { desc, emojis, created_at, url } = this.props.bookmarkInfo;
-
     return (
       <div className="bookmarkEditContatiner">
         <div
           className="bookmarkWidthEdit"
-          onClick={() => {
+          onClick={
+            // this.scrollToTop
+            () => {
             this.props.editBookmark(this.props.bookmarkInfo);
-          }}
+          }
+        }
         >
-          <div className="mouseOut">
+          <div className="mouseOut" onClick={this.scrollToTop}>
             <div> {desc} </div>
             <div>
               {emojis.map((emoji) => {

@@ -1,19 +1,39 @@
 import React from 'react';
 
-function Alarm(props) {
+class Alarm extends React.Component{
+  constructor(props){
+    super(props); //getRefreshToken 
+    this.state ={
+      unreadCount: 0,
+    }
+  }
 
-
-  return (
-    <div id="alarm" >
-      <div id="alarm-alert">
-        {/* There are ??? Collects Unread for a week */}
-      <button>
-          Click here to Recollect !
-      </button>
+  componentDidUpdate(prevProps){
+    if(this.props.unreadCount !== prevProps.unreadCount){
+      this.setState({
+        unreadCount : this.props.unreadCount,
+      })
+    }
+  }
+  render(){
+    return (
+      <div id="alarm" >
+        <div id="alarm-alert">
+            <div onClick = {() => { 
+                if(this.props.location === '/mypage'){
+                  this.props.history.push('/recollect')
+                }
+              } 
+            }>
+            There are {this.state.unreadCount} Collects you haven't checked.  Start to Recollect !
+            </div>
+        </div>
+  
       </div>
+    );
+  }
 
-    </div>
-  );
+
 }
 
 export default Alarm;
