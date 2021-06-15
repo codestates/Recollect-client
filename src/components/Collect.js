@@ -125,6 +125,11 @@ class Collect extends React.Component {
         Object.keys(prevProps.selectedInfo).length
     ) {
       this.handleShowEditing(this.props.selectedInfo);
+    } else if (
+      Object.keys(this.props.selectedInfo).length !== 0 &&
+      this.props.selectedInfo.id !== prevProps.selectedInfo.id
+    ) {
+      this.handleShowEditing(this.props.selectedInfo);
     }
   }
 
