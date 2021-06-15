@@ -105,7 +105,7 @@ class Collect extends React.Component {
       if (el === '☕️') {
         emojisBooleanArr[0] = true;
       }
-
+      //f
       if (el === '🔥') {
         emojisBooleanArr[1] = true;
       }
