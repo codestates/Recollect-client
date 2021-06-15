@@ -1,8 +1,6 @@
 const tinycolor = require('tinycolor2');
 
 module.exports = {
-  //사용자가 컬러 theme을 정한다 -> advanced
-  // 랜덤테마를 선택했으면
   generateRandomColorPairArr: () => {
     const randomColor = tinycolor.random().toHexString();
 
@@ -20,7 +18,5 @@ module.exports = {
     });
 
     return analogousColorArr;
-
-    //[{backgroundColor: <hexstring>, textColor: <hexstring> // black or white }, {...}, {...}]
   },
 };

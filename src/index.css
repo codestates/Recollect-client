@@ -1,11 +1,11 @@
 @font-face {
-  font-family: "AzeretMono-Bold";
-  src: url("AzeretMono-Bold.ttf") format("ttf");
+  font-family: 'AzeretMono-Bold';
+  src: url('AzeretMono-Bold.ttf') format('ttf');
 }
 
 @font-face {
-  font-family: "AzeretMono-Light";
-  src: url("AzeretMono-Light.ttf") format("ttf");
+  font-family: 'AzeretMono-Light';
+  src: url('AzeretMono-Light.ttf') format('ttf');
 }
 
 * {
@@ -164,7 +164,7 @@ body,
 #start-btn {
   width: 50%;
   font-size: 26px;
-  font-family: "AzeretMono-Bold";
+  font-family: 'AzeretMono-Bold';
   padding: 1rem;
   border-style: none;
   margin-bottom: 20px;
@@ -323,7 +323,7 @@ body,
 }
 .seperatingLine::before,
 .seperatingLine::after {
-  content: "";
+  content: '';
   flex-grow: 1;
   background: black;
   height: 1px;
@@ -622,16 +622,21 @@ cursor: pointer; */
 
 #Collect-btn-container {
   display: flex;
-  margin-top: 10px;
   flex-direction: row-reverse;
-  padding: 0 25%;
+  margin-top: 2px;
+  padding: 5px 25%;
+  min-width: 280px;
 }
 
 .Collect-btn {
   font-size: 15px;
   display: flex;
-  width: 30px;
-  color: var(--btn-color);
+  width: fit-content;
+  padding: 0.5rem;
+  margin-left: 3px;
+  background-color: var(--btn-color);
+  color: white;
+  border-radius: 5px;
 }
 
 #Collect-showEmoji {
@@ -650,10 +655,32 @@ cursor: pointer; */
   text-align: center;
   font-size: 25px;
   flex: 1 1;
+  -webkit-transform: translateY(0px) scale(1);
+  -moz-transform: translateY(0px) scale(1);
+  -ms-transform: translateY(0px) scale(1);
+  -o-transform: translateY(0px) scale(1);
+  transform: translateY(0px) scale(1);
+  -webkit-transition: 0.1s;
+  -moz-transition: 0.1s;
+  -ms-transition: 0.1s;
+  -o-transition: 0.1s;
+  transition: 0.1s;
 }
 
-.Collect-emojibtn:active {
-  box-shadow: 0 5px var(--btn-hover-color);
+/* .Collect-emojibtn:active {
+  -webkit-transform: translateY(-3px) scale(2);
+  -moz-transform: translateY(-3px) scale(2);
+  -ms-transform: translateY(-3px) scale(2);
+  -o-transform: translateY(-3px) scale(2);
+  transform: translateY(-3px) scale(2);
+} */
+
+.Collect-emojibtn:hover {
+  -webkit-transform: translateY(-6px) scale(1.5);
+  -moz-transform: translateY(-6px) scale(1.5);
+  -ms-transform: translateY(-6px) scale(1.5);
+  -o-transform: translateY(-6px) scale(1.5);
+  transform: translateY(-6px) scale(1.5);
 }
 
 .Collect-btn:hover {

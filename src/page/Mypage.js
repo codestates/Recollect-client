@@ -23,70 +23,28 @@ class MyPage extends React.Component {
         {
           id: 1,
           desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '⚡️'],
+          emojis: ['☕️', '🔥'],
           url: 'https://www.google.com/',
           created_at: '2021 - 06 - 08',
         },
         {
-          id: 1,
+          id: 2,
           desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '⚡️'],
+          emojis: ['🔥', '🚨'],
           url: 'https://www.google.com/',
           created_at: '2021 - 06 - 08',
         },
         {
-          id: 1,
+          id: 3,
           desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '⚡️'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 1,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '⚡️'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 1,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '⚡️'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 1,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '⚡️'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 1,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '⚡️'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 1,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '⚡️'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 1,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '⚡️'],
+          emojis: ['☕️', '🔥'],
           url: 'https://www.google.com/',
           created_at: '2021 - 06 - 08',
         },
       ],
       errorMessage: '',
       isEdit: false,
-      selectecdInfo: {},
+      selectedInfo: {},
     };
 
     this.getMypageInformation = this.getMypageInformation.bind(this);
@@ -95,18 +53,20 @@ class MyPage extends React.Component {
     this.editBtnHandler = this.editBtnHandler.bind(this);
     this.deleteBookmark = this.deleteBookmark.bind(this);
     this.editBookmark = this.editBookmark.bind(this);
+    this.sendEditedBookmark = this.sendEditedBookmark.bind(this);
   }
 
   editBtnHandler() {
     this.setState({
       isEdit: !this.state.isEdit,
+      selectedInfo: {},
     });
   }
 
   editBookmark(selectedInfo) {
     const { id, desc, url, emojis } = selectedInfo;
     this.setState({
-      selectecdInfo: { id: id, desc: desc, url: url, emojis, emojis },
+      selectedInfo: { id: id, desc: desc, url: url, emojis: emojis },
     });
   }
 
@@ -120,7 +80,7 @@ class MyPage extends React.Component {
           bookmarkId: bookmarkId,
         },
         {
-          headers: { Authorization: this.props.accessToken },
+          headers: { Authorization: `Bearer ${this.props.accessToken}` },
         }
       )
       .then(() => {
@@ -135,7 +95,7 @@ class MyPage extends React.Component {
         if (err.dataValues.message === 'invalid access token') {
           this.getRefreshToken();
         }
-        console.log(err);
+        console.erorr(err);
       });
   }
 
@@ -148,6 +108,7 @@ class MyPage extends React.Component {
       .catch((err) => {
         //로그아웃 시키기
         // islogin, isSociallogin false 로 만들어주고 socialId지워주고 세션 파괴
+        console.error(err);
       });
   }
 
@@ -164,7 +125,7 @@ class MyPage extends React.Component {
         });
       })
       .catch((err) => {
-        console.error(err.response);
+        console.error(err);
         // this.setState({
         //   errorMessage: err.dataValues.message,
         // });
@@ -196,7 +157,7 @@ class MyPage extends React.Component {
         this.getMypageInformation();
       })
       .catch((err) => {
-        console.log(err.response); //err 메시지 접근하는 방법 다시 찾아보기
+        console.error(err); //err 메시지 접근하는 방법 다시 찾아보기
         // if (err.response.data === 'invalid access token') {
         //   this.getRefreshToken();
         // } else {
@@ -208,12 +169,42 @@ class MyPage extends React.Component {
       });
   }
 
+  sendEditedBookmark(desc, url, emoji) {
+    if (!desc || !url) {
+      this.setState({
+        errorMessage: '설명과 url을 추가해주세요!',
+      });
+      return;
+    }
+    axios
+      .put(
+        'http://recollect.today/mypage',
+        {
+          emoji: emoji,
+          url: url,
+          desc: desc,
+          bookmarkId: this.state.selectedInfo.id,
+        },
+        {
+          headers: { Authorization: `Bearer ${this.props.accessToken}` },
+        }
+      )
+      .then(() => {
+        this.setState({
+          isEdit: false,
+          selectedInfo: {},
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
   componentDidMount() {
     this.getMypageInformation();
   }
 
   render() {
-    console.log(generateRandomColorPairArr());
     return (
       <div className="tempBackground">
         <div className="nav upper">
@@ -226,7 +217,8 @@ class MyPage extends React.Component {
         <Collect
           addBookmark={this.addBookmark}
           isEdit={this.state.isEdit}
-          selectecdInfo={this.state.selectecdInfo}
+          selectedInfo={this.state.selectedInfo}
+          sendEditedBookmark={this.sendEditedBookmark}
         />
         <Alarm />
         <CollectionEditor
