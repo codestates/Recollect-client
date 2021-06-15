@@ -10,10 +10,12 @@ class Collect extends React.Component {
     };
 
     this.handleAddBtn = this.handleAddBtn.bind(this);
-    this.handleTrashcanBtn = this.handleTrashcanBtn.bind(this);
+    this.handleEditBtn = this.handleEditBtn.bind(this);
+    this.handleInitialize = this.handleInitialize.bind(this);
     this.handleEmojiBtn = this.handleEmojiBtn.bind(this);
     this.handleInputtextValue = this.handleInputtextValue.bind(this);
     this.handleShowEmoji = this.handleShowEmoji.bind(this);
+    this.handleShowEditing = this.handleShowEditing.bind(this);
   }
 
   handleInputtextValue = (key) => (e) => {
@@ -23,35 +25,28 @@ class Collect extends React.Component {
   async handleAddBtn() {
     const { desc, url, emoji } = this.state;
 
-    if (!desc || !url) {
-      //마이페이지에 에러메시지 전달하는 메서드 필요
-      return;
+    const emojiNumStr = this.emojiBoleanToNumString(emoji);
+
+    if (emojiNumStr === undefined) {
+      await this.props.addBookmark(desc, url, '');
+    } else {
+      await this.props.addBookmark(desc, url, emojiNumStr.slice(2));
     }
 
+    this.handleInitialize();
+  }
+
+  emojiBoleanToNumString(emoji) {
     let emojiNumStr = emoji.reduce((acc, cur, idx) => {
       if (cur) {
         acc = acc + ', ' + (idx + 1).toString();
         return acc;
       }
     }, '');
-
-    if (emojiNumStr === undefined) {
-      await this.props.addBookmark(desc, url);
-    } else {
-      await this.props.addBookmark(desc, url, emojiNumStr.slice(2));
-    }
-
-    this.setState({
-      desc: '',
-      url: '',
-      emoji: [false, false, false],
-    });
-    // 이모지 배열을
-    //마이페이지에 있는 메서드를 스테이트 값들을 실어서 실행시킨다.
-    // this.props.addBookmark(desc, url, emojiNumArr);
+    return emojiNumStr;
   }
 
-  handleTrashcanBtn() {
+  handleInitialize() {
     this.setState({
       desc: '',
       url: '',
@@ -74,6 +69,68 @@ class Collect extends React.Component {
         return <span key={idx}>{emojiArr[idx]}</span>;
       }
     });
+  }
+
+  handleShowEditing({ desc, emojis, url }) {
+    console.log('실행');
+    const emojiArr = this.emojiConverter(emojis);
+    this.setState({
+      desc: desc,
+      url: url,
+      emoji: emojiArr,
+    });
+  }
+
+  async handleEditBtn() {
+    const { desc, url, emoji } = this.state;
+    if (!desc || !url) {
+      //마이페이지에 에러메시지 전달하는 메서드 필요
+      return;
+    }
+
+    const emojiNumStr = this.emojiBoleanToNumString(emoji);
+
+    if (emojiNumStr === undefined) {
+      await this.props.sendEditedBookmark(desc, url, '');
+    } else {
+      await this.props.sendEditedBookmark(desc, url, emojiNumStr.slice(2));
+    }
+
+    this.handleInitialize();
+  }
+
+  emojiConverter(emojis) {
+    const emojisBooleanArr = [false, false, false];
+    emojis.map((el) => {
+      if (el === '☕️') {
+        emojisBooleanArr[0] = true;
+      }
+      //f
+      if (el === '🔥') {
+        emojisBooleanArr[1] = true;
+      }
+
+      if (el === '🚨') {
+        emojisBooleanArr[2] = true;
+      }
+    });
+
+    return emojisBooleanArr;
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.isEdit === true &&
+      Object.keys(this.props.selectedInfo).length !==
+        Object.keys(prevProps.selectedInfo).length
+    ) {
+      this.handleShowEditing(this.props.selectedInfo);
+    } else if (
+      Object.keys(this.props.selectedInfo).length !== 0 &&
+      this.props.selectedInfo.id !== prevProps.selectedInfo.id
+    ) {
+      this.handleShowEditing(this.props.selectedInfo);
+    }
   }
 
   render() {
@@ -124,10 +181,16 @@ class Collect extends React.Component {
             onChange={this.handleInputtextValue('url')}
           />
           <div id="Collect-btn-container">
-            <div onClick={this.handleAddBtn} className="Collect-btn">
-              ADD
-            </div>
-            <div onClick={this.handleTrashcanBtn} className="Collect-btn">
+            {this.props.isEdit ? (
+              <div onClick={this.handleEditBtn} className="Collect-btn first">
+                EDIT
+              </div>
+            ) : (
+              <div onClick={this.handleAddBtn} className="Collect-btn second">
+                Add
+              </div>
+            )}
+            <div onClick={this.handleInitialize} className="Collect-btn">
               <i className="far fa-trash-alt"></i>
             </div>
           </div>

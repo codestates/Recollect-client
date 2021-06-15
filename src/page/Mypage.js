@@ -1,44 +1,49 @@
-import axios from "axios";
-import React from "react";
-import Footer from "../components/Footer";
-import BackBtn from "../components/BackBtn";
-import Collect from "../components/Collect";
-import SignOutBtn from "../components/SignOutBtn";
-import ProfileBtn from "../components/ProfileBtn";
-import Alarm from "../components/Alarm";
-import CollectionEditor from "../components/CollectionEditor";
-import BookmarkReadMode from "../components/BookmarkReadMode";
-import BookmarkEditMode from "../components/BookmarkEditMode";
+import axios from 'axios';
+import React from 'react';
+import Footer from '../components/Footer';
+import BackBtn from '../components/BackBtn';
+import Collect from '../components/Collect';
+import SignOutBtn from '../components/SignOutBtn';
+import ProfileBtn from '../components/ProfileBtn';
+import Alarm from '../components/Alarm';
+import CollectionEditor from '../components/CollectionEditor';
+import BookmarkReadMode from '../components/BookmarkReadMode';
+import BookmarkEditMode from '../components/BookmarkEditMode';
 
-const { generateRandomColorPairArr } = require("../util/randomColor");
+const { generateRandomColorPairArr } = require('../util/randomColor');
 
 class MyPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
+      username: '',
       isRecollect: false,
       bookmarks: [
         {
           id: 1,
-          desc:
-            "Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World",
-          emojis: ["☕️", "⚡️"],
-          url: "https://www.google.com/",
-          created_at: "2021 - 06 - 08",
+          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
+          emojis: ['☕️', '🔥'],
+          url: 'https://www.google.com/',
+          created_at: '2021 - 06 - 08',
         },
         {
           id: 2,
-          desc:
-            "Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World",
-          emojis: ["☕️", "⚡️"],
-          url: "https://www.google.com/",
-          created_at: "2021 - 06 - 08",
+          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
+          emojis: ['🔥', '🚨'],
+          url: 'https://www.google.com/',
+          created_at: '2021 - 06 - 08',
+        },
+        {
+          id: 3,
+          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
+          emojis: ['☕️', '🔥'],
+          url: 'https://www.google.com/',
+          created_at: '2021 - 06 - 08',
         },
       ],
-      errorMessage: "",
+      errorMessage: '',
       isEdit: false,
-      selectecdInfo: {},
+      selectedInfo: {},
     };
 
     this.getMypageInformation = this.getMypageInformation.bind(this);
@@ -47,19 +52,21 @@ class MyPage extends React.Component {
     this.editBtnHandler = this.editBtnHandler.bind(this);
     this.deleteBookmark = this.deleteBookmark.bind(this);
     this.editBookmark = this.editBookmark.bind(this);
+    this.sendEditedBookmark = this.sendEditedBookmark.bind(this);
     this.setRandomColor = this.setRandomColor.bind(this);
   }
 
   editBtnHandler() {
     this.setState({
       isEdit: !this.state.isEdit,
+      selectedInfo: {},
     });
   }
 
   editBookmark(selectedInfo) {
     const { id, desc, url, emojis } = selectedInfo;
     this.setState({
-      selectecdInfo: { id: id, desc: desc, url: url, emojis, emojis },
+      selectedInfo: { id: id, desc: desc, url: url, emojis: emojis },
     });
   }
 
@@ -68,12 +75,13 @@ class MyPage extends React.Component {
     // api 확인필요합니다! collect랑 겹침
     axios
       .patch(
-        "http://recollect.today/mypage",
+        'http://recollect.today/mypage',
         {
           bookmarkId: bookmarkId,
         },
         {
-          headers: { Authorization: this.props.accessToken },
+          headers: { Authorization: `Bearer ${this.props.accessToken}` },
+          withCredentials: true,
         }
       )
       .then(() => {
@@ -85,30 +93,32 @@ class MyPage extends React.Component {
       })
       .catch((err) => {
         // 삭제실패
-        if (err.body.message === "Not Allowed") {
+        if (err.body.message === 'Not Allowed') {
           //// err.body.message 맞는지 확인필요
           this.getRefreshToken();
         }
-        console.log(err);
+        console.erorr(err);
       });
   }
 
   getRefreshToken() {
     axios
-      .get("http://recollect.today/getrefreshtoken")
+      .get('http://recollect.today/getrefreshtoken')
       .then((res) => {
         this.props.loginSuccess(res.data.accessToken);
       })
       .catch((err) => {
         //로그아웃 시키기
         // islogin, isSociallogin false 로 만들어주고 socialId지워주고 세션 파괴
+        console.error(err);
       });
   }
 
   getMypageInformation() {
     axios
-      .get("http://recollect.today/mypage", {
-        headers: { Authorization: `Bearer ${this.props.accessToken}` }, // 여기에다가도 withCredentials true 가 들어가야함
+      .get('http://recollect.today/mypage', {
+        headers: { Authorization: `Bearer ${this.props.accessToken}` },
+        withCredentials: true,
       })
       .then((res) => {
         const { user, bookmark } = res.data;
@@ -118,7 +128,7 @@ class MyPage extends React.Component {
         });
       })
       .catch((err) => {
-        console.error(err.response);
+        console.error(err);
         // this.setState({
         //   errorMessage: err.dataValues.message,
         // });
@@ -129,13 +139,13 @@ class MyPage extends React.Component {
   addBookmark(desc, url, emoji) {
     if (!desc || !url) {
       this.setState({
-        errorMessage: "설명과 url을 추가해주세요!",
+        errorMessage: '설명과 url을 추가해주세요!',
       });
       return;
     }
     axios
       .post(
-        "http://recollect.today/mypage",
+        'http://recollect.today/mypage',
         {
           desc: desc,
           username: this.state.username,
@@ -144,13 +154,14 @@ class MyPage extends React.Component {
         },
         {
           headers: { Authorization: `Bearer ${this.props.accessToken}` },
+          withCredentials: true,
         }
       )
       .then(() => {
         this.getMypageInformation();
       })
       .catch((err) => {
-        console.log(err.response); //err 메시지 접근하는 방법 다시 찾아보기
+        console.error(err); //err 메시지 접근하는 방법 다시 찾아보기
         // if (err.response.data === 'invalid access token') {
         //   this.getRefreshToken();
         // } else {
@@ -162,15 +173,47 @@ class MyPage extends React.Component {
       });
   }
 
+  sendEditedBookmark(desc, url, emoji) {
+    if (!desc || !url) {
+      this.setState({
+        errorMessage: '설명과 url을 추가해주세요!',
+      });
+      return;
+    }
+    axios
+      .put(
+        'http://recollect.today/mypage',
+        {
+          emoji: emoji,
+          url: url,
+          desc: desc,
+          bookmarkId: this.state.selectedInfo.id,
+        },
+        {
+          headers: { Authorization: `Bearer ${this.props.accessToken}` },
+          withCredentials: true,
+        }
+      )
+      .then(() => {
+        this.setState({
+          isEdit: false,
+          selectedInfo: {},
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
+  componentDidMount() {
+    this.getMypageInformation();
+  }
+
   setRandomColor() {
     let analogousColorArr = generateRandomColorPairArr();
     let randomNumber = Math.floor(Math.random() * 10);
     return analogousColorArr[randomNumber];
   }
-
-  // componentDidMount() {
-  //   this.getMypageInformation();
-  // }
 
   render() {
     this.setRandomColor();
@@ -186,7 +229,8 @@ class MyPage extends React.Component {
         <Collect
           addBookmark={this.addBookmark}
           isEdit={this.state.isEdit}
-          selectecdInfo={this.state.selectecdInfo}
+          selectedInfo={this.state.selectedInfo}
+          sendEditedBookmark={this.sendEditedBookmark}
         />
         <Alarm />
         <CollectionEditor

@@ -11,17 +11,15 @@ import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
 require("dotenv").config();
 
-//axios.defaults.headers.common['Authorization'] = this.state.accessToken;
-
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isLogin: false,
-      username: "state username",
       accessToken: "",
       socialId: "",
-      isSocialLogin: false, //--> socialId로 profile 분기 변경 / 좀 더 생각해보기
+      isSocialLogin: true, //--> socialId로 profile 분기 변경 / 좀 더 생각해보기
+
       isLoading: false, //로딩용 상태값
     };
 
@@ -37,6 +35,17 @@ class App extends React.Component {
     // this.getTheAuthenticatedUser = this.getTheAuthenticatedUser(this);
 
     this.handleLogOut = this.handleLogOut.bind(this);
+    this.initState = this.initState.bind(this);
+  }
+
+  initState() {
+    this.setState({
+      isLogin: false,
+      isSocialLogin: false,
+      accessToken: "",
+      socialId: "",
+    });
+    this.props.history.push("/");
   }
 
   handleLogOut() {
@@ -45,23 +54,11 @@ class App extends React.Component {
         headers: { Authorization: `Bearer ${this.state.accessToken}` },
       })
       .then(() => {
-        this.setState({
-          isLogin: false,
-          isSocialLogin: false,
-          accessToken: "",
-          socialId: "",
-        });
-        this.props.history.push("/");
+        this.initState();
       })
       .catch((err) => {
         console.log(err);
-        this.setState({
-          isLogin: false,
-          isSocialLogin: false,
-          accessToken: "",
-          socialId: "",
-        });
-        this.props.history.push("/");
+        this.initState();
       });
   }
 
@@ -93,7 +90,7 @@ class App extends React.Component {
       )
       .then((res) => {
         this.setState({
-          accessToken: res.data.data.accessToken,
+          accessToken: res.headers.accessToken, // 수정필요 headers로
         });
         this.getGitHubUserInfo();
       })
@@ -276,9 +273,8 @@ class App extends React.Component {
                 history={this.props.history}
                 isLogin={this.state.isLogin}
                 isSocialLogin={this.state.isSocialLogin}
-                username={this.state.username}
-                loginSuccess={this.loginSuccess}
                 accessToken={this.state.accessToken}
+                initState={this.initState}
               />
             )}
           />

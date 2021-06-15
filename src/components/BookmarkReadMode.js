@@ -1,6 +1,6 @@
-import React from "react";
-import { generateRandomColorPairArr } from "../util/randomColor";
-import axios from "axios";
+import React from 'react';
+import { generateRandomColorPairArr } from '../util/randomColor';
+import axios from 'axios';
 
 class BookmarkReadMode extends React.Component {
   constructor(props) {
@@ -40,21 +40,23 @@ class BookmarkReadMode extends React.Component {
               window.open(url);
               axios
                 .put(
-                  "http://recollect.today/bookmark",
+                  'http://recollect.today/bookmark',
                   {
                     BookmarkId: id,
                   },
                   {
                     headers: {
                       Authorization: `Bearer ${this.props.accessToken}`,
+                      withCredentials: true,
                     },
                   }
                 )
                 .then()
                 .catch((err) => {
-                  if ((err.body.message = "Not Allowed")) {
-                    this.props.getRefreshToken();
-                  }
+                  console.error(err.message);
+                  // if ((err.body.message = "Not Allowed")) {
+                  //   this.props.getRefreshToken();
+                  // }
                 });
             }}
           >
