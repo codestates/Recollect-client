@@ -140,13 +140,6 @@ body,
   }
 }
 
-/* .logosample {
-  width: 100px;
-  height: 100px;
-  background-color: rgba(39, 39, 185, 0.918);
-  border-radius: 1rem;
-} */
-
 .logo-container img {
   width: 48%;
   margin-bottom: 15px;
@@ -356,6 +349,10 @@ body,
   box-shadow: var(--box-shadow);
 }
 
+.profile-container > .main-container > .logo-container{
+  width: 12vw;
+}
+
 .profile {
   display: flex;
   flex-direction: column;
@@ -366,6 +363,12 @@ body,
   margin: 0;
   height: 60vh;
   background-color: var(--container-color);
+}
+
+#profile-backbtn-container{
+  position: absolute;
+  left: 5%;
+  top: 5%;
 }
 
 .profile-header {
@@ -406,7 +409,7 @@ body,
   cursor: pointer;
 }
 
-/* //// modal test css //// */
+/* //// popup css //// */
 .popup {
   position: fixed;
   width: 100vw;

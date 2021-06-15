@@ -18,10 +18,10 @@ class App extends React.Component {
     super(props);
     this.state = {
       isLogin: false,
-      username: 'state username',
+      username: 'collector',
       accessToken: '',
       socialId: '',
-      isSocialLogin: false, //--> socialId로 profile 분기 변경 / 좀 더 생각해보기
+      isSocialLogin: true, //--> socialId로 profile 분기 변경 / 좀 더 생각해보기
 
       isLoading: false, //로딩용 상태값
     };
@@ -284,7 +284,6 @@ class App extends React.Component {
                 isLogin={this.state.isLogin}
                 isSocialLogin={this.state.isSocialLogin}
                 username={this.state.username}
-                loginSuccess={this.loginSuccess}
                 accessToken={this.state.accessToken}
               />
             )}
