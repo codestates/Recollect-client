@@ -2,7 +2,6 @@ import axios from 'axios';
 import React from 'react';
 import Footer from '../components/Footer';
 import BackBtn from '../components/BackBtn';
-import BookMark from '../components/Bookmark';
 import Collect from '../components/Collect';
 import SignOutBtn from '../components/SignOutBtn';
 import ProfileBtn from '../components/ProfileBtn';
@@ -54,6 +53,7 @@ class MyPage extends React.Component {
     this.deleteBookmark = this.deleteBookmark.bind(this);
     this.editBookmark = this.editBookmark.bind(this);
     this.sendEditedBookmark = this.sendEditedBookmark.bind(this);
+    this.setRandomColor = this.setRandomColor.bind(this);
   }
 
   editBtnHandler() {
@@ -74,7 +74,7 @@ class MyPage extends React.Component {
     // bookmarkID랑 토큰넣어서 보내기
     // api 확인필요합니다! collect랑 겹침
     axios
-      .post(
+      .patch(
         'http://recollect.today/mypage',
         {
           bookmarkId: bookmarkId,
@@ -92,7 +92,8 @@ class MyPage extends React.Component {
       })
       .catch((err) => {
         // 삭제실패
-        if (err.dataValues.message === 'invalid access token') {
+        if (err.body.message === 'Not Allowed') {
+          //// err.body.message 맞는지 확인필요
           this.getRefreshToken();
         }
         console.erorr(err);
@@ -204,9 +205,16 @@ class MyPage extends React.Component {
     this.getMypageInformation();
   }
 
+  setRandomColor() {
+    let analogousColorArr = generateRandomColorPairArr();
+    let randomNumber = Math.floor(Math.random() * 10);
+    return analogousColorArr[randomNumber];
+  }
+
   render() {
+    this.setRandomColor();
     return (
-      <div className="tempBackground">
+      <div className="mypageBackground">
         <div className="nav upper">
           <SignOutBtn handleLogOut={this.props.handleLogOut} />
           <ProfileBtn history={this.props.history} />
@@ -234,6 +242,7 @@ class MyPage extends React.Component {
                   deleteBookmark={this.deleteBookmark}
                   editBookmark={this.editBookmark}
                   bookmarkInfo={bookmark}
+                  color={this.setRandomColor()}
                 />
               ))}
             </div>
@@ -242,7 +251,12 @@ class MyPage extends React.Component {
           <div>
             <div className="bookmarkContainer">
               {this.state.bookmarks.map((bookmark) => (
-                <BookmarkReadMode key={bookmark.id} bookmarkInfo={bookmark} />
+                <BookmarkReadMode
+                  key={bookmark.id}
+                  bookmarkInfo={bookmark}
+                  color={this.setRandomColor()}
+                  getRefreshToken={this.getRefreshToken()}
+                />
               ))}
             </div>
           </div>

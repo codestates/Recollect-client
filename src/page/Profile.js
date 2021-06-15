@@ -1,5 +1,5 @@
 import React from "react";
-import axios from 'axios';
+//import axios from 'axios';
 
 import BackBtn from '../components/BackBtn'
 import Footer from '../components/Footer'
@@ -7,6 +7,7 @@ import Footer from '../components/Footer'
 import UserPopup from '../components/UserPopup'
 import PwdPopup from '../components/PwdPopup'
 import DelAccountPopup from '../components/DelAccountPopup'
+import axios from "axios";
 class Profile extends React.Component{
   constructor(props){
     super(props);
@@ -18,23 +19,41 @@ class Profile extends React.Component{
     this.handleUserPopup = this.handleUserPopup.bind(this);
     this.handlePwdPopup = this.handlePwdPopup.bind(this);
     this.handleDelAccountPopup = this.handleDelAccountPopup.bind(this);
+    this.getProfileInfomation = this.getProfileInfomation.bind(this);
   }
 
 
+  getProfileInfomation(){
+    axios
+      .get('http://recollect.tody/profile', 
+      {
+        headers: { Authorization: `Bearer ${this.props.accessToken}` },
+        withCredentials: true,
+      })
+      .then((res) => {
+        const {user} = res.data;
+
+      })
+      .catch((err) => {
+        console.err(err);
+      })
+  }
+
+  //유저네임변경 팝업
   handleUserPopup(){
     this.setState((prevState)=>({
       showUserPopup: !prevState.showUserPopup,
     })
     )
   }
-
+  //패스워드변경 팝업
   handlePwdPopup(){
     this.setState((prevState)=>({
       showPwdPopup: !prevState.showPwdPopup,
     })
     )
   }
-
+  //회원탈퇴 팝업
   handleDelAccountPopup(){
     this.setState((prevState)=>({
       showDelAccountPopup: !prevState.showDelAccountPopup,
@@ -42,59 +61,64 @@ class Profile extends React.Component{
     )
   }
 
+  componentDidMount(){
+    this.getProfileInfomation();
+  }
+
   render(){
-    const isSocialLogin = this.props.isSocialLogin;
+    const {isSocialLogin} = this.props;
     const {showUserPopup, showPwdPopup, showDelAccountPopup} = this.state;
     return(
       <div className="profile-container">
         <div className="main-container">
-        <BackBtn history={this.props.history} id="profile-backbtn"/>
-
+          <div className="logo-container">
+            <img src="logo.png" alt="logo" />
+          </div>
+          <div id="profile-backbtn-container">
+            <BackBtn history={this.props.history}/>
+          </div>
+          
           <h1>PROFILE</h1>
-          { (isSocialLogin) 
-          ? (
+          { (isSocialLogin) //////소셯회원인 경우////////
+          ? ( 
             <div className="profile">
               <div className="profile-header">
                 <h1>{this.props.username}</h1>
                 <span>-</span>
               </div>
-              
               <div className="profile-btns">
-              <button className="change-btn" 
-                onClick={()=>{this.handleUserPopup()}}>
-                Change username
-              </button>
-              <div className="seperating-line">OR</div>
-              <button className="delete-account-btn" onClick={()=>{this.handleDelAccountPopup()}}>
-                Delete Account
-              </button>
-              {showUserPopup 
-                ? 
-                <UserPopup
-                  username={this.props.username}
-                  handleUserPopup={this.handleUserPopup}
-                />
-                : null
+                <button className="change-btn" onClick={()=>{this.handleUserPopup()}}>
+                  Change username
+                </button>
+                <div className="seperating-line">OR</div>
+                <button className="delete-account-btn" onClick={()=>{this.handleDelAccountPopup()}}>
+                  Delete Account
+                </button>
+                {showUserPopup && 
+                  <UserPopup
+                    username={this.props.username}
+                    accessToken={this.props.accessToken}
+                    handleUserPopup={this.handleUserPopup}
+                  />  
                 }
-              {showDelAccountPopup 
-                ? 
-                <DelAccountPopup
-                  history={this.props.history}
-                  isLogin={this.props.isLogin}
-                  username={this.props.username}
-                  handleDelAccountPopup={this.handleDelAccountPopup}
-                />
-                : null
+                {showDelAccountPopup &&
+                  <DelAccountPopup
+                    history={this.props.history}
+                    handleDelAccountPopup={this.handleDelAccountPopup}
+                    username={this.props.username}
+                    accessToken={this.props.accessToken}
+
+                  />
                 }
               </div>
-            </div>)
-          :(
+            </div> )
+
+          : ( ///////자체 회원인 경우////////
             <div className="profile">
               <div className="profile-header">
                 <h1>{this.props.username}</h1> 
                 <span>{this.props.email}</span>
               </div>
-              
               <div className="profile-btns">
                 <button className="change-btn" onClick={this.handleUserPopup}>
                   Change username
@@ -106,35 +130,31 @@ class Profile extends React.Component{
                 <button className="delete-account-btn" onClick={this.handleDelAccountPopup}>
                   Delete Account
                 </button>
-                {showUserPopup
-                  ? 
+                {showUserPopup &&
                   <UserPopup
-                  username={this.props.username}
-                  handleUserPopup={this.handleUserPopup}
+                    username={this.props.username}
+                    accessToken={this.props.accessToken}
+                    handleUserPopup={this.handleUserPopup}
                   />
-                : null
                 }
-                {showPwdPopup
-                ? 
+                {showPwdPopup &&
                   <PwdPopup
-                  password={this.props.password}
-                  passwordcheck={this.props.passwordcheck}
-                  handlePwdPopup={this.handlePwdPopup}
+                    password={this.props.password}
+                    passwordcheck={this.props.passwordcheck}
+                    accessToken={this.props.accessToken}
+                    handlePwdPopup={this.handlePwdPopup}
                   />
-                : null
                 }
-                {showDelAccountPopup 
-                ? 
-                <DelAccountPopup
-                  isLogin={this.props.isLogin}
-                  username={this.props.username}
-                  handleDelAccountPopup={this.handleDelAccountPopup}
-                />
-                : null
+                {showDelAccountPopup &&
+                  <DelAccountPopup
+                    history={this.props.history}
+                    handleDelAccountPopup={this.handleDelAccountPopup}
+                    username={this.props.username}
+                    accessToken={this.props.accessToken}
+                  />
                 }
               </div>
-            
-            </div>)
+            </div> )
           }
         </div>
         <Footer />

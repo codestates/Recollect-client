@@ -1,4 +1,6 @@
 import React from "react";
+import { generateRandomColorPairArr } from "../util/randomColor";
+import axios from "axios";
 
 class BookmarkReadMode extends React.Component {
   constructor(props) {
@@ -22,19 +24,38 @@ class BookmarkReadMode extends React.Component {
   }
 
   render() {
-    const { desc, emojis, created_at, url } = this.props.bookmarkInfo;
-
+    const { desc, emojis, created_at, url, id } = this.props.bookmarkInfo;
+    const { backgroundColor, textColor } = this.props.color;
     return (
       <div
         className="bookmark"
         onMouseOver={this.mouseHover}
         onMouseOut={this.mouseOut}
+        style={{ backgroundColor: backgroundColor, color: textColor }}
       >
         {this.state.isMouseHover ? (
           <div
             className="mouseHover"
             onClick={() => {
               window.open(url);
+              axios
+                .put(
+                  "http://recollect.today/bookmark",
+                  {
+                    BookmarkId: id,
+                  },
+                  {
+                    headers: {
+                      Authorization: `Bearer ${this.props.accessToken}`,
+                    },
+                  }
+                )
+                .then()
+                .catch((err) => {
+                  if ((err.body.message = "Not Allowed")) {
+                    this.props.getRefreshToken();
+                  }
+                });
             }}
           >
             {url}
