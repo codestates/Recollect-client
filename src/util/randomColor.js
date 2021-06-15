@@ -11,7 +11,7 @@ module.exports = {
     const analogousColorArr = analogousColor.map((t) => {
       let colorPairObject = { backgroundColor: t.toHexString() };
       if (t.isLight()) {
-        // 배경색과 글작색 조정
+        // 배경색과 글자색 조정
         colorPairObject.textColor = tinycolor("black").toHexString();
         return colorPairObject;
       } else {
