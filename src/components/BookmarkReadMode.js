@@ -11,7 +11,34 @@ class BookmarkReadMode extends React.Component {
 
     this.mouseHover = this.mouseHover.bind(this);
     this.mouseOut = this.mouseOut.bind(this);
+    this.incrementCount = this.incrementCount.bind(this);
   }
+
+  incrementCount(){
+    axios
+    .put(
+      'http://recollect.today/bookmark',
+      {
+        BookmarkId: this.props.bookmarkInfo.id,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${this.props.accessToken}`,
+          withCredentials: true,
+        },
+      }
+    )
+    .then(() => {
+      this.props.getMypageInformation();
+    })
+    .catch((err) => {
+      console.error(err.message);
+      if ((err.body.message = "Not Allowed")) {
+      this.props.getRefreshToken();
+      }
+    });
+  }
+
   mouseHover() {
     this.setState({
       isMouseHover: true,
@@ -38,26 +65,7 @@ class BookmarkReadMode extends React.Component {
             className="mouseHover"
             onClick={() => {
               window.open(url);
-              axios
-                .put(
-                  'http://recollect.today/bookmark',
-                  {
-                    BookmarkId: id,
-                  },
-                  {
-                    headers: {
-                      Authorization: `Bearer ${this.props.accessToken}`,
-                      withCredentials: true,
-                    },
-                  }
-                )
-                .then()
-                .catch((err) => {
-                  console.error(err.message);
-                  // if ((err.body.message = "Not Allowed")) {
-                  //   this.props.getRefreshToken();
-                  // }
-                });
+              this.incrementCount();
             }}
           >
             {url}

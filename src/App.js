@@ -29,10 +29,7 @@ class App extends React.Component {
     this.getGitHubUserInfo = this.getGitHubUserInfo.bind(this);
     this.logcheck = this.logcheck.bind(this);
     this.getAccessToken = this.getAccessToken.bind(this);
-    //this.handleUpdateUser = this.handleUpdateUser.bind(this);
-
-    // this.getUserInfo = this.getUserInfo.bind(this);
-    // this.getTheAuthenticatedUser = this.getTheAuthenticatedUser(this);
+    this.getRefreshToken = this.getRefreshToken.bind(this);
 
     this.handleLogOut = this.handleLogOut.bind(this);
     this.initState = this.initState.bind(this);
@@ -90,7 +87,7 @@ class App extends React.Component {
       )
       .then((res) => {
         this.setState({
-          accessToken: res.data.data.accessToken,
+          accessToken: res.headers.accessToken,
         });
         this.getGitHubUserInfo();
       })
@@ -100,37 +97,18 @@ class App extends React.Component {
       });
   }
 
-  //* 깃허브로 로그인 한 유저를 app에 저장/업데이트 ---> 유빈님 작성하신..뭘까요?????
-  // async handleUpdateUser() {
-  //   await axios({
-  //     method: 'patch',
-  //     url: 'https://api.github.com/user',
-  //     data: {
-  //       name: 'Justicexx0099',
-  //       email: 'mjustin9709@gmail.com'
-  //     },
-  //     headers: {
-  //       'Accept': 'application/vnd.github.v3+json',
-  //     }
-  //   })
-  //   .then((res) => {
-  //     console.log('패치를 하였습니다',res.data);
-  //   })
-  // }
-
-  //* 깃허브에 유저정보 요청
-  // async getUserInfo() {
-  //   await axios
-  //     .get("https://api.github.com/users/Justicexx0099", {
-  //       headers: {
-  //         Accept: "application/vnd.github.v3+json",
-  //       },
-  //     })
-  //     .then((res) => {
-  //       console.log("데이터를 받아왔습니다", res);
-  //       //this.logcheck(res.data.id);
-  //     });
-  // }
+  getRefreshToken() {
+    axios
+      .get('http://recollect.today/getrefreshtoken')
+      .then((res) => {
+        this.props.loginSuccess(res.data.accessToken);
+      })
+      .catch((err) => {
+        //로그아웃 시키기
+        // islogin, isSociallogin false 로 만들어주고 socialId지워주고 세션 파괴
+        console.error(err);
+      });
+  }
 
   //TODO: socialId를 저장
   //* GitHub 앱이 사용자의 액세스 토큰을 사용하여 API에 액세스
@@ -151,19 +129,6 @@ class App extends React.Component {
         this.logcheck(res.data.id);
       });
   }
-
-  //* 로그인 사용자의 공개 프로필 정보 요청
-  // async getTheAuthenticatedUser() {
-  //   await axios({
-  //     method: "get",
-  //     url: "https://api.github.com/user",
-  //     headers: {
-  //       Accept: "application/vnd.github.v3+json",
-  //     },
-  //   }).then((res) => {
-  //     console.log(res.data);
-  //   });
-  // }
 
   //* 기존 rocollect 회원인지 아닌지 판별
   logcheck(socialId) {
@@ -196,15 +161,19 @@ class App extends React.Component {
             this.socialLoginSuccess(res); // 이미 리콜렉트 소셜 회원인 경우
           });
       })
-      .catch(() => {
+      .catch((err) => {
         //신규 소셜 회원인경우
-        this.props.history.push({
-          pathname: '/signup',
-          state: { socialId: socialId },
-        });
-        this.setState({
-          isSocialLogin: true,
-        });
+        if(err.response.status === 404){
+          this.props.history.push({
+            pathname: '/signup',
+            state: { socialId: socialId },
+          });
+          this.setState({
+            isSocialLogin: true,
+          });
+        }else{
+          console.error(err);
+        }
       });
   }
 
@@ -261,10 +230,20 @@ class App extends React.Component {
                 handleLogOut={this.handleLogOut}
                 history={this.props.history}
                 accessToken={this.state.accessToken}
+                getRefreshToken={this.getRefreshToken}
               />
             )}
           />
-          <Route exact path="/recollect" render={() => <Recollect />} />
+          <Route 
+            exact 
+            path="/recollect" 
+            render={() => ( 
+            <Recollect 
+              history={this.props.history}
+              getRefreshToken={this.getRefreshToken}
+              />
+              )} 
+            />
           <Route
             exact
             path="/profile"

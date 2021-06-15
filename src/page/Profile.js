@@ -114,9 +114,7 @@ class Profile extends React.Component {
     return (
       <div className="profile-container">
         <div className="main-container">
-          <div className="logo-container">
-            <img src="logo.png" alt="logo" />
-          </div>
+
           <div id="profile-backbtn-container">
             <BackBtn history={this.props.history} />
           </div>
@@ -124,6 +122,9 @@ class Profile extends React.Component {
           <h1>PROFILE</h1>
           {isSocialLogin ? ( //////소셯회원인 경우////////
             <div className="profile">
+              <div className="logo-container">
+                <img src="logo.png" alt="logo" />
+              </div>
               <div className="profile-header">
                 <h1>{this.state.username}</h1>
                 <span>-</span>
@@ -168,6 +169,9 @@ class Profile extends React.Component {
           ) : (
             ///////자체 회원인 경우////////
             <div className="profile">
+              <div className="logo-container">
+                <img src="logo.png" alt="logo" />
+              </div>
               <div className="profile-header">
                 <h1>{this.state.username}</h1>
                 <span>{this.state.email}</span>

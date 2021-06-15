@@ -14,6 +14,7 @@ class Landing extends React.Component {
         <div className="main-container">
           <div className="main">
             <div className="logo-container">
+                <div id="none"></div>
                 <img src="logo.png" alt="logo"/>
             </div>
             <div className="intro">

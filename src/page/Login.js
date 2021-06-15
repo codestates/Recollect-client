@@ -64,12 +64,18 @@ class Login extends React.Component {
     return (
       <div className="LoginContainer">
         <div className="mainContainer">
-          <BackBtn history={this.props.history} />
+          <div id="login-backbtn-container">
+            <BackBtn history={this.props.history} />
+          </div>
           <h1>LOGIN</h1>
           <article>
             <div className="logo-container">
-              <div className="logosample"></div>
-              Recollect
+              {/* <div className="logo-container">
+                <img src="logo.png" alt="logo" />
+              </div> */}
+              <div id="login-logo-wrap">
+                <img src="logo.png" alt="logo" />
+              </div>
             </div>
             <button id="GithubBtn" onClick={this.handleSocialLogin}>
               GitHub
