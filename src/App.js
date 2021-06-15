@@ -1,15 +1,15 @@
-import axios from 'axios';
-import React from 'react';
-import Landing from './page/Landing';
+import axios from "axios";
+import React from "react";
+import Landing from "./page/Landing";
 // import Loading from "./components/Loading"; //TEMP
-import Login from './page/Login';
-import Signup from './page/Signup';
-import Mypage from './page/Mypage';
-import Recollect from './page/Recollect';
-import Profile from './page/Profile';
-import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import Login from "./page/Login";
+import Signup from "./page/Signup";
+import Mypage from "./page/Mypage";
+import Recollect from "./page/Recollect";
+import Profile from "./page/Profile";
+import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
-require('dotenv').config();
+require("dotenv").config();
 
 //axios.defaults.headers.common['Authorization'] = this.state.accessToken;
 
@@ -41,29 +41,28 @@ class App extends React.Component {
   }
 
   handleLogOut() {
-    //이따 확인
     axios
-      .get('http://recollect.today/logout', {
+      .get("http://recollect.today/logout", {
         headers: { Authorization: `Bearer ${this.state.accessToken}` },
       })
       .then(() => {
         this.setState({
           isLogin: false,
           isSocialLogin: false,
-          accessToken: '',
-          socialId: '',
+          accessToken: "",
+          socialId: "",
         });
-        this.props.history.push('/');
+        this.props.history.push("/");
       })
       .catch((err) => {
         console.log(err);
         this.setState({
           isLogin: false,
           isSocialLogin: false,
-          accessToken: '',
-          socialId: '',
+          accessToken: "",
+          socialId: "",
         });
-        this.props.history.push('/');
+        this.props.history.push("/");
       });
   }
 
@@ -73,23 +72,23 @@ class App extends React.Component {
       isLogin: true,
       accessToken: accessToken, //accessToken 할당
     });
-    this.props.history.push('/'); // isLogin 상태값에 따라 Landing / Mypage
+    this.props.history.push("/"); // isLogin 상태값에 따라 Landing / Mypage
   }
 
   //// 소셜 로그인 성공시 ////
-  socialLoginSuccess() {
+  socialLoginSuccess(res) {
     this.setState({
       isLogin: true,
       isSocialLogin: true,
-      //여기에 자체 엑세스토큰이 들어가야함
+      accessToken: res.headers.accessToken, //// <= 헤더에서 토큰추출하는부분 확인필요
     });
-    this.props.history.push('/'); // isLogin 상태값에 따라 Landing / Mypage
+    this.props.history.push("/"); // isLogin 상태값에 따라 Landing / Mypage
   }
   //* 깃허브에서 access code를 받고 서버로 access 토큰 요청
   async getAccessToken(authorizationCode) {
     await axios
       .post(
-        'http://localhost:4000/getToken',
+        "http://localhost:4000/getToken",
         { authorizationCode: authorizationCode },
         { withCredentials: true }
       )
@@ -141,9 +140,9 @@ class App extends React.Component {
   //* GitHub 앱이 사용자의 액세스 토큰을 사용하여 API에 액세스
   //사용자의 액세스 토큰을 사용하면 GitHub 앱이 사용자를 대신하여 API에 요청을 할 수 있음
   getGitHubUserInfo() {
-    console.log('access token ', this.state.accessToken);
+    console.log("access token ", this.state.accessToken);
     axios
-      .get('https://api.github.com/user', {
+      .get("https://api.github.com/user", {
         headers: {
           Authorization: `token ${this.state.accessToken}`, //A or a
         },
@@ -152,7 +151,7 @@ class App extends React.Component {
         this.setState({
           socialId: res.data.id,
         });
-        console.log('데이터를 출력하겠습니다', res.data);
+        console.log("데이터를 출력하겠습니다", res.data);
         this.logcheck(res.data.id);
       });
   }
@@ -174,12 +173,12 @@ class App extends React.Component {
   logcheck(socialId) {
     axios
       .post(
-        'http://localhost:4000/logcheck',
+        "http://localhost:4000/logcheck",
         {
           socialId: this.state.socialId,
         },
         {
-          headers: { 'Content-Type': 'application/json' },
+          headers: { "Content-Type": "application/json" },
           withCredentials: true,
         }
       )
@@ -188,30 +187,25 @@ class App extends React.Component {
         // login post 요청
         axios
           .post(
-            'http://localhost:4000/login',
+            "http://localhost:4000/login",
             {
               uuid: res.data.uuid,
             },
             {
-              headers: { 'Content-Type': 'application/json' },
+              headers: { "Content-Type": "application/json" },
               withCredentials: true,
             }
           )
           .then((res) => {
-            // 자체 발행한 엑세스토큰을 메서드에 전해줘
-            this.socialLoginSuccess(); // 이미 리콜렉트 소셜 회원인 경우 isSocialLogin: true 로 변경 -> mypage로 이동
-          })
-          .catch((err) => {
-            this.props.history.push('/mypage'); //**[서버]logincontroller 를 자체/소셜로그인으로 분리, api 수정 추가 (총체적으로)
-          }); // **[서버]소셜로그인에서 세션아이디 저장시 자체 토큰 생성 확인 필요
+            this.socialLoginSuccess(res); // 이미 리콜렉트 소셜 회원인 경우
+          });
       })
-      .catch((err) => {
+      .catch(() => {
         //신규 소셜 회원인경우
         this.props.history.push({
-          pathname: '/signup',
+          pathname: "/signup",
           state: { socialId: socialId },
         });
-        //[서버 로그체크컨트롤러] then/catch 404, 500 분기 처리 리팩토링 필요
         this.setState({
           isSocialLogin: true,
         });
@@ -221,7 +215,7 @@ class App extends React.Component {
   componentDidMount() {
     //* 깃허브 accessCode 가져옴
     const url = new URL(window.location.href);
-    const authorizationCode = url.searchParams.get('code');
+    const authorizationCode = url.searchParams.get("code");
     if (authorizationCode) this.getAccessToken(authorizationCode);
   }
 

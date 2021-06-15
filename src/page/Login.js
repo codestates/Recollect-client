@@ -1,15 +1,15 @@
-import axios from 'axios';
-import React from 'react';
-import Footer from '../components/Footer';
-import BackBtn from '../components/BackBtn';
+import axios from "axios";
+import React from "react";
+import Footer from "../components/Footer";
+import BackBtn from "../components/BackBtn";
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: '',
-      errorMessage: '',
+      email: "",
+      password: "",
+      errorMessage: "",
       GITHUB_LOGIN_URL: `https://github.com/login/oauth/authorize?client_id=749cea90f0ee8535f1fa`,
       //clientid가 시윤님껄로 해도 되는지? 서버 켜서 확인
     };
@@ -35,26 +35,26 @@ class Login extends React.Component {
     //// email 또는 password가 공백상태로 제출된경우 에러 ////
     if (!email || !password) {
       this.setState({
-        errorMessage: '아이디와 비밀번호를 확인해주세요',
+        errorMessage: "아이디와 비밀번호를 확인해주세요",
       });
     } else {
       //// POST 요청 (서버 열리면 주석제거) ////
       axios
         .post(
-          'http://recollect.today/login',
+          "http://recollect.today/login",
           {
             email: email,
             password: password,
           },
           {
-            headers: { 'Content-Type': 'application/json' },
+            headers: { "Content-Type": "application/json" },
             withCredentials: true,
           }
         )
         .then((res) => this.props.loginSuccess(res.data.accessToken)) // Login요청 성공
         .catch(() => {
           this.setState({
-            errorMessage: '아이디와 비밀번호를 확인해주세요',
+            errorMessage: "아이디와 비밀번호를 확인해주세요",
           });
         });
     }
@@ -81,13 +81,13 @@ class Login extends React.Component {
               type="email"
               placeholder="Email"
               className="email"
-              onChange={this.handleInputValue('email')}
+              onChange={this.handleInputValue("email")}
             />
             <input
               type="password"
               placeholder="Password"
               className="pwd"
-              onChange={this.handleInputValue('password')}
+              onChange={this.handleInputValue("password")}
             />
             <button onClick={this.handleLogin}>Log In</button>
             <div>
@@ -95,7 +95,7 @@ class Login extends React.Component {
             </div>
             <button
               onClick={() => {
-                this.props.history.push('/signup');
+                this.props.history.push("/signup");
               }}
             >
               Create Account

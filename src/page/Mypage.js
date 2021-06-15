@@ -1,90 +1,42 @@
-import axios from 'axios';
-import React from 'react';
-import Footer from '../components/Footer';
-import BackBtn from '../components/BackBtn';
-import BookMark from '../components/Bookmark';
-import Collect from '../components/Collect';
-import SignOutBtn from '../components/SignOutBtn';
-import ProfileBtn from '../components/ProfileBtn';
-import Alarm from '../components/Alarm';
-import CollectionEditor from '../components/CollectionEditor';
-import BookmarkReadMode from '../components/BookmarkReadMode';
-import BookmarkEditMode from '../components/BookmarkEditMode';
+import axios from "axios";
+import React from "react";
+import Footer from "../components/Footer";
+import BackBtn from "../components/BackBtn";
+import Collect from "../components/Collect";
+import SignOutBtn from "../components/SignOutBtn";
+import ProfileBtn from "../components/ProfileBtn";
+import Alarm from "../components/Alarm";
+import CollectionEditor from "../components/CollectionEditor";
+import BookmarkReadMode from "../components/BookmarkReadMode";
+import BookmarkEditMode from "../components/BookmarkEditMode";
 
-const { generateRandomColorPairArr } = require('../util/randomColor');
+const { generateRandomColorPairArr } = require("../util/randomColor");
 
 class MyPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
+      username: "",
       isRecollect: false,
       bookmarks: [
         {
           id: 1,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '⚡️'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
+          desc:
+            "Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World",
+          emojis: ["☕️", "⚡️"],
+          url: "https://www.google.com/",
+          created_at: "2021 - 06 - 08",
         },
         {
-          id: 1,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '⚡️'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 1,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '⚡️'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 1,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '⚡️'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 1,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '⚡️'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 1,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '⚡️'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 1,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '⚡️'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 1,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '⚡️'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 1,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '⚡️'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
+          id: 2,
+          desc:
+            "Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World",
+          emojis: ["☕️", "⚡️"],
+          url: "https://www.google.com/",
+          created_at: "2021 - 06 - 08",
         },
       ],
-      errorMessage: '',
+      errorMessage: "",
       isEdit: false,
       selectecdInfo: {},
     };
@@ -95,6 +47,7 @@ class MyPage extends React.Component {
     this.editBtnHandler = this.editBtnHandler.bind(this);
     this.deleteBookmark = this.deleteBookmark.bind(this);
     this.editBookmark = this.editBookmark.bind(this);
+    this.setRandomColor = this.setRandomColor.bind(this);
   }
 
   editBtnHandler() {
@@ -114,8 +67,8 @@ class MyPage extends React.Component {
     // bookmarkID랑 토큰넣어서 보내기
     // api 확인필요합니다! collect랑 겹침
     axios
-      .post(
-        'http://recollect.today/mypage',
+      .patch(
+        "http://recollect.today/mypage",
         {
           bookmarkId: bookmarkId,
         },
@@ -132,7 +85,8 @@ class MyPage extends React.Component {
       })
       .catch((err) => {
         // 삭제실패
-        if (err.dataValues.message === 'invalid access token') {
+        if (err.body.message === "Not Allowed") {
+          //// err.body.message 맞는지 확인필요
           this.getRefreshToken();
         }
         console.log(err);
@@ -141,7 +95,7 @@ class MyPage extends React.Component {
 
   getRefreshToken() {
     axios
-      .get('http://recollect.today/getrefreshtoken')
+      .get("http://recollect.today/getrefreshtoken")
       .then((res) => {
         this.props.loginSuccess(res.data.accessToken);
       })
@@ -153,7 +107,7 @@ class MyPage extends React.Component {
 
   getMypageInformation() {
     axios
-      .get('http://recollect.today/mypage', {
+      .get("http://recollect.today/mypage", {
         headers: { Authorization: `Bearer ${this.props.accessToken}` }, // 여기에다가도 withCredentials true 가 들어가야함
       })
       .then((res) => {
@@ -175,13 +129,13 @@ class MyPage extends React.Component {
   addBookmark(desc, url, emoji) {
     if (!desc || !url) {
       this.setState({
-        errorMessage: '설명과 url을 추가해주세요!',
+        errorMessage: "설명과 url을 추가해주세요!",
       });
       return;
     }
     axios
       .post(
-        'http://recollect.today/mypage',
+        "http://recollect.today/mypage",
         {
           desc: desc,
           username: this.state.username,
@@ -208,14 +162,20 @@ class MyPage extends React.Component {
       });
   }
 
-  componentDidMount() {
-    this.getMypageInformation();
+  setRandomColor() {
+    let analogousColorArr = generateRandomColorPairArr();
+    let randomNumber = Math.floor(Math.random() * 10);
+    return analogousColorArr[randomNumber];
   }
 
+  // componentDidMount() {
+  //   this.getMypageInformation();
+  // }
+
   render() {
-    //console.log(generateRandomColorPairArr());
+    this.setRandomColor();
     return (
-      <div className="tempBackground">
+      <div className="mypageBackground">
         <div className="nav upper">
           <SignOutBtn handleLogOut={this.props.handleLogOut} />
           <ProfileBtn history={this.props.history}/>
@@ -242,6 +202,7 @@ class MyPage extends React.Component {
                   deleteBookmark={this.deleteBookmark}
                   editBookmark={this.editBookmark}
                   bookmarkInfo={bookmark}
+                  color={this.setRandomColor()}
                 />
               ))}
             </div>
@@ -250,7 +211,12 @@ class MyPage extends React.Component {
           <div>
             <div className="bookmarkContainer">
               {this.state.bookmarks.map((bookmark) => (
-                <BookmarkReadMode key={bookmark.id} bookmarkInfo={bookmark} />
+                <BookmarkReadMode
+                  key={bookmark.id}
+                  bookmarkInfo={bookmark}
+                  color={this.setRandomColor()}
+                  getRefreshToken={this.getRefreshToken()}
+                />
               ))}
             </div>
           </div>
