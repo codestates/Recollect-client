@@ -178,7 +178,7 @@ class MyPage extends React.Component {
       <div className="mypageBackground">
         <div className="nav upper">
           <SignOutBtn handleLogOut={this.props.handleLogOut} />
-          <ProfileBtn history={this.props.history} />
+          <ProfileBtn history={this.props.history}/>
         </div>
         <div className="logo-container">
           <img src="logo.png" alt="logo" />
