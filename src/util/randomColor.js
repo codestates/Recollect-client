@@ -1,4 +1,4 @@
-// const tinycolor = require("tinycolor2");
+const tinycolor = require("tinycolor2");
 
 module.exports = {
   generateRandomColorPairArr: () => {

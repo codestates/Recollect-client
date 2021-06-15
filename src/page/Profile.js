@@ -35,7 +35,7 @@ class Profile extends React.Component{
 
       })
       .catch((err) => {
-        console.err(err);
+        console.error(err);
       })
   }
 
