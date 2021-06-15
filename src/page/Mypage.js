@@ -81,6 +81,7 @@ class MyPage extends React.Component {
         },
         {
           headers: { Authorization: `Bearer ${this.props.accessToken}` },
+          withCredentials: true,
         }
       )
       .then(() => {
@@ -116,7 +117,8 @@ class MyPage extends React.Component {
   getMypageInformation() {
     axios
       .get('http://recollect.today/mypage', {
-        headers: { Authorization: `Bearer ${this.props.accessToken}` }, // 여기에다가도 withCredentials true 가 들어가야함
+        headers: { Authorization: `Bearer ${this.props.accessToken}` },
+        withCredentials: true,
       })
       .then((res) => {
         const { user, bookmark } = res.data;
@@ -152,6 +154,7 @@ class MyPage extends React.Component {
         },
         {
           headers: { Authorization: `Bearer ${this.props.accessToken}` },
+          withCredentials: true,
         }
       )
       .then(() => {
@@ -188,6 +191,7 @@ class MyPage extends React.Component {
         },
         {
           headers: { Authorization: `Bearer ${this.props.accessToken}` },
+          withCredentials: true,
         }
       )
       .then(() => {

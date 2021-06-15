@@ -105,7 +105,7 @@ class Collect extends React.Component {
       if (el === '☕️') {
         emojisBooleanArr[0] = true;
       }
-
+      //f
       if (el === '🔥') {
         emojisBooleanArr[1] = true;
       }
@@ -123,6 +123,11 @@ class Collect extends React.Component {
       this.props.isEdit === true &&
       Object.keys(this.props.selectedInfo).length !==
         Object.keys(prevProps.selectedInfo).length
+    ) {
+      this.handleShowEditing(this.props.selectedInfo);
+    } else if (
+      Object.keys(this.props.selectedInfo).length !== 0 &&
+      this.props.selectedInfo.id !== prevProps.selectedInfo.id
     ) {
       this.handleShowEditing(this.props.selectedInfo);
     }
