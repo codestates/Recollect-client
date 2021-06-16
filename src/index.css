@@ -705,18 +705,17 @@ cursor: pointer; */
   background-color: var(--main-bg-color);
 }
 
+/* ///////alarm css start////// */
+
 #alarm {
   background-color: rgba(255, 255, 5, 0.479);
   height: 80px;
   width: 85vw;
-  font-size: 1.2rem;
+  /* font-size: 1.2rem; */
   text-align: center;
   margin-top: 20px;
   vertical-align: middle;
-  line-height: 80px;
 }
-
-/* ///////alarm css start////// */
 
 #alarm-alert {
   color: var(--logo-color);
@@ -742,25 +741,21 @@ cursor: pointer; */
 }
 /* 반응형 미디어쿼리 */
 @media (max-width: 940px) {
-  #alarm-alert > div {
-    font-size: 1rem;
+  #alarm {
+    font-size: 1em;
   }
 }
 @media (max-width: 805px) {
-  #alarm-alert > div {
-    font-size: 0.8rem;
+  #alarm {
+    font-size: 0.8em;
   }
 }
 @media (max-width: 640px) {
-  #alarm-alert > div {
-    font-size: 0.6rem;
+  #alarm {
+    font-size: 0.6em;
   }
 }
-@media (max-width: 510px) {
-  #alarm-alert > div {
-    content: "Check Recollects!";
-  }
-}
+
 /* #alarm-alert:before {
   content: "There are 7 Collects you haven't checked.  Start to Recollect !";
   color: blue;
