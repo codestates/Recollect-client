@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React from 'react';
 import Footer from '../components/Footer';
-import BackBtn from '../components/BackBtn';
 import Collect from '../components/Collect';
 import SignOutBtn from '../components/SignOutBtn';
 import ProfileBtn from '../components/ProfileBtn';

@@ -125,9 +125,6 @@ class SignupComp extends React.Component {
             ) //socialId 있는 경우
           }
           <div>
-            <label>{this.state.errormessage}</label>
-          </div>
-          <div>
             <button
               onClick={() => {
                 if (this.props.isSocialLogin) {
@@ -139,6 +136,9 @@ class SignupComp extends React.Component {
             >
               Create account
             </button>
+          </div>
+          <div>
+            <label>{this.state.errormessage}</label>
           </div>
         </form>
       </div>

@@ -3,9 +3,9 @@ import Footer from "../components/Footer";
 import SignBtn from "../components/SignBtn";
 
 class Landing extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   render() {
     return (

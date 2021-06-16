@@ -51,7 +51,7 @@ class BookmarkReadMode extends React.Component {
   }
 
   render() {
-    const { desc, emojis, created_at, url, id } = this.props.bookmarkInfo;
+    const { desc, emojis, created_at, url } = this.props.bookmarkInfo;
     const { backgroundColor, textColor } = this.props.color;
     return (
       <div
