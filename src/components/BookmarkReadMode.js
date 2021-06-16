@@ -14,29 +14,29 @@ class BookmarkReadMode extends React.Component {
     this.incrementCount = this.incrementCount.bind(this);
   }
 
-  incrementCount(){
+  incrementCount() {
     axios
-    .put(
-      'http://recollect.today/bookmark',
-      {
-        BookmarkId: this.props.bookmarkInfo.id,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${this.props.accessToken}`,
-          withCredentials: true,
+      .put(
+        'http://recollect.today/bookmark',
+        {
+          BookmarkId: this.props.bookmarkInfo.id,
         },
-      }
-    )
-    .then(() => {
-      this.props.getMypageInformation();
-    })
-    .catch((err) => {
-      console.error(err.message);
-      if ((err.body.message = "Not Allowed")) {
-      this.props.getRefreshToken();
-      }
-    });
+        {
+          headers: {
+            Authorization: `Bearer ${this.props.accessToken}`,
+            withCredentials: true,
+          },
+        }
+      )
+      .then(() => {
+        this.props.getMypageInformation();
+      })
+      .catch((err) => {
+        console.error(err.message);
+        if ((err.message = 'Not Allowed')) {
+          this.props.getRefreshToken();
+        }
+      });
   }
 
   mouseHover() {

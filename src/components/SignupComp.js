@@ -1,11 +1,14 @@
-import React from "react";
+import React from 'react';
 
-const { IsValidiateUsername, IsValidiatePassword } = require('../util/validiation')
+const {
+  IsValidiateUsername,
+  IsValidiatePassword,
+} = require('../util/validiation');
 
 class SignupComp extends React.Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
       username: '',
       email: '',
@@ -20,7 +23,7 @@ class SignupComp extends React.Component {
   }
 
   handleInputValue = (key) => (e) => {
-    this.setState({ [key]: e.target.value});
+    this.setState({ [key]: e.target.value });
   };
 
   handleCreateSocialAccount() {
@@ -28,114 +31,119 @@ class SignupComp extends React.Component {
 
     if (!IsValidiateUsername(username)) {
       this.setState({
-        errormessage: "사용자 이름은 영문 대소문자, 숫자, 언더바, 하이픈을 사용한 4~16글자로 만들수 있습니다."
-      })
+        errormessage:
+          '사용자 이름은 영문 대소문자, 숫자, 언더바, 하이픈을 사용한 4~16글자로 만들수 있습니다.',
+      });
       return;
     } else {
       this.setState({
         errormessage: '',
-      })
+      });
     }
     this.props.handleCreateSocialAccount(this.state);
   }
 
   handleCreateAccount() {
     const { username, email, password, passwordcheck } = this.state;
-    if (!username || !email || !password ) {
+    if (!username || !email || !password) {
       this.setState({
-        errormessage: "모든 항목은 필수입니다."
-      })
+        errormessage: '모든 항목은 필수입니다.',
+      });
       return;
     } else if (password !== passwordcheck) {
       this.setState({
-        errormessage: "비밀번호가 서로 다릅니다."
-      })
+        errormessage: '비밀번호가 서로 다릅니다.',
+      });
       return;
     } else if (!IsValidiateUsername(this.state.username)) {
       this.setState({
-        errormessage: "유저네임은 영문 대소문자, 숫자, 언더바, 하이픈을 사용해 4글자이상 16글자 이하로 만들수 있습니다."
-      })
+        errormessage:
+          '유저네임은 영문 대소문자, 숫자, 언더바, 하이픈을 사용해 4글자이상 16글자 이하로 만들수 있습니다.',
+      });
       return;
     } else if (!IsValidiatePassword(this.state.password)) {
       this.setState({
-        errormessage: "비밀번호는 최소 한 글자 이상의 영문 대소문자, 숫/자, 특수문자(!, @, #, $, %, &, *) 를 포함한 8글자 이상으로 만들어야 합니다."
-      })
+        errormessage:
+          '비밀번호는 최소 한 글자 이상의 영문 대소문자, 숫/자, 특수문자(!, @, #, $, %, &, *) 를 포함한 8글자 이상으로 만들어야 합니다.',
+      });
       return;
     } else {
       this.setState({
         errormessage: '',
-      })
+      });
     }
 
     this.props.handleCreateAccount(this.state);
+  }
 
-    }
-    
-  
   render() {
-
-    return(
+    return (
       <div id="signupComp-container">
+        <h1>SIGN UP</h1>
         <form id="signupComp" onSubmit={(e) => e.preventDefault()}>
           <div className="logo-container">
-              <div className="logosample"></div>
-              Recollect
+            <img src="logo.png" alt="logo" />
           </div>
           <div>
-          <input 
-            className="signupComp-input" 
-            type="text"
-            onChange={this.handleInputValue("username")} 
-            placeholder="username"/>
+            <input
+              className="signupComp-input"
+              type="text"
+              onChange={this.handleInputValue('username')}
+              placeholder="Username"
+            />
           </div>
-          { this.props.isSocialLogin === undefined ? 
-            <div>
+          {
+            this.props.isSocialLogin === undefined ? (
               <div>
-                <input 
-                  className="signupComp-input" 
-                  onChange={this.handleInputValue("email")}
-                  type="email" 
-                  placeholder="email"/>
+                <div>
+                  <input
+                    className="signupComp-input"
+                    onChange={this.handleInputValue('email')}
+                    type="email"
+                    placeholder="Email"
+                  />
+                </div>
+                <div>
+                  <input
+                    className="signupComp-input"
+                    onChange={this.handleInputValue('password')}
+                    type="password"
+                    placeholder="Password"
+                  />
+                </div>
+                <div>
+                  <input
+                    className="signupComp-input"
+                    onChange={this.handleInputValue('passwordcheck')}
+                    type="password"
+                    placeholder="Password-check"
+                  />
+                </div>
               </div>
-              <div>
-                <input 
-                  className="signupComp-input" 
-                  onChange={this.handleInputValue("password")}
-                  type="password" 
-                  placeholder="password"/>
-              </div>
-              <div>
-                <input 
-                  className="signupComp-input"
-                  onChange={this.handleInputValue("passwordcheck")} 
-                  type="password" 
-                  placeholder="password-check"/>
-              </div>
-            </div>
-            : 
-            '' //socialId 있는 경우
+            ) : (
+              ''
+            ) //socialId 있는 경우
           }
           <div>
             <label>{this.state.errormessage}</label>
           </div>
           <div>
-            <button 
+            <button
               onClick={() => {
-                  if(this.props.isSocialLogin){
-                    this.handleCreateSocialAccount()
-                  } else {
-                    this.handleCreateAccount()
-                  }
+                if (this.props.isSocialLogin) {
+                  this.handleCreateSocialAccount();
+                } else {
+                  this.handleCreateAccount();
                 }
-              }>
-                Create account
+              }}
+            >
+              Create account
             </button>
           </div>
         </form>
-      </div> 
+      </div>
     );
   }
-  
 }
 
 export default SignupComp;

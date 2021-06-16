@@ -83,10 +83,6 @@ class Collect extends React.Component {
 
   async handleEditBtn() {
     const { desc, url, emoji } = this.state;
-    if (!desc || !url) {
-      //마이페이지에 에러메시지 전달하는 메서드 필요
-      return;
-    }
 
     const emojiNumStr = this.emojiBoleanToNumString(emoji);
 
@@ -188,7 +184,6 @@ class Collect extends React.Component {
               </div>
             )}
             <div onClick={this.handleInitialize} className="Collect-btn">
-              {/* <i className="far fa-trash-alt"></i> */}
               <i className="fas fa-eraser"></i>
             </div>
           </div>

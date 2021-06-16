@@ -9,8 +9,8 @@ import Alarm from '../components/Alarm';
 import CollectionEditor from '../components/CollectionEditor';
 import BookmarkReadMode from '../components/BookmarkReadMode';
 import BookmarkEditMode from '../components/BookmarkEditMode';
-
-const { setRandomColor  } = require('../util/randomColor');
+import ScrollToTop from '../components/ScrollToTop';
+const { setRandomColor } = require('../util/randomColor');
 
 class MyPage extends React.Component {
   constructor(props) {
@@ -62,6 +62,118 @@ class MyPage extends React.Component {
           url: 'https://www.google.com/',
           created_at: '2021 - 06 - 08',
         },
+        {
+          id: 7,
+          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
+          emojis: ['☕️', '🔥'],
+          url: 'https://www.google.com/',
+          created_at: '2021 - 06 - 08',
+        },
+        {
+          id: 8,
+          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
+          emojis: ['☕️', '🔥'],
+          url: 'https://www.google.com/',
+          created_at: '2021 - 06 - 08',
+        },
+        {
+          id: 9,
+          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
+          emojis: ['☕️', '🔥'],
+          url: 'https://www.google.com/',
+          created_at: '2021 - 06 - 08',
+        },
+        {
+          id: 10,
+          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
+          emojis: ['☕️', '🔥'],
+          url: 'https://www.google.com/',
+          created_at: '2021 - 06 - 08',
+        },
+        {
+          id: 11,
+          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
+          emojis: ['☕️', '🔥'],
+          url: 'https://www.google.com/',
+          created_at: '2021 - 06 - 08',
+        },
+        {
+          id: 12,
+          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
+          emojis: ['☕️', '🔥'],
+          url: 'https://www.google.com/',
+          created_at: '2021 - 06 - 08',
+        },
+        {
+          id: 13,
+          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
+          emojis: ['☕️', '🔥'],
+          url: 'https://www.google.com/',
+          created_at: '2021 - 06 - 08',
+        },
+        {
+          id: 14,
+          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
+          emojis: ['☕️', '🔥'],
+          url: 'https://www.google.com/',
+          created_at: '2021 - 06 - 08',
+        },
+        {
+          id: 15,
+          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
+          emojis: ['☕️', '🔥'],
+          url: 'https://www.google.com/',
+          created_at: '2021 - 06 - 08',
+        },
+        {
+          id: 16,
+          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
+          emojis: ['☕️', '🔥'],
+          url: 'https://www.google.com/',
+          created_at: '2021 - 06 - 08',
+        },
+        {
+          id: 17,
+          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
+          emojis: ['☕️', '🔥'],
+          url: 'https://www.google.com/',
+          created_at: '2021 - 06 - 08',
+        },
+        {
+          id: 18,
+          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
+          emojis: ['☕️', '🔥'],
+          url: 'https://www.google.com/',
+          created_at: '2021 - 06 - 08',
+        },
+        {
+          id: 19,
+          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
+          emojis: ['☕️', '🔥'],
+          url: 'https://www.google.com/',
+          created_at: '2021 - 06 - 08',
+        },
+        {
+          id: 20,
+          desc: '잘 되고 있네요',
+          emojis: ['☕️', '🔥'],
+          url: 'https://www.google.com/',
+          created_at: '2021 - 06 - 08',
+        },
+        {
+          id: 21,
+          desc: '성공 확인용',
+          emojis: ['☕️', '🔥'],
+          url: 'https://www.google.com/',
+          created_at: '2021 - 06 - 08',
+        },
+        {
+          id: 22,
+          desc: '스크롤 투 탑',
+          emojis: ['☕️', '🔥'],
+          url: 'https://www.google.com/',
+          created_at: '2021 - 06 - 08',
+        },
       ],
       errorMessage: '',
       isEdit: false,
@@ -78,10 +190,10 @@ class MyPage extends React.Component {
     this.scrollTopHandler = this.scrollTopHandler.bind(this);
   }
 
-  scrollTopHandler(){
-    let location = document.querySelector("#root").offsetTop;
+  scrollTopHandler() {
+    let location = document.querySelector('#root').offsetTop;
     console.log(location);
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }
 
   editBtnHandler() {
@@ -121,11 +233,11 @@ class MyPage extends React.Component {
       })
       .catch((err) => {
         // 삭제실패
-        if (err.body.message === 'Not Allowed') {
+        if (err.message === 'Not Allowed') {
           //// err.body.message 맞는지 확인필요
           this.props.getRefreshToken();
         }
-        console.erorr(err);
+        console.error(err);
       });
   }
 
@@ -133,7 +245,7 @@ class MyPage extends React.Component {
     axios
       .get('http://recollect.today/mypage', {
         headers: { Authorization: `Bearer ${this.props.accessToken}` },
-        withCredentials: true // 여기에다가도 withCredentials true 가 들어가야함
+        withCredentials: true, // 여기에다가도 withCredentials true 가 들어가야함
       })
       .then((res) => {
         const { user, bookmark } = res.data;
@@ -176,15 +288,14 @@ class MyPage extends React.Component {
         this.getMypageInformation();
       })
       .catch((err) => {
-        console.error(err); //err 메시지 접근하는 방법 다시 찾아보기
-        // if (err.response.data === 'invalid access token') {
-        //   this.getRefreshToken();
-        // } else {
-        //   this.setState({
-        //     errorMessage: err.response.data,
-        //   });
-        // }
-        //! 이 부분(오류메시지?)을 어떤 식으로 할지 체크하는 과정이 필요합니다!
+        if (err.response) {
+          console.error(err.response);
+          // this.setState({
+          //   errorMessage: err.response.data
+          // })
+        } else if (err.message) {
+          console.error(err.mesasge);
+        }
       });
   }
 
@@ -216,7 +327,14 @@ class MyPage extends React.Component {
         });
       })
       .catch((err) => {
-        console.error(err);
+        if (err.response) {
+          console.error(err.response);
+          // this.setState({
+          //   errorMessage: err.response.data
+          // })
+        } else if (err.message) {
+          console.error(err.mesasge);
+        }
         this.setState({
           isEdit: false,
           selectedInfo: {},
@@ -224,27 +342,26 @@ class MyPage extends React.Component {
       });
   }
 
-  getRecollectInfo(){
+  getRecollectInfo() {
     axios
-      .get('http://recollect.today/recollect', 
-      {
+      .get('http://recollect.today/recollect', {
         headers: { Authorization: `Bearer ${this.props.accessToken}` },
         withCredentials: true,
       })
       .then((res) => {
         this.setState({
-          unreadbookmarks: res.data.bookmark
-        }) 
+          unreadbookmarks: res.data.bookmark,
+        });
       })
       .catch((err) => {
-        if(err.message === 'Not Allowed'){
+        if (err.message === 'Not Allowed') {
           this.props.getRefreshToken();
         }
-      })
+      });
   }
 
-  componetnDidUpdate(prevProps, prevState){
-    if(prevState !== this.state){
+  componetnDidUpdate(prevProps, prevState) {
+    if (prevState !== this.state) {
       this.getRecollectInfo();
     }
   }
@@ -253,8 +370,6 @@ class MyPage extends React.Component {
     this.getMypageInformation();
     // ??
   }
-
-
 
   render() {
     return (
@@ -274,7 +389,7 @@ class MyPage extends React.Component {
         />
         <Alarm
           //getRecollectInfo={this.getRecollectInfo}
-          unreadCount = {this.state.unreadbookmarks.length}
+          unreadCount={this.state.unreadbookmarks.length}
           getRefreshToken={this.props.getRefreshToken}
           color={this.props.setRandomColor}
           history={this.props.history}
@@ -284,34 +399,29 @@ class MyPage extends React.Component {
           editBtnHandler={this.editBtnHandler}
           isEdit={this.state.isEdit}
         />
-        {this.state.isEdit ? (
-          <div>
-            <div className="bookmarkContainer">
-              {this.state.bookmarks.map((bookmark) => (
-                <BookmarkEditMode
-                  key={bookmark.id}
-                  deleteBookmark={this.deleteBookmark}
-                  editBookmark={this.editBookmark}
-                  bookmarkInfo={bookmark}
-                />
-              ))}
-            </div>
+        <div>
+          <div className="bookmarkContainer">
+            {this.state.isEdit
+              ? this.state.bookmarks.map((bookmark) => (
+                  <BookmarkEditMode
+                    key={bookmark.id}
+                    deleteBookmark={this.deleteBookmark}
+                    editBookmark={this.editBookmark}
+                    bookmarkInfo={bookmark}
+                  />
+                ))
+              : this.state.bookmarks.map((bookmark) => (
+                  <BookmarkReadMode
+                    key={bookmark.id}
+                    bookmarkInfo={bookmark}
+                    color={setRandomColor()}
+                    getRefreshToken={this.getRefreshToken}
+                    getMypageInformation={this.getMypageInformation}
+                  />
+                ))}
           </div>
-        ) : (
-          <div>
-            <div className="bookmarkContainer">
-              {this.state.bookmarks.map((bookmark) => (
-                <BookmarkReadMode
-                  key={bookmark.id}
-                  bookmarkInfo={bookmark}
-                  color={setRandomColor()}
-                  getRefreshToken={this.getRefreshToken}
-                  getMypageInformation={this.getMypageInformation}
-                />
-              ))}
-            </div>
-          </div>
-        )}
+        </div>
+        <ScrollToTop />
         <Footer />
       </div>
     );
