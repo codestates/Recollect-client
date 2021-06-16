@@ -1,9 +1,9 @@
-import React from 'react';
-import axios from 'axios';
+import React from "react";
+import axios from "axios";
 
-import SignupComp from '../components/SignupComp';
-import Footer from '../components/Footer';
-import BackBtn from '../components/BackBtn';
+import SignupComp from "../components/SignupComp";
+import Footer from "../components/Footer";
+import BackBtn from "../components/BackBtn";
 
 class Signup extends React.Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class Signup extends React.Component {
 
   handleCreateSocialAccount({ username }) {
     axios
-      .post('https://localhost:4000/signup', {
+      .post("https://localhost:4000/signup", {
         username: username,
         socialId: this.state.socialId,
         isSocialAccount: 1,
@@ -25,7 +25,7 @@ class Signup extends React.Component {
       .then((res) => {
         console.log(res); //uuid접근 다시 해보하기
         axios
-          .post('https://localhost:4000/login', {
+          .post("https://localhost:4000/login", {
             uuid: res.data.data.userInfo.uuid, //테슼트
           })
           .then((res) => {
@@ -39,14 +39,14 @@ class Signup extends React.Component {
   //! 자체 회원 socialId = 0 안넣어줘도 됨
   handleCreateAccount({ username, email, password }) {
     axios
-      .post('https://localhost:4000/signup', {
+      .post("https://localhost:4000/signup", {
         username: username,
         email: email,
         password: password,
         isSocialAccount: 0, //[서버] 타입 궁금...?
       })
       .then(() => {
-        this.props.history.push('/login');
+        this.props.history.push("/login");
       })
       .catch((err) => {
         console.log(err);

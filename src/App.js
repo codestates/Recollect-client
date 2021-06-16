@@ -19,7 +19,7 @@ class App extends React.Component {
       accessToken: "",
       socialId: "",
       isSocialLogin: true, //--> socialId로 profile 분기 변경 / 좀 더 생각해보기
-
+      unreadBookmarks: [],
       isLoading: false, //로딩용 상태값
     };
 
@@ -33,6 +33,7 @@ class App extends React.Component {
 
     this.handleLogOut = this.handleLogOut.bind(this);
     this.initState = this.initState.bind(this);
+    this.moveUnreadBookmarks = this.moveUnreadBookmarks.bind(this);
   }
 
   initState() {
@@ -103,7 +104,7 @@ class App extends React.Component {
   getRefreshToken() {
     axios
       .get("https://localhost:4000/getrefreshtoken", {
-        withCredentials: true 
+        withCredentials: true,
       })
       .then((res) => {
         this.props.loginSuccess(res.data.accessToken);
@@ -182,6 +183,12 @@ class App extends React.Component {
       });
   }
 
+  moveUnreadBookmarks(bookmarks) {
+    this.setState({
+      unreadBookmarks: bookmarks,
+    });
+  }
+
   componentDidMount() {
     //* 깃허브 accessCode 가져옴
     const url = new URL(window.location.href);
@@ -231,6 +238,7 @@ class App extends React.Component {
             path="/mypage"
             render={() => (
               <Mypage
+                moveUnreadBookmarks={this.moveUnreadBookmarks}
                 loginSuccess={this.loginSuccess}
                 handleLogOut={this.handleLogOut}
                 history={this.props.history}
@@ -244,6 +252,7 @@ class App extends React.Component {
             path="/recollect"
             render={() => (
               <Recollect
+                unreadBookmarks={this.state.unreadBookmarks}
                 history={this.props.history}
                 getRefreshToken={this.getRefreshToken}
               />

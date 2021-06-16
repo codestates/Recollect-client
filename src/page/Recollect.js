@@ -15,16 +15,26 @@ class Recollect extends React.Component {
     super(props);
     this.state = {
       username: "",
-      bookmark: [],
+      bookmark: [
+        {
+          id: 1,
+          url: "google.com",
+          icon: "🤢🤢🤢",
+          descrip: "hi",
+          createdAt: "2021",
+        },
+      ],
     };
   }
 
-  // componentDidMount(){
-  //   this.getRecollectInfo();
-  // }
+  componentDidMount() {
+    // this.setState({
+    //   bookmark: this.props.unreadBookmarks,
+    // });
+  }
 
   render() {
-    console.log(this.state.bookmark);
+    console.log(this.props.moveUnreadBookmarks);
     return (
       <div className="recollect-container">
         <div className="nav upper">

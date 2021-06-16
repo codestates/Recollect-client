@@ -1,25 +1,25 @@
-import axios from 'axios';
-import React from 'react';
-import Footer from '../components/Footer';
-import Collect from '../components/Collect';
-import SignOutBtn from '../components/SignOutBtn';
-import ProfileBtn from '../components/ProfileBtn';
-import Alarm from '../components/Alarm';
-import CollectionEditor from '../components/CollectionEditor';
-import BookmarkReadMode from '../components/BookmarkReadMode';
-import BookmarkEditMode from '../components/BookmarkEditMode';
-import ScrollToTop from '../components/ScrollToTop';
-const { setRandomColor } = require('../util/randomColor');
+import axios from "axios";
+import React from "react";
+import Footer from "../components/Footer";
+import Collect from "../components/Collect";
+import SignOutBtn from "../components/SignOutBtn";
+import ProfileBtn from "../components/ProfileBtn";
+import Alarm from "../components/Alarm";
+import CollectionEditor from "../components/CollectionEditor";
+import BookmarkReadMode from "../components/BookmarkReadMode";
+import BookmarkEditMode from "../components/BookmarkEditMode";
+import ScrollToTop from "../components/ScrollToTop";
+const { setRandomColor } = require("../util/randomColor");
 
 class MyPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
+      username: "",
       isRecollect: false,
       unreadbookmarks: [],
       bookmark: [],
-      errorMessage: '',
+      errorMessage: "",
       isEdit: false,
       selectedInfo: {},
     };
@@ -32,10 +32,11 @@ class MyPage extends React.Component {
     this.sendEditedBookmark = this.sendEditedBookmark.bind(this);
     this.getRecollectInfo = this.getRecollectInfo.bind(this);
     this.scrollTopHandler = this.scrollTopHandler.bind(this);
+    this.getbookmark = this.getbookmark.bind(this);
   }
 
   scrollTopHandler() {
-    let location = document.querySelector('#root').offsetTop;
+    let location = document.querySelector("#root").offsetTop;
     console.log(location);
     window.scrollTo(0, 0);
   }
@@ -59,7 +60,7 @@ class MyPage extends React.Component {
     // api 확인필요합니다! collect랑 겹침
     axios
       .patch(
-        'http://localhost:4000/mypage',
+        "http://localhost:4000/mypage",
         {
           bookmarkId: bookmarkId,
         },
@@ -77,7 +78,7 @@ class MyPage extends React.Component {
       })
       .catch((err) => {
         // 삭제실패
-        if (err.message === 'Not Allowed') {
+        if (err.message === "Not Allowed") {
           //// err.body.message 맞는지 확인필요
           this.props.getRefreshToken();
         }
@@ -87,16 +88,17 @@ class MyPage extends React.Component {
 
   getMypageInformation() {
     axios
-      .get('https://localhost:4000/mypage', {
+      .get("https://localhost:4000/mypage", {
         headers: { Authorization: `${this.props.accessToken}` },
         withCredentials: true, // 여기에다가도 withCredentials true 가 들어가야함
       })
       .then((res) => {
         console.log(res);
         const { user, bookmark } = res.data.data;
+        let result = this.getbookmark(bookmark);
         this.setState({
           username: user.username,
-          bookmark: bookmark,
+          bookmark: result,
         });
       })
       .catch((err) => {
@@ -108,16 +110,41 @@ class MyPage extends React.Component {
       });
   }
 
+  getbookmark(bookmark) {
+    const result = [];
+
+    let cur = bookmark[0];
+    for (let i = 1; i <= bookmark.length; i++) {
+      if (!bookmark[i]) {
+        result.push(cur);
+        break;
+      }
+
+      if (bookmark[i].id === cur.id) {
+        cur = { ...cur, ...bookmark[i], icon: cur.icon + bookmark[i].icon };
+      } else {
+        result.push(cur);
+        cur = bookmark[i];
+      }
+    }
+
+    result.map((el) => {
+      el.createdAt = el.createdAt.slice(0, 10);
+    });
+
+    return result;
+  }
+
   addBookmark(desc, url, emoji) {
     if (!desc || !url) {
       this.setState({
-        errorMessage: '설명과 url을 추가해주세요!',
+        errorMessage: "설명과 url을 추가해주세요!",
       });
       return;
     }
     axios
       .post(
-        'https://localhost:4000/mypage',
+        "https://localhost:4000/mypage",
         {
           desc: desc,
           username: this.state.username,
@@ -147,13 +174,13 @@ class MyPage extends React.Component {
   sendEditedBookmark(desc, url, emoji) {
     if (!desc || !url) {
       this.setState({
-        errorMessage: '설명과 url을 추가해주세요!',
+        errorMessage: "설명과 url을 추가해주세요!",
       });
       return;
     }
     axios
       .put(
-        'https://localhost:4000/mypage',
+        "https://localhost:4000/mypage",
         {
           emoji: emoji,
           url: url,
@@ -189,18 +216,21 @@ class MyPage extends React.Component {
 
   getRecollectInfo() {
     axios
-      .get('https://localhost:4000/recollect', {
+      .get("https://localhost:4000/recollect", {
         headers: { Authorization: `${this.props.accessToken}` },
         withCredentials: true,
       })
       .then((res) => {
-        console.log('리콜렉트:',res);
+        console.log("리콜렉트:", res);
         this.setState({
           unreadbookmarks: res.data.data.bookmark,
         });
       })
+      .then(() => {
+        this.props.moveUnreadBookmarks(this.state.unreadbookmarks);
+      })
       .catch((err) => {
-        if (err.message === 'Not Allowed') {
+        if (err.message === "Not Allowed") {
           this.props.getRefreshToken();
         }
       });
@@ -208,14 +238,17 @@ class MyPage extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     console.log(this.state.bookmark);
-    
   }
 
-  componentDidMount(prevProps,prevState) {
+  componentDidMount(prevProps, prevState) {
     this.getMypageInformation();
     if (prevState !== this.state) {
       this.getRecollectInfo();
     }
+    const unreadbookmarks = [
+      { id: 1, url: "google.com", icon: "", descript: "hi" },
+    ];
+    this.props.moveUnreadBookmarks(unreadbookmarks);
   }
 
   render() {

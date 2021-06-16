@@ -705,6 +705,8 @@ cursor: pointer; */
   background-color: var(--main-bg-color);
 }
 
+/* ///////alarm css start////// */
+
 #alarm {
   background-color: rgba(255, 255, 5, 0.479);
   height: 80px;
@@ -716,8 +718,6 @@ cursor: pointer; */
   line-height: 100%;
   word-break: keep-all;
 }
-
-/* ///////alarm css start////// */
 
 #alarm-alert {
   color: var(--logo-color);
@@ -762,6 +762,7 @@ cursor: pointer; */
     content: "Check Recollects!";
   }
 }
+
 /* #alarm-alert:before {
   content: "There are 7 Collects you haven't checked.  Start to Recollect !";
   color: blue;

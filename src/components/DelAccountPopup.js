@@ -1,20 +1,20 @@
-import React from 'react';
-import axios from 'axios';
+import React from "react";
+import axios from "axios";
 
 class DelAccountPopup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      errormessage: '',
+      errormessage: "",
     };
     this.handleDeleteBtn = this.handleDeleteBtn.bind(this);
   }
 
   handleDeleteBtn() {
-    console.log('delete click');
+    console.log("delete click");
     //회원 탈퇴
     axios
-      .delete('https://localhost:4000/profile', {
+      .delete("https://localhost:4000/profile", {
         headers: { Authorization: `Bearer ${this.props.accessToken}` },
       })
       .then(() => {
