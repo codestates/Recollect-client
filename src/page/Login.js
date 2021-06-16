@@ -54,7 +54,7 @@ class Login extends React.Component {
         .then((res) => this.props.loginSuccess(res.data.accessToken)) // Login요청 성공
         .catch(() => {
           this.setState({
-            errorMessage: "아이디와 비밀번호를 확인해주세요",
+            errorMessage: "아이디와 비밀번호를 확인해주세요.",
           });
         });
     }
@@ -106,8 +106,7 @@ class Login extends React.Component {
             >
               Create Account
             </button>
-
-            <p className="LoginerrorMessage"> {this.state.errorMessage} </p>
+            <label> {this.state.errorMessage} </label>
           </article>
         </div>
         <Footer />
