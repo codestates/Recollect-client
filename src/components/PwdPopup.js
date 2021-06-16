@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 
 const { IsValidiatePassword } = require('../util/validiation');
 class PwdPopup extends React.Component {
@@ -35,7 +34,7 @@ class PwdPopup extends React.Component {
     } else if (!IsValidiatePassword(password)) {
       this.setState({
         errormessage:
-          '비밀번호는 최소 한 글자 이상의 영문 대소문자, 숫/자, 특수문자(!, @, #, $, %, &, *) 를 포함한 8글자 이상으로 만들어야 합니다.',
+          '비밀번호는 최소 한 글자 이상의 영문 대소문자,숫자,특수문자(!,@,#,$,%,&,*)를 포함한 8글자 이상으로 만들어야 합니다.',
       });
       return;
     } else {

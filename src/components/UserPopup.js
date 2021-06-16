@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 
 const { IsValidiateUsername } = require('../util/validiation');
 class UserPopup extends React.Component {
@@ -57,10 +56,10 @@ class UserPopup extends React.Component {
               placeholder={this.props.username}
               onChange={this.handleInputValue('changingUsername')}
             />
+            <button onClick={this.handleEditBtn}>Change username</button>
             <div>
               <label>{this.state.errormessage}</label>
             </div>
-            <button onClick={this.handleEditBtn}>Change username</button>
           </div>
         </div>
       </div>

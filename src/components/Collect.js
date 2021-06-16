@@ -134,7 +134,7 @@ class Collect extends React.Component {
           <input
             type="text"
             className="Collect-textinput first"
-            placeholder="Describe your collecting"
+            placeholder="Describe your Collect"
             value={this.state.desc}
             onChange={this.handleInputtextValue('desc')}
           />

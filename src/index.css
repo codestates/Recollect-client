@@ -23,6 +23,7 @@ body,
   display: flex;
   overflow-x: hidden;
   overflow-y: auto;
+  /* cursor: url('../public/logo.png'), auto; */
 }
 
 :root {
@@ -33,6 +34,7 @@ body,
   --btn-hover-color: rgb(41,78,193);
   --box-shadow: 12px 12px 20px 1px rgba(0, 0, 255, 0.116);
 }
+
 
 .loading-container {
   display: flex;
@@ -160,7 +162,8 @@ body,
   /* min-width: 400px; */
   line-height: 2rem;
   text-align: center;
-  word-break: break-all;
+  word-break: keep-all;
+  color: var(--btn-color);
 }
 
 #start-btn {
@@ -186,7 +189,7 @@ body,
   text-align: center;
   line-height: 60px;
   background-color: rgb(188, 206, 207);
-  padding: 1rem;
+  padding: 0.5rem;
   height: 60px;
 }
 
@@ -237,15 +240,9 @@ body,
 
 #login-logo-wrap{
   max-width:230px;
-  padding-top:16px;
+  /* padding-top:0px; */
 }
 
-.LoginContainer > .mainContainer > article .logosample {
-  width: 60px;
-  height: 60px;
-  background-color: rgba(39, 39, 185, 0.918);
-  border-radius: 1rem;
-}
 
 .LoginContainer > .mainContainer > article {
   display: flex;
@@ -344,9 +341,9 @@ body,
   align-items: center;
   text-align: center;
   justify-content: center;
-  padding: 0;
+  padding: 7px;
   margin: 0;
-  height: 60vh;
+  height: 65vh;
   background-color: var(--container-color);
 }
 
@@ -414,6 +411,7 @@ body,
   bottom: 0;
   margin: auto;
   background-color: rgba(222, 220, 220, 0.5);
+
 }
 
 .popup-inner {
@@ -442,12 +440,12 @@ body,
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 2rem;
+  margin-top: 2.5rem;
 }
 
 .popup-inner > .ask {
   font-size: 1rem;
-  line-height: 2.5vh;
+  line-height: 3vh;
 }
 
 .popup-inner h1 {
@@ -461,8 +459,12 @@ body,
   height: 40px;
   border: 1px solid var(--container-color);
   border-radius: 5px;
-  margin: 8px;
+  margin: 12px;
   outline-style: none;
+}
+
+.popup-inner-body > .edit:nth-child(1){
+  margin-top: 30px;
 }
 
 .popup-inner-body > .edit::placeholder {
@@ -484,6 +486,11 @@ body,
   cursor: pointer;
 }
 
+/*error message style*/
+label{
+  font-size: 0.8rem;
+  color:rgb(123, 43, 43);
+}
 /* //// Profile Page End //// */
 
 #signup-container {
@@ -553,11 +560,6 @@ cursor: pointer; */
   color: var(--btn-hover-color);
 }
 
-#signupComp label {
-  font-size: 15px;
-  color: rgb(143, 23, 23);
-}
-
 .signupComp-input {
   width: 260px;
   height: 40px;
@@ -575,6 +577,7 @@ cursor: pointer; */
   flex-direction: column;
   margin-top: 20px;
   padding: 20px;
+  padding-bottom: 0px;
   background-color: var(--container-color);
   flex: 1;
   align-content: center;
