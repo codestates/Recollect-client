@@ -25,15 +25,7 @@ class Recollect extends React.Component {
           created_at: "2021 - 06 - 08",
         },
         {
-          id: 4,
-          desc:
-            "Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World",
-          emojis: ["☕️", "🔥"],
-          url: "https://www.google.com/",
-          created_at: "2021 - 06 - 08",
-        },
-        {
-          id: 5,
+          id: 2,
           desc:
             "Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World",
           emojis: ["☕️", "🔥"],
