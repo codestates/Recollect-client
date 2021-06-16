@@ -15,24 +15,7 @@ class Recollect extends React.Component {
     super(props);
     this.state = {
       username: "",
-      bookmarks: [
-        {
-          id: 1,
-          desc:
-            "Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World",
-          emojis: ["☕️", "🔥"],
-          url: "https://www.google.com/",
-          created_at: "2021 - 06 - 08",
-        },
-        {
-          id: 2,
-          desc:
-            "Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World",
-          emojis: ["☕️", "🔥"],
-          url: "https://www.google.com/",
-          created_at: "2021 - 06 - 08",
-        },
-      ],
+      bookmark: [],
     };
   }
 
@@ -41,7 +24,7 @@ class Recollect extends React.Component {
   // }
 
   render() {
-    console.log(this.props.history.location);
+    console.log(this.state.bookmark);
     return (
       <div className="recollect-container">
         <div className="nav upper">
@@ -60,7 +43,7 @@ class Recollect extends React.Component {
         />
         <div className="nav lower"></div>
         <div className="bookmarkContainer">
-          {this.state.bookmarks.map((bookmark) => (
+          {this.state.bookmark.map((bookmark) => (
             <BookmarkReadMode
               key={bookmark.id}
               getRefreshToken={this.props.getRefreshToken}

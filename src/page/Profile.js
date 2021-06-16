@@ -29,7 +29,7 @@ class Profile extends React.Component {
     if (!password) {
       axios
         .patch(
-          'http://recollect.today/profile',
+          'https://localhost:4000/profile',
           {
             username: changingUsername,
           },
@@ -49,7 +49,7 @@ class Profile extends React.Component {
 
     axios
       .patch(
-        'http://recollect.today/profile',
+        'https://localhost:4000/profile',
         {
           username: this.state.username,
           password: password,
@@ -69,7 +69,7 @@ class Profile extends React.Component {
 
   getProfileInfomation() {
     axios
-      .get('http://recollect.tody/profile', {
+      .get('https://localhost:4000/profile', {
         headers: { Authorization: `Bearer ${this.props.accessToken}` },
         withCredentials: true,
       })

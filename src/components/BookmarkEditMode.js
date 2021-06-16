@@ -17,7 +17,7 @@ class BookmarkEditMode extends React.Component {
   }
 
   render() {
-    const { desc, emojis, created_at, url } = this.props.bookmarkInfo;
+    const { descrip, icon, createdAt, url } = this.props.bookmarkInfo;
     return (
       <div className="bookmarkEditContatiner">
         <div
@@ -31,12 +31,13 @@ class BookmarkEditMode extends React.Component {
           }
         >
           <div className="mouseOut" onClick={this.scrollToTop}>
-            <div> {desc} </div>
+            <div> {descrip} </div>
             <div>
-              {emojis.map((emoji) => {
+            {icon}
+              {/* {emojis.map((emoji) => {
                 return <span id="emoji"> {emoji} </span>;
-              })}
-              <div id="created_at"> {created_at} </div>
+              })} */}
+              <div id="created_at"> {createdAt} </div>
             </div>
           </div>
         </div>
