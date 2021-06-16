@@ -1,23 +1,23 @@
-import axios from 'axios';
-import React from 'react';
-import Landing from './page/Landing';
+import axios from "axios";
+import React from "react";
+import Landing from "./page/Landing";
 // import Loading from "./components/Loading"; //TEMP
-import Login from './page/Login';
-import Signup from './page/Signup';
-import Mypage from './page/Mypage';
-import Recollect from './page/Recollect';
-import Profile from './page/Profile';
-import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import Login from "./page/Login";
+import Signup from "./page/Signup";
+import Mypage from "./page/Mypage";
+import Recollect from "./page/Recollect";
+import Profile from "./page/Profile";
+import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
-require('dotenv').config();
+require("dotenv").config();
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isLogin: false,
-      accessToken: '',
-      socialId: '',
+      accessToken: "",
+      socialId: "",
       isSocialLogin: true, //--> socialId로 profile 분기 변경 / 좀 더 생각해보기
 
       isLoading: false, //로딩용 상태값
@@ -39,15 +39,15 @@ class App extends React.Component {
     this.setState({
       isLogin: false,
       isSocialLogin: false,
-      accessToken: '',
-      socialId: '',
+      accessToken: "",
+      socialId: "",
     });
-    this.props.history.push('/');
+    this.props.history.push("/");
   }
 
   handleLogOut() {
     axios
-      .get('http://recollect.today/logout', {
+      .get("http://recollect.today/logout", {
         headers: { Authorization: `Bearer ${this.state.accessToken}` },
       })
       .then(() => {
@@ -65,7 +65,7 @@ class App extends React.Component {
       isLogin: true,
       accessToken: accessToken, //accessToken 할당
     });
-    this.props.history.push('/'); // isLogin 상태값에 따라 Landing / Mypage
+    this.props.history.push("/"); // isLogin 상태값에 따라 Landing / Mypage
   }
 
   //// 소셜 로그인 성공시 ////
@@ -75,13 +75,13 @@ class App extends React.Component {
       isSocialLogin: true,
       accessToken: res.headers.accessToken, //// <= 헤더에서 토큰추출하는부분 확인필요
     });
-    this.props.history.push('/'); // isLogin 상태값에 따라 Landing / Mypage
+    this.props.history.push("/"); // isLogin 상태값에 따라 Landing / Mypage
   }
   //* 깃허브에서 access code를 받고 서버로 access 토큰 요청
   async getAccessToken(authorizationCode) {
     await axios
       .post(
-        'http://localhost:4000/getToken',
+        "http://localhost:4000/getToken",
         { authorizationCode: authorizationCode },
         { withCredentials: true }
       )
@@ -99,7 +99,7 @@ class App extends React.Component {
 
   getRefreshToken() {
     axios
-      .get('http://recollect.today/getrefreshtoken')
+      .get("http://recollect.today/getrefreshtoken")
       .then((res) => {
         this.props.loginSuccess(res.data.accessToken);
       })
@@ -114,9 +114,9 @@ class App extends React.Component {
   //* GitHub 앱이 사용자의 액세스 토큰을 사용하여 API에 액세스
   //사용자의 액세스 토큰을 사용하면 GitHub 앱이 사용자를 대신하여 API에 요청을 할 수 있음
   getGitHubUserInfo() {
-    console.log('access token ', this.state.accessToken);
+    console.log("access token ", this.state.accessToken);
     axios
-      .get('https://api.github.com/user', {
+      .get("https://api.github.com/user", {
         headers: {
           Authorization: `token ${this.state.accessToken}`, //A or a
         },
@@ -125,7 +125,7 @@ class App extends React.Component {
         this.setState({
           socialId: res.data.id,
         });
-        console.log('데이터를 출력하겠습니다', res.data);
+        console.log("데이터를 출력하겠습니다", res.data);
         this.logcheck(res.data.id);
       });
   }
@@ -134,12 +134,12 @@ class App extends React.Component {
   logcheck(socialId) {
     axios
       .post(
-        'http://localhost:4000/logcheck',
+        "http://localhost:4000/logcheck",
         {
           socialId: this.state.socialId,
         },
         {
-          headers: { 'Content-Type': 'application/json' },
+          headers: { "Content-Type": "application/json" },
           withCredentials: true,
         }
       )
@@ -148,12 +148,12 @@ class App extends React.Component {
         // login post 요청
         axios
           .post(
-            'http://localhost:4000/login',
+            "http://localhost:4000/login",
             {
               uuid: res.data.uuid,
             },
             {
-              headers: { 'Content-Type': 'application/json' },
+              headers: { "Content-Type": "application/json" },
               withCredentials: true,
             }
           )
@@ -163,15 +163,15 @@ class App extends React.Component {
       })
       .catch((err) => {
         //신규 소셜 회원인경우
-        if(err.response.status === 404){
+        if (err.response.status === 404) {
           this.props.history.push({
-            pathname: '/signup',
+            pathname: "/signup",
             state: { socialId: socialId },
           });
           this.setState({
             isSocialLogin: true,
           });
-        }else{
+        } else {
           console.error(err);
         }
       });
@@ -180,7 +180,7 @@ class App extends React.Component {
   componentDidMount() {
     //* 깃허브 accessCode 가져옴
     const url = new URL(window.location.href);
-    const authorizationCode = url.searchParams.get('code');
+    const authorizationCode = url.searchParams.get("code");
     if (authorizationCode) this.getAccessToken(authorizationCode);
   }
 
@@ -234,16 +234,16 @@ class App extends React.Component {
               />
             )}
           />
-          <Route 
-            exact 
-            path="/recollect" 
-            render={() => ( 
-            <Recollect 
-              history={this.props.history}
-              getRefreshToken={this.getRefreshToken}
+          <Route
+            exact
+            path="/recollect"
+            render={() => (
+              <Recollect
+                history={this.props.history}
+                getRefreshToken={this.getRefreshToken}
               />
-              )} 
-            />
+            )}
+          />
           <Route
             exact
             path="/profile"

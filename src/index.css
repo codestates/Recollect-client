@@ -1,16 +1,16 @@
 @font-face {
   font-family: AzeretMono-Light;
-  src: url('./AzeretMono-Light.ttf') format('ttf');
+  src: url("./AzeretMono-Light.ttf") format("ttf");
 }
 
 @font-face {
   font-family: Arial;
-  src: url('./AzeretMono-Bold.ttf') format('ttf');
+  src: url("./AzeretMono-Bold.ttf") format("ttf");
 }
 
 * {
   box-sizing: border-box;
-  font-family: AzeretMono-Light, Arial; 
+  font-family: AzeretMono-Light, Arial;
 }
 
 html,
@@ -27,14 +27,13 @@ body,
 }
 
 :root {
-  --logo-color: #214BC8;
+  --logo-color: #214bc8;
   --main-bg-color: rgb(210, 214, 211);
   --container-color: rgb(218, 231, 222);
   --btn-color: #596e9b;
-  --btn-hover-color: rgb(41,78,193);
+  --btn-hover-color: rgb(41, 78, 193);
   --box-shadow: 12px 12px 20px 1px rgba(0, 0, 255, 0.116);
 }
-
 
 .loading-container {
   display: flex;
@@ -95,7 +94,7 @@ body,
   flex-direction: column;
 }
 
-#none{
+#none {
   width: 48%;
   margin-bottom: 15px;
   background-color: violet;
@@ -169,7 +168,7 @@ body,
 #start-btn {
   width: 50%;
   font-size: 26px;
-  font-family: 'AzeretMono-Bold';
+  font-family: "AzeretMono-Bold";
   padding: 1rem;
   border-style: none;
   margin-bottom: 20px;
@@ -212,10 +211,10 @@ body,
 }
 
 #backBtn {
-  font-size: 2rem; 
+  font-size: 2rem;
 }
 
-#login-backbtn-container{
+#login-backbtn-container {
   position: absolute;
   left: 5%;
   top: 5%;
@@ -238,11 +237,10 @@ body,
   -o-animation: fadein 3s; /*Opera*/
 }
 
-#login-logo-wrap{
-  max-width:230px;
+#login-logo-wrap {
+  max-width: 230px;
   /* padding-top:0px; */
 }
-
 
 .LoginContainer > .mainContainer > article {
   display: flex;
@@ -296,7 +294,7 @@ body,
 }
 .seperatingLine::before,
 .seperatingLine::after {
-  content: '';
+  content: "";
   flex-grow: 1;
   background: black;
   height: 1px;
@@ -329,7 +327,7 @@ body,
   box-shadow: var(--box-shadow);
 }
 
-.profile > .logo-container{
+.profile > .logo-container {
   width: 15vw;
   min-width: 230px;
   padding-top: 30px;
@@ -347,7 +345,7 @@ body,
   background-color: var(--container-color);
 }
 
-#profile-backbtn-container{
+#profile-backbtn-container {
   position: absolute;
   left: 5%;
   top: 5%;
@@ -355,17 +353,17 @@ body,
 
 .profile-header {
   text-align: center;
-  font-family: 'AzeretMono-Bold';
+  font-family: "AzeretMono-Bold";
   color: var(--logo-color);
   flex: 2;
 }
 
-.profile-header > h1{
+.profile-header > h1 {
   margin-top: 0;
   margin-bottom: 5px;
 }
 
-.profile-header > span{
+.profile-header > span {
   font-size: 0.8rem;
 }
 
@@ -411,7 +409,6 @@ body,
   bottom: 0;
   margin: auto;
   background-color: rgba(222, 220, 220, 0.5);
-
 }
 
 .popup-inner {
@@ -463,7 +460,7 @@ body,
   outline-style: none;
 }
 
-.popup-inner-body > .edit:nth-child(1){
+.popup-inner-body > .edit:nth-child(1) {
   margin-top: 30px;
 }
 
@@ -487,9 +484,9 @@ body,
 }
 
 /*error message style*/
-label{
+label {
   font-size: 0.8rem;
-  color:rgb(123, 43, 43);
+  color: rgb(123, 43, 43);
 }
 /* //// Profile Page End //// */
 
@@ -633,7 +630,7 @@ cursor: pointer; */
   display: flex;
   width: 50px;
   padding: 0.5rem;
-  padding-right:0;
+  padding-right: 0;
   margin-left: 3px;
   justify-content: flex-end;
   color: var(--logo-color);
@@ -642,14 +639,14 @@ cursor: pointer; */
 
 #Collect-showEmoji {
   margin: 8px 25%;
-  line-height: 25px; 
-  color:white;
-  border-bottom:4.5px dotted white;
+  line-height: 25px;
+  color: white;
+  border-bottom: 4.5px dotted white;
   height: 30px;
   text-align: right;
 }
 
-#Collect-showEmoji > div{
+#Collect-showEmoji > div {
   /* position: absolute;
   left: 0; */
   float: left;
@@ -683,7 +680,7 @@ cursor: pointer; */
   -ms-transform: translateY(-6px) scale(1.5);
   -o-transform: translateY(-6px) scale(1.5);
   transform: translateY(-6px) scale(1.5);
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .Collect-btn:hover {
@@ -705,7 +702,6 @@ cursor: pointer; */
 }
 
 #alarm {
-  /* flex: 1; */
   background-color: rgba(255, 255, 5, 0.479);
   height: 80px;
   width: 85vw;
@@ -722,18 +718,44 @@ cursor: pointer; */
   color: var(--logo-color);
   font-weight: bold;
   height: 80px;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-content: center;
+  align-items: center;
 }
 
-#alarm-alert > div{
-  width:60vw;
+#alarm-alert > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60vw;
   height: 80%;
   -webkit-animation: blink 2s ease-in-out infinite alternate;
   -moz-animation: blink 2s ease-in-out infinite alternate;
   animation: blink 2s ease-in-out infinite alternate;
   border: dotted 3px var(--logo-color);
+  overflow: visible;
+}
+/* 반응형 미디어쿼리 */
+@media (max-width: 940px) {
+  #alarm-alert > div {
+    font-size: 1rem;
+  }
+}
+@media (max-width: 805px) {
+  #alarm-alert > div {
+    font-size: 0.8rem;
+  }
+}
+@media (max-width: 640px) {
+  #alarm-alert > div {
+    font-size: 0.6rem;
+  }
+}
+@media (max-width: 510px) {
+  #alarm-alert > div {
+    content: "Check Recollects!";
+  }
 }
 /* #alarm-alert:before {
   content: "There are 7 Collects you haven't checked.  Start to Recollect !";
@@ -747,9 +769,11 @@ cursor: pointer; */
   margin-right: 1em;
 } */
 
-#alarm-alert > div:hover{
+#alarm-alert > div:hover {
   cursor: pointer;
   transform: translateY(0px) scale(1.2);
+  width: 71vw;
+  height: 67px;
 }
 
 @-moz-keyframes blink {
@@ -837,10 +861,10 @@ cursor: pointer; */
   justify-content: flex-start;
   align-items: center; */
   flex-wrap: wrap;
-  overflow:hidden;
+  overflow: hidden;
   text-overflow: ellipsis;
   /* white-space:nowrap;*/
-  word-break:break-all;
+  word-break: break-all;
   display: -webkit-box;
   -webkit-line-clamp: 2; /* number of lines to show */
   -webkit-box-orient: vertical;
@@ -928,7 +952,7 @@ cursor: pointer; */
   background-color: var(--btn-hover-color);
 }
 
-.recollect-container{
+.recollect-container {
   margin: 0;
   max-width: 100vw;
   width: 100vw;
@@ -941,11 +965,11 @@ cursor: pointer; */
   background-color: var(--main-bg-color);
 }
 
-.recollect-container .logo-container{
+.recollect-container .logo-container {
   width: 35vw;
 }
 
-#recollect-backbtn-container{
+#recollect-backbtn-container {
   position: absolute;
   left: 5%;
   top: 5%;
