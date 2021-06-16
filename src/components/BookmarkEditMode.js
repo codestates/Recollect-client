@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 class BookmarkEditMode extends React.Component {
   constructor(props) {
@@ -8,10 +8,13 @@ class BookmarkEditMode extends React.Component {
     this.scrollToTop = this.scrollToTop.bind(this);
   }
 
-  scrollToTop(){
-    console.log('스크롤 외않되', window)
-    window.scrollTo(0,0);
-  };
+  scrollToTop() {
+    console.log('스크롤 외않되', window);
+    document.querySelector('#root').scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }
 
   render() {
     const { desc, emojis, created_at, url } = this.props.bookmarkInfo;
@@ -22,9 +25,10 @@ class BookmarkEditMode extends React.Component {
           onClick={
             // this.scrollToTop
             () => {
-            this.props.editBookmark(this.props.bookmarkInfo);
+              this.scrollToTop();
+              this.props.editBookmark(this.props.bookmarkInfo);
+            }
           }
-        }
         >
           <div className="mouseOut" onClick={this.scrollToTop}>
             <div> {desc} </div>
