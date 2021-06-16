@@ -69,6 +69,9 @@ class PwdPopup extends React.Component {
               onChange={this.handleInputValue('passwordcheck')}
             />
             <button onClick={this.handleEditBtn}>Change password</button>
+            <div>
+              <label>{this.state.errormessage}</label>
+            </div>
           </div>
         </div>
       </div>
