@@ -22,6 +22,7 @@ class MyPage extends React.Component {
       errorMessage: "",
       isEdit: false,
       selectedInfo: {},
+      temp: "",
     };
 
     this.getMypageInformation = this.getMypageInformation.bind(this);
