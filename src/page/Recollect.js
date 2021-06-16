@@ -15,26 +15,21 @@ class Recollect extends React.Component {
     super(props);
     this.state = {
       username: "",
-      bookmark: [
-        {
-          id: 1,
-          url: "google.com",
-          icon: "🤢🤢🤢",
-          descrip: "hi",
-          createdAt: "2021",
-        },
-      ],
+      bookmark: []
     };
   }
 
   componentDidMount() {
-    // this.setState({
-    //   bookmark: this.props.unreadBookmarks,
-    // });
+    console.log(this.props.unreadBookmarks);
+    if(this.props.unreadBookmarks !== undefined) {
+      this.setState({
+        bookmark: this.props.unreadBookmarks,
+      });
+    }
   }
 
   render() {
-    console.log(this.props.moveUnreadBookmarks);
+    console.log(this.state.bookmark);
     return (
       <div className="recollect-container">
         <div className="nav upper">
@@ -48,6 +43,7 @@ class Recollect extends React.Component {
           <img src="logo.png" alt="logo" />
         </div>
         <Alarm
+          unreadCount={this.state.bookmark.length}
           history={this.props.history}
           location={this.props.history.location.pathname}
         />
@@ -55,6 +51,7 @@ class Recollect extends React.Component {
         <div className="bookmarkContainer">
           {this.state.bookmark.map((bookmark) => (
             <BookmarkReadMode
+              accessToken = {this.props.accessToken}
               key={bookmark.id}
               getRefreshToken={this.props.getRefreshToken}
               bookmarkInfo={bookmark}

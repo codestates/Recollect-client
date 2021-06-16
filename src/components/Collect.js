@@ -30,7 +30,7 @@ class Collect extends React.Component {
     if (emojiNumStr === undefined) {
       await this.props.addBookmark(desc, url, '');
     } else {
-      await this.props.addBookmark(desc, url, emojiNumStr.slice(2));
+      await this.props.addBookmark(desc, url, emojiNumStr);
     }
 
     this.handleInitialize();
@@ -39,10 +39,13 @@ class Collect extends React.Component {
   emojiBoleanToNumString(emoji) {
     let emojiNumStr = emoji.reduce((acc, cur, idx) => {
       if (cur) {
-        acc = acc + ', ' + (idx + 1).toString();
+        acc = acc + (idx + 1).toString();
+        return acc;
+      } else {
         return acc;
       }
     }, '');
+    console.log(emojiNumStr);
     return emojiNumStr;
   }
 
@@ -64,18 +67,20 @@ class Collect extends React.Component {
 
   handleShowEmoji() {
     const emojiArr = ['☕️', '🔥', '🚨'];
-    return this.state.emoji.map((el, idx) => {
-      if (el) {
-        return <span key={idx}>{emojiArr[idx]}</span>;
-      }
-    });
+    console.log(this.state.emoji);
+      return this.state.emoji.map((el, idx) => {
+        console.log('이모지확인', el);
+        if (el) {
+          return (<span key={idx}>{emojiArr[idx]}</span>);
+        }
+      });
   }
 
-  handleShowEditing({ desc, emojis, url }) {
-    console.log('실행');
-    const emojiArr = this.emojiConverter(emojis);
+  handleShowEditing({ descrip, icon, url }) {
+    console.log(icon);
+    const emojiArr = this.emojiConverter(icon);
     this.setState({
-      desc: desc,
+      desc: descrip,
       url: url,
       emoji: emojiArr,
     });
@@ -89,28 +94,30 @@ class Collect extends React.Component {
     if (emojiNumStr === undefined) {
       await this.props.sendEditedBookmark(desc, url, '');
     } else {
-      await this.props.sendEditedBookmark(desc, url, emojiNumStr.slice(2));
+      await this.props.sendEditedBookmark(desc, url, emojiNumStr);
     }
 
     this.handleInitialize();
   }
 
   emojiConverter(emojis) {
+    const e = emojis.split('');
     const emojisBooleanArr = [false, false, false];
-    emojis.map((el) => {
-      if (el === '☕️') {
+    //emojis가 스트링타입일 경우
+    for ( let el of e ) {
+      console.log(el);
+      if (el === '☕' ) {
         emojisBooleanArr[0] = true;
       }
-      //f
-      if (el === '🔥') {
+
+      if (el=== '🔥') {
         emojisBooleanArr[1] = true;
       }
 
       if (el === '🚨') {
         emojisBooleanArr[2] = true;
       }
-    });
-
+    }
     return emojisBooleanArr;
   }
 

@@ -15,7 +15,8 @@ class DelAccountPopup extends React.Component {
     //회원 탈퇴
     axios
       .delete("https://localhost:4000/profile", {
-        headers: { Authorization: `Bearer ${this.props.accessToken}` },
+        headers: { Authorization: `${this.props.accessToken}` },
+        withCredentials: true
       })
       .then(() => {
         this.props.initState();

@@ -49,9 +49,9 @@ class MyPage extends React.Component {
   }
 
   editBookmark(selectedInfo) {
-    const { id, desc, url, emojis } = selectedInfo;
+    const { id, descrip, url, icon } = selectedInfo;
     this.setState({
-      selectedInfo: { id: id, desc: desc, url: url, emojis: emojis },
+      selectedInfo: { id: id, descrip: descrip, url: url, icon: icon },
     });
   }
 
@@ -60,12 +60,12 @@ class MyPage extends React.Component {
     // api 확인필요합니다! collect랑 겹침
     axios
       .patch(
-        "http://localhost:4000/mypage",
+        "https://localhost:4000/mypage",
         {
           bookmarkId: bookmarkId,
         },
         {
-          headers: { Authorization: `Bearer ${this.props.accessToken}` },
+          headers: { Authorization: `${this.props.accessToken}` },
           withCredentials: true,
         }
       )
@@ -103,10 +103,10 @@ class MyPage extends React.Component {
       })
       .catch((err) => {
         console.error(err);
-        // this.setState({
-        //   errorMessage: err.dataValues.message,
-        // });
-        //this.props.getRefreshToken();
+        this.setState({
+          errorMessage: err.message,
+        });
+        this.props.getRefreshToken();
       });
   }
 
@@ -128,8 +128,8 @@ class MyPage extends React.Component {
       }
     }
 
-    result.map((el) => {
-      el.createdAt = el.createdAt.slice(0, 10);
+    result.map((el) =>  {
+      return el.createdAt = el.createdAt.slice(0, 10);
     });
 
     return result;
@@ -152,12 +152,13 @@ class MyPage extends React.Component {
           url: url,
         },
         {
-          headers: { Authorization: `Bearer ${this.props.accessToken}` },
+          headers: { Authorization: `${this.props.accessToken}` },
           withCredentials: true,
         }
       )
       .then(() => {
         this.getMypageInformation();
+        this.getRecollectInfo();
       })
       .catch((err) => {
         if (err.response) {
@@ -188,7 +189,7 @@ class MyPage extends React.Component {
           bookmarkId: this.state.selectedInfo.id,
         },
         {
-          headers: { Authorization: `Bearer ${this.props.accessToken}` },
+          headers: { Authorization: `${this.props.accessToken}` },
           withCredentials: true,
         }
       )
@@ -221,9 +222,10 @@ class MyPage extends React.Component {
         withCredentials: true,
       })
       .then((res) => {
+        const bookmark = this.getbookmark(res.data.data.bookmark);
         console.log("리콜렉트:", res);
         this.setState({
-          unreadbookmarks: res.data.data.bookmark,
+          unreadbookmarks: bookmark,
         });
       })
       .then(() => {
@@ -245,10 +247,7 @@ class MyPage extends React.Component {
     if (prevState !== this.state) {
       this.getRecollectInfo();
     }
-    const unreadbookmarks = [
-      { id: 1, url: "google.com", icon: "", descript: "hi" },
-    ];
-    this.props.moveUnreadBookmarks(unreadbookmarks);
+    this.props.moveUnreadBookmarks(this.state.unreadbookmarks);
   }
 
   render() {
@@ -269,7 +268,7 @@ class MyPage extends React.Component {
         />
         <Alarm
           //getRecollectInfo={this.getRecollectInfo}
-          unreadCount={this.state.unreadbookmarks.length}
+          unreadCount={this.getbookmark(this.state.unreadbookmarks).length}
           getRefreshToken={this.props.getRefreshToken}
           color={this.props.setRandomColor}
           history={this.props.history}
@@ -292,6 +291,7 @@ class MyPage extends React.Component {
                 ))
               : this.state.bookmark.map((bookmark) => (
                   <BookmarkReadMode
+                    accessToken={this.props.accessToken}
                     key={bookmark.id}
                     bookmarkInfo={bookmark}
                     color={setRandomColor()}

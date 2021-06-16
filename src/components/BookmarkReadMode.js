@@ -15,15 +15,16 @@ class BookmarkReadMode extends React.Component {
   }
 
   incrementCount() {
+    console.log(this.props.bookmarkInfo);
     axios
       .put(
         "https://localhost:4000/bookmark",
         {
-          BookmarkId: this.props.bookmarkInfo.id,
+          bookmarkId: this.props.bookmarkInfo.id,
         },
         {
           headers: {
-            Authorization: `Bearer ${this.props.accessToken}`,
+            Authorization: `${this.props.accessToken}`,
             withCredentials: true,
           },
         }
