@@ -12,8 +12,8 @@ class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "collector",
-      email: "collector@recollect.today",
+      username: "",
+      email: "",
       showUserPopup: false,
       showPwdPopup: false,
       showDelAccountPopup: false,
@@ -34,7 +34,7 @@ class Profile extends React.Component {
             username: changingUsername,
           },
           {
-            headers: { Authorization: `Bearer ${this.props.accessToken}` },
+            headers: { Authorization: `${this.props.accessToken}` },
             withCredentials: true,
           }
         )
@@ -55,7 +55,7 @@ class Profile extends React.Component {
           password: password,
         },
         {
-          headers: { Authorization: `Bearer ${this.props.accessToken}` },
+          headers: { Authorization: `${this.props.accessToken}` },
           withCredentials: true,
         }
       )
@@ -70,14 +70,15 @@ class Profile extends React.Component {
   getProfileInfomation() {
     axios
       .get("https://localhost:4000/profile", {
-        headers: { Authorization: `Bearer ${this.props.accessToken}` },
+        headers: { Authorization: `${this.props.accessToken}` },
         withCredentials: true,
       })
       .then((res) => {
         // 꼭 확인 해봐야 합니다.
+        console.log(res);
         this.setState({
-          username: res.data.user.user.username,
-          email: res.data.user.user.email,
+          username: res.data.data.user.username,
+          email: res.data.data.user.email,
         });
       })
       .catch((err) => {
@@ -201,7 +202,7 @@ class Profile extends React.Component {
                   <PwdPopup
                     accessToken={this.props.accessToken}
                     handlePwdPopup={this.handlePwdPopup}
-                    updateUserInfo={this.state.updateUserInfo}
+                    updateUserInfo={this.updateUserInfo}
                   />
                 )}
                 {showDelAccountPopup && (

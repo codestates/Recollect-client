@@ -49,7 +49,8 @@ class App extends React.Component {
   handleLogOut() {
     axios
       .get("https://localhost:4000/logout", {
-        headers: { Authorization: `Bearer ${this.state.accessToken}` },
+        headers: { Authorization: `${this.state.accessToken}` },
+        withCredentials: true
       })
       .then(() => {
         this.initState();
@@ -107,7 +108,7 @@ class App extends React.Component {
         withCredentials: true,
       })
       .then((res) => {
-        this.props.loginSuccess(res.data.accessToken);
+        this.loginSuccess(res.data.accessToken);
       })
       .catch((err) => {
         //로그아웃 시키기
@@ -254,6 +255,7 @@ class App extends React.Component {
               <Recollect
                 unreadBookmarks={this.state.unreadBookmarks}
                 history={this.props.history}
+                accessToken={this.state.accessToken}
                 getRefreshToken={this.getRefreshToken}
               />
             )}
