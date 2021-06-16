@@ -28,7 +28,7 @@ class SignupComp extends React.Component {
 
     if (!IsValidiateUsername(username)) {
       this.setState({
-        errormessage: "사용자 이름은 영문 대소문자, 숫자, 언더바, 하이픈을 사용한 4~16글자로 만들수 있습니다."
+        errormessage: "유저네임은 영문 대소문자,숫자,언더바,하이픈을 사용한 4~16글자로 만들수 있습니다."
       })
       return;
     } else {
@@ -58,7 +58,7 @@ class SignupComp extends React.Component {
       return;
     } else if (!IsValidiatePassword(this.state.password)) {
       this.setState({
-        errormessage: "비밀번호는 최소 한 글자 이상의 영문 대소문자, 숫/자, 특수문자(!, @, #, $, %, &, *) 를 포함한 8글자 이상으로 만들어야 합니다."
+        errormessage: "비밀번호는 최소 한 글자 이상의 영문 대소문자,숫자,특수문자(!,@,#,$,%,&,*)를 포함한 8글자 이상으로 만들어야 합니다."
       })
       return;
     } else {
@@ -116,9 +116,6 @@ class SignupComp extends React.Component {
             '' //socialId 있는 경우
           }
           <div>
-            <label>{this.state.errormessage}</label>
-          </div>
-          <div>
             <button 
               onClick={() => {
                   if(this.props.isSocialLogin){
@@ -130,6 +127,9 @@ class SignupComp extends React.Component {
               }>
                 Create account
             </button>
+          </div>
+          <div>
+            <label>{this.state.errormessage}</label>
           </div>
         </form>
       </div> 
