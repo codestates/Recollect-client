@@ -709,11 +709,12 @@ cursor: pointer; */
   background-color: rgba(255, 255, 5, 0.479);
   height: 80px;
   width: 85vw;
-  font-size: 1.2rem;
+  font-size: 1.2em;
   text-align: center;
   margin-top: 20px;
   vertical-align: middle;
-  line-height: 80px;
+  line-height: 100%;
+  word-break: keep-all;
 }
 
 /* ///////alarm css start////// */
@@ -742,22 +743,22 @@ cursor: pointer; */
 }
 /* 반응형 미디어쿼리 */
 @media (max-width: 940px) {
-  #alarm-alert > div {
+  #alarm-alert {
     font-size: 1rem;
   }
 }
 @media (max-width: 805px) {
-  #alarm-alert > div {
-    font-size: 0.8rem;
+  #alarm-alert {
+    font-size: 0.5rem;
   }
 }
 @media (max-width: 640px) {
-  #alarm-alert > div {
-    font-size: 0.6rem;
+  #alarm-alert {
+    font-size: 90%;
   }
 }
 @media (max-width: 510px) {
-  #alarm-alert > div {
+  #alarm-alert {
     content: "Check Recollects!";
   }
 }
