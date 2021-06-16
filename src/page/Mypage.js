@@ -17,12 +17,11 @@ class MyPage extends React.Component {
     this.state = {
       username: "",
       isRecollect: false,
-      unreadbookmarks: [], // 스테이트 이름 확인하기
+      unreadbookmarks: [],
       bookmark: [],
       errorMessage: "",
       isEdit: false,
       selectedInfo: {},
-      temp: "",
     };
 
     this.getMypageInformation = this.getMypageInformation.bind(this);
@@ -33,6 +32,7 @@ class MyPage extends React.Component {
     this.sendEditedBookmark = this.sendEditedBookmark.bind(this);
     this.getRecollectInfo = this.getRecollectInfo.bind(this);
     this.scrollTopHandler = this.scrollTopHandler.bind(this);
+    this.getbookmark = this.getbookmark.bind(this);
   }
 
   scrollTopHandler() {
@@ -95,9 +95,10 @@ class MyPage extends React.Component {
       .then((res) => {
         console.log(res);
         const { user, bookmark } = res.data.data;
+        let result = this.getbookmark(bookmark);
         this.setState({
           username: user.username,
-          bookmark: bookmark,
+          bookmark: result,
         });
       })
       .catch((err) => {
@@ -107,6 +108,31 @@ class MyPage extends React.Component {
         // });
         //this.props.getRefreshToken();
       });
+  }
+
+  getbookmark(bookmark) {
+    const result = [];
+
+    let cur = bookmark[0];
+    for (let i = 1; i <= bookmark.length; i++) {
+      if (!bookmark[i]) {
+        result.push(cur);
+        break;
+      }
+
+      if (bookmark[i].id === cur.id) {
+        cur = { ...cur, ...bookmark[i], icon: cur.icon + bookmark[i].icon };
+      } else {
+        result.push(cur);
+        cur = bookmark[i];
+      }
+    }
+
+    result.map((el) => {
+      el.createdAt = el.createdAt.slice(0, 10);
+    });
+
+    return result;
   }
 
   addBookmark(desc, url, emoji) {
@@ -200,6 +226,9 @@ class MyPage extends React.Component {
           unreadbookmarks: res.data.data.bookmark,
         });
       })
+      .then(() => {
+        this.props.moveUnreadBookmarks(this.state.unreadbookmarks);
+      })
       .catch((err) => {
         if (err.message === "Not Allowed") {
           this.props.getRefreshToken();
@@ -216,6 +245,10 @@ class MyPage extends React.Component {
     if (prevState !== this.state) {
       this.getRecollectInfo();
     }
+    const unreadbookmarks = [
+      { id: 1, url: "google.com", icon: "", descript: "hi" },
+    ];
+    this.props.moveUnreadBookmarks(unreadbookmarks);
   }
 
   render() {

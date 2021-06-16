@@ -19,7 +19,7 @@ class App extends React.Component {
       accessToken: "",
       socialId: "",
       isSocialLogin: true, //--> socialId로 profile 분기 변경 / 좀 더 생각해보기
-
+      unreadBookmarks: [],
       isLoading: false, //로딩용 상태값
     };
 
@@ -33,6 +33,7 @@ class App extends React.Component {
 
     this.handleLogOut = this.handleLogOut.bind(this);
     this.initState = this.initState.bind(this);
+    this.moveUnreadBookmarks = this.moveUnreadBookmarks.bind(this);
   }
 
   initState() {
@@ -47,7 +48,7 @@ class App extends React.Component {
 
   handleLogOut() {
     axios
-      .get("http://recollect.today/logout", {
+      .get("https://localhost:4000/logout", {
         headers: { Authorization: `Bearer ${this.state.accessToken}` },
       })
       .then(() => {
@@ -61,6 +62,7 @@ class App extends React.Component {
 
   //// 자체 로그인 성공시 ////
   loginSuccess(accessToken) {
+    console.log(accessToken);
     this.setState({
       isLogin: true,
       accessToken: accessToken, //accessToken 할당
@@ -70,10 +72,11 @@ class App extends React.Component {
 
   //// 소셜 로그인 성공시 ////
   socialLoginSuccess(res) {
+    console.log(res);
     this.setState({
       isLogin: true,
       isSocialLogin: true,
-      accessToken: res.headers.accessToken, //// <= 헤더에서 토큰추출하는부분 확인필요
+      accessToken: res.headers.authorization, //// <= 헤더에서 토큰추출하는부분 확인필요
     });
     this.props.history.push("/"); // isLogin 상태값에 따라 Landing / Mypage
   }
@@ -81,13 +84,14 @@ class App extends React.Component {
   async getAccessToken(authorizationCode) {
     await axios
       .post(
-        "http://localhost:4000/getToken",
+        "https://localhost:4000/getToken",
         { authorizationCode: authorizationCode },
         { withCredentials: true }
       )
       .then((res) => {
+        console.log(res);
         this.setState({
-          accessToken: res.headers.accessToken,
+          accessToken: res.data.data,
         });
         this.getGitHubUserInfo();
       })
@@ -99,7 +103,9 @@ class App extends React.Component {
 
   getRefreshToken() {
     axios
-      .get("http://recollect.today/getrefreshtoken")
+      .get("https://localhost:4000/getrefreshtoken", {
+        withCredentials: true,
+      })
       .then((res) => {
         this.props.loginSuccess(res.data.accessToken);
       })
@@ -134,7 +140,7 @@ class App extends React.Component {
   logcheck(socialId) {
     axios
       .post(
-        "http://localhost:4000/logcheck",
+        "https://localhost:4000/logcheck",
         {
           socialId: this.state.socialId,
         },
@@ -148,7 +154,7 @@ class App extends React.Component {
         // login post 요청
         axios
           .post(
-            "http://localhost:4000/login",
+            "https://localhost:4000/login",
             {
               uuid: res.data.uuid,
             },
@@ -175,6 +181,12 @@ class App extends React.Component {
           console.error(err);
         }
       });
+  }
+
+  moveUnreadBookmarks(bookmarks) {
+    this.setState({
+      unreadBookmarks: bookmarks,
+    });
   }
 
   componentDidMount() {
@@ -226,6 +238,7 @@ class App extends React.Component {
             path="/mypage"
             render={() => (
               <Mypage
+                moveUnreadBookmarks={this.moveUnreadBookmarks}
                 loginSuccess={this.loginSuccess}
                 handleLogOut={this.handleLogOut}
                 history={this.props.history}
@@ -239,6 +252,7 @@ class App extends React.Component {
             path="/recollect"
             render={() => (
               <Recollect
+                unreadBookmarks={this.state.unreadBookmarks}
                 history={this.props.history}
                 getRefreshToken={this.getRefreshToken}
               />

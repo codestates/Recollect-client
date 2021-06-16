@@ -1,19 +1,19 @@
-import React from 'react';
+import React from "react";
 //import axios from 'axios';
 
-import BackBtn from '../components/BackBtn';
-import Footer from '../components/Footer';
+import BackBtn from "../components/BackBtn";
+import Footer from "../components/Footer";
 
-import UserPopup from '../components/UserPopup';
-import PwdPopup from '../components/PwdPopup';
-import DelAccountPopup from '../components/DelAccountPopup';
-import axios from 'axios';
+import UserPopup from "../components/UserPopup";
+import PwdPopup from "../components/PwdPopup";
+import DelAccountPopup from "../components/DelAccountPopup";
+import axios from "axios";
 class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: 'collector',
-      email: 'collector@recollect.today',
+      username: "collector",
+      email: "collector@recollect.today",
       showUserPopup: false,
       showPwdPopup: false,
       showDelAccountPopup: false,
@@ -29,7 +29,7 @@ class Profile extends React.Component {
     if (!password) {
       axios
         .patch(
-          'https://localhost:4000/profile',
+          "https://localhost:4000/profile",
           {
             username: changingUsername,
           },
@@ -49,7 +49,7 @@ class Profile extends React.Component {
 
     axios
       .patch(
-        'https://localhost:4000/profile',
+        "https://localhost:4000/profile",
         {
           username: this.state.username,
           password: password,
@@ -69,7 +69,7 @@ class Profile extends React.Component {
 
   getProfileInfomation() {
     axios
-      .get('https://localhost:4000/profile', {
+      .get("https://localhost:4000/profile", {
         headers: { Authorization: `Bearer ${this.props.accessToken}` },
         withCredentials: true,
       })
@@ -114,7 +114,6 @@ class Profile extends React.Component {
     return (
       <div className="profile-container">
         <div className="main-container">
-
           <div id="profile-backbtn-container">
             <BackBtn history={this.props.history} />
           </div>

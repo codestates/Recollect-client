@@ -1,6 +1,6 @@
-import React from 'react';
-import { generateRandomColorPairArr } from '../util/randomColor';
-import axios from 'axios';
+import React from "react";
+import { generateRandomColorPairArr } from "../util/randomColor";
+import axios from "axios";
 
 class BookmarkReadMode extends React.Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class BookmarkReadMode extends React.Component {
   incrementCount() {
     axios
       .put(
-        'https://localhost:4000/bookmark',
+        "https://localhost:4000/bookmark",
         {
           BookmarkId: this.props.bookmarkInfo.id,
         },
@@ -33,7 +33,7 @@ class BookmarkReadMode extends React.Component {
       })
       .catch((err) => {
         console.error(err.message);
-        if ((err.message = 'Not Allowed')) {
+        if ((err.message = "Not Allowed")) {
           this.props.getRefreshToken();
         }
       });
@@ -74,7 +74,7 @@ class BookmarkReadMode extends React.Component {
           <div className="mouseOut">
             <div> {descrip} </div>
             <div>
-            {icon}
+              {icon}
               {/* {emojis.map((emoji) => {
                 return <span id="emoji"> {emoji} </span>;
               })} */}
