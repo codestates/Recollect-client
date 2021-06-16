@@ -1,11 +1,11 @@
 @font-face {
   font-family: AzeretMono-Light;
-  src: url('./AzeretMono-Light.ttf') format('ttf');
+  src: url("./AzeretMono-Light.ttf") format("ttf");
 }
 
 @font-face {
   font-family: Arial;
-  src: url('./AzeretMono-Bold.ttf') format('ttf');
+  src: url("./AzeretMono-Bold.ttf") format("ttf");
 }
 
 * {
@@ -168,7 +168,7 @@ body,
 #start-btn {
   width: 50%;
   font-size: 26px;
-  font-family: 'AzeretMono-Bold';
+  font-family: "AzeretMono-Bold";
   padding: 1rem;
   border-style: none;
   margin-bottom: 20px;
@@ -294,7 +294,7 @@ body,
 }
 .seperatingLine::before,
 .seperatingLine::after {
-  content: '';
+  content: "";
   flex-grow: 1;
   background: black;
   height: 1px;
@@ -353,7 +353,7 @@ body,
 
 .profile-header {
   text-align: center;
-  font-family: 'AzeretMono-Bold';
+  font-family: "AzeretMono-Bold";
   color: var(--logo-color);
   flex: 2;
 }
@@ -758,7 +758,7 @@ cursor: pointer; */
 }
 @media (max-width: 510px) {
   #alarm-alert > div {
-    content: 'Check Recollects!';
+    content: "Check Recollects!";
   }
 }
 /* #alarm-alert:before {
@@ -990,5 +990,9 @@ cursor: pointer; */
   border-style: none;
   position: absolute;
   top: 90%;
-  left: 95.5%;
+  left: 94.5%;
+}
+.scroll-to-top:hover {
+  cursor: pointer;
+  background-color: var(--btn-hover-color);
 }
