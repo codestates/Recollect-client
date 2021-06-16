@@ -5,7 +5,7 @@ class Alarm extends React.Component {
     super(props); //getRefreshToken
     this.state = {
       unreadCount: 0,
-      innerWidth: window.innerWidth,
+      // innerWidth: window.innerWidth,
     };
   }
 
@@ -18,38 +18,26 @@ class Alarm extends React.Component {
   }
 
   render() {
-    window.addEventListener("resize", () => {
-      this.setState({
-        innerWidth: window.innerWidth,
-      });
-    });
+    // window.addEventListener("resize", () => {
+    //   this.setState({
+    //     innerWidth: window.innerWidth,
+    //   });
+    // });
     const longContents = `There are ${this.state.unreadCount} Collects you haven't checked.
     Start to Recollect !`;
     const shortContents = `Check Unread Contents!`;
     return (
       <div id="alarm">
         <div id="alarm-alert">
-          {this.state.innerWidth > 520 ? (
-            <div
-              onClick={() => {
-                if (this.props.location === "/mypage") {
-                  this.props.history.push("/recollect");
-                }
-              }}
-            >
-              {longContents}
-            </div>
-          ) : (
-            <div
-              onClick={() => {
-                if (this.props.location === "/mypage") {
-                  this.props.history.push("/recollect");
-                }
-              }}
-            >
-              {shortContents}
-            </div>
-          )}
+          <div
+            onClick={() => {
+              if (this.props.location === "/mypage") {
+                this.props.history.push("/recollect");
+              }
+            }}
+          >
+            {longContents}
+          </div>
         </div>
       </div>
     );
