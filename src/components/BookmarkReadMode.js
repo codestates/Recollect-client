@@ -17,7 +17,7 @@ class BookmarkReadMode extends React.Component {
   incrementCount() {
     axios
       .put(
-        'http://recollect.today/bookmark',
+        'https://localhost:4000/bookmark',
         {
           BookmarkId: this.props.bookmarkInfo.id,
         },
@@ -51,7 +51,7 @@ class BookmarkReadMode extends React.Component {
   }
 
   render() {
-    const { desc, emojis, created_at, url } = this.props.bookmarkInfo;
+    const { descrip, icon, createdAt, url } = this.props.bookmarkInfo;
     const { backgroundColor, textColor } = this.props.color;
     return (
       <div
@@ -72,12 +72,13 @@ class BookmarkReadMode extends React.Component {
           </div>
         ) : (
           <div className="mouseOut">
-            <div> {desc} </div>
+            <div> {descrip} </div>
             <div>
-              {emojis.map((emoji) => {
+            {icon}
+              {/* {emojis.map((emoji) => {
                 return <span id="emoji"> {emoji} </span>;
-              })}
-              <div id="created_at"> {created_at} </div>
+              })} */}
+              <div id="created_at"> {createdAt} </div>
             </div>
           </div>
         )}

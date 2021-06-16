@@ -18,162 +18,7 @@ class MyPage extends React.Component {
       username: '',
       isRecollect: false,
       unreadbookmarks: [],
-      bookmarks: [
-        {
-          id: 1,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '🔥'],
-          url: 'https://www.google.com/fasdfasdlkjkjlkjlkjjfasdfasf',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 2,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['🔥', '🚨'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 3,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '🔥'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 4,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '🔥'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 5,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '🔥'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 6,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '🔥'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 7,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '🔥'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 8,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '🔥'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 9,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '🔥'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 10,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '🔥'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 11,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '🔥'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 12,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '🔥'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 13,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '🔥'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 14,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '🔥'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 15,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '🔥'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 16,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '🔥'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 17,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '🔥'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 18,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '🔥'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 19,
-          desc: 'Hello WorldHello WorldHello WorldHello WorldHello WorldHello WorldHello World',
-          emojis: ['☕️', '🔥'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 20,
-          desc: '잘 되고 있네요',
-          emojis: ['☕️', '🔥'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 21,
-          desc: '성공 확인용',
-          emojis: ['☕️', '🔥'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-        {
-          id: 22,
-          desc: '스크롤 투 탑',
-          emojis: ['☕️', '🔥'],
-          url: 'https://www.google.com/',
-          created_at: '2021 - 06 - 08',
-        },
-      ],
+      bookmark: [],
       errorMessage: '',
       isEdit: false,
       selectedInfo: {},
@@ -214,7 +59,7 @@ class MyPage extends React.Component {
     // api 확인필요합니다! collect랑 겹침
     axios
       .patch(
-        'http://recollect.today/mypage',
+        'http://localhost:4000/mypage',
         {
           bookmarkId: bookmarkId,
         },
@@ -242,12 +87,13 @@ class MyPage extends React.Component {
 
   getMypageInformation() {
     axios
-      .get('http://recollect.today/mypage', {
-        headers: { Authorization: `Bearer ${this.props.accessToken}` },
+      .get('https://localhost:4000/mypage', {
+        headers: { Authorization: `${this.props.accessToken}` },
         withCredentials: true, // 여기에다가도 withCredentials true 가 들어가야함
       })
       .then((res) => {
-        const { user, bookmark } = res.data;
+        console.log(res);
+        const { user, bookmark } = res.data.data;
         this.setState({
           username: user.username,
           bookmark: bookmark,
@@ -258,7 +104,7 @@ class MyPage extends React.Component {
         // this.setState({
         //   errorMessage: err.dataValues.message,
         // });
-        this.props.getRefreshToken();
+        //this.props.getRefreshToken();
       });
   }
 
@@ -271,7 +117,7 @@ class MyPage extends React.Component {
     }
     axios
       .post(
-        'http://recollect.today/mypage',
+        'https://localhost:4000/mypage',
         {
           desc: desc,
           username: this.state.username,
@@ -307,7 +153,7 @@ class MyPage extends React.Component {
     }
     axios
       .put(
-        'http://recollect.today/mypage',
+        'https://localhost:4000/mypage',
         {
           emoji: emoji,
           url: url,
@@ -343,13 +189,14 @@ class MyPage extends React.Component {
 
   getRecollectInfo() {
     axios
-      .get('http://recollect.today/recollect', {
-        headers: { Authorization: `Bearer ${this.props.accessToken}` },
+      .get('https://localhost:4000/recollect', {
+        headers: { Authorization: `${this.props.accessToken}` },
         withCredentials: true,
       })
       .then((res) => {
+        console.log('리콜렉트:',res);
         this.setState({
-          unreadbookmarks: res.data.bookmark,
+          unreadbookmarks: res.data.data.bookmark,
         });
       })
       .catch((err) => {
@@ -359,15 +206,16 @@ class MyPage extends React.Component {
       });
   }
 
-  componetnDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps, prevState) {
+    console.log(this.state.bookmark);
+    
+  }
+
+  componentDidMount(prevProps,prevState) {
+    this.getMypageInformation();
     if (prevState !== this.state) {
       this.getRecollectInfo();
     }
-  }
-
-  componentDidMount() {
-    this.getMypageInformation();
-    // ??
   }
 
   render() {
@@ -401,7 +249,7 @@ class MyPage extends React.Component {
         <div>
           <div className="bookmarkContainer">
             {this.state.isEdit
-              ? this.state.bookmarks.map((bookmark) => (
+              ? this.state.bookmark.map((bookmark) => (
                   <BookmarkEditMode
                     key={bookmark.id}
                     deleteBookmark={this.deleteBookmark}
@@ -409,7 +257,7 @@ class MyPage extends React.Component {
                     bookmarkInfo={bookmark}
                   />
                 ))
-              : this.state.bookmarks.map((bookmark) => (
+              : this.state.bookmark.map((bookmark) => (
                   <BookmarkReadMode
                     key={bookmark.id}
                     bookmarkInfo={bookmark}

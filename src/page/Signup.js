@@ -17,7 +17,7 @@ class Signup extends React.Component {
 
   handleCreateSocialAccount({ username }) {
     axios
-      .post('http://recollect.today/signup', {
+      .post('https://localhost:4000/signup', {
         username: username,
         socialId: this.state.socialId,
         isSocialAccount: 1,
@@ -25,11 +25,11 @@ class Signup extends React.Component {
       .then((res) => {
         console.log(res); //uuid접근 다시 해보하기
         axios
-          .post('http://recollect.today/login', {
-            uuid: res.data.userInfo.uuid, //테슼트
+          .post('https://localhost:4000/login', {
+            uuid: res.data.data.userInfo.uuid, //테슼트
           })
-          .then(() => {
-            this.props.socialLoginSuccess();
+          .then((res) => {
+            this.props.socialLoginSuccess(res);
           });
       })
       .catch((err) => {
@@ -39,7 +39,7 @@ class Signup extends React.Component {
   //! 자체 회원 socialId = 0 안넣어줘도 됨
   handleCreateAccount({ username, email, password }) {
     axios
-      .post('http://recollect.today/signup', {
+      .post('https://localhost:4000/signup', {
         username: username,
         email: email,
         password: password,
