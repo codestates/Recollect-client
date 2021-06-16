@@ -14,7 +14,7 @@ class DelAccountPopup extends React.Component {
     console.log('delete click');
     //회원 탈퇴
     axios
-      .delete('http://recollect.today/profile', {
+      .delete('https://localhost:4000/profile', {
         headers: { Authorization: `Bearer ${this.props.accessToken}` },
       })
       .then(() => {

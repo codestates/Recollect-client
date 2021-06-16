@@ -41,7 +41,7 @@ class Login extends React.Component {
       //// POST 요청 (서버 열리면 주석제거) ////
       axios
         .post(
-          "http://recollect.today/login",
+          "https://localhost:4000/login",
           {
             email: email,
             password: password,
@@ -51,7 +51,10 @@ class Login extends React.Component {
             withCredentials: true,
           }
         )
-        .then((res) => this.props.loginSuccess(res.data.accessToken)) // Login요청 성공
+        .then((res) => {
+          console.log(res);
+          this.props.loginSuccess(res.headers.authorization)
+        }) // Login요청 성공
         .catch(() => {
           this.setState({
             errorMessage: "아이디와 비밀번호를 확인해주세요.",
