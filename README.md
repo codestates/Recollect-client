@@ -16,16 +16,42 @@ recollect : 기억해내다, "모아서  + 다시보다" <br />
 
 ## 사용한 기술 스택
 ### 프론트
+
 <img src="https://img.shields.io/badge/FRONT-JAVASCRIPT-yellow?style=for-the-badge&logo=javascript" >
 <img src="https://img.shields.io/badge/FRONT-REACT-skyblue?style=for-the-badge&logo=react" >
 <img src="https://img.shields.io/badge/FRONT-REACTROUTERDOM-skyblue?style=for-the-badge&logo=react" >
+
 ### 백
+
 <img src="https://img.shields.io/badge/BACK-NODE.SJ-teal?style=for-the-badge&logo=nodedotjs" >
 <img src="https://img.shields.io/badge/BACK-EXPRESS-white?style=for-the-badge" >
 <img src="https://img.shields.io/badge/BACK-Mysql-orange?style=for-the-badge&logo=mysql" >
 
 
-<img src="https://user-images.githubusercontent.com/76909552/122406074-890b8680-cfbb-11eb-89f4-0a2c69246bb5.png" width="80%">
+<img src="https://user-images.githubusercontent.com/76909552/122406074-890b8680-cfbb-11eb-89f4-0a2c69246bb5.png" >
 
 ## 🏛 Architecture
+
+### Client-Side flow chart [static]
+![Flow Chart](https://user-images.githubusercontent.com/54028005/121215575-1b74a180-c8bb-11eb-9b17-4000b172e993.jpg)
+
+### Client-Side Storyboard flow chart
+![clientarchi](https://user-images.githubusercontent.com/54028005/121322771-3a6e4480-c94a-11eb-8798-c96e41b80cd4.png)
+
+### Server-Side flow chart
+// API 문서 수정 후 추가해야함
+
+## 우리를 소개합니다
+
+| [김지우](https://github.com/zuzokim)  | 💻 Front-end, 🌟 Team leader  |
+| ------- | ----- |
+| [김시윤](https://github.com/siyooonkim) | 💻 Front-end |
+| [박유빈](https://github.com/Justicexx0099) | 💻 Back-end |
+| [이석준](https://github.com/CodingGorani) | 💻 Front-end |
+
+
+
+
+
+
 
