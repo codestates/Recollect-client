@@ -1,3 +1,4 @@
+<img src="https://img.shields.io/badge/PROJECT-RECOLLECT-blue?style=for-the-badge" >
 
 ## 📝 Recollect
 <img src="https://user-images.githubusercontent.com/54028005/122155197-6c7b2b80-cea1-11eb-9934-7ea04e23ef29.png" width="30%">
