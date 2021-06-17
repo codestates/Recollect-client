@@ -24,7 +24,7 @@ recollect : 기억해내다, "모아서  + 다시보다" <br />
 
 ### 백
 
-<img src="https://img.shields.io/badge/BACK-NODE.SJ-teal?style=for-the-badge&logo=nodedotjs" >
+<img src="https://img.shields.io/badge/BACK-NODE.JS-teal?style=for-the-badge&logo=nodedotjs" >
 <img src="https://img.shields.io/badge/BACK-EXPRESS-white?style=for-the-badge" >
 <img src="https://img.shields.io/badge/BACK-Mysql-orange?style=for-the-badge&logo=mysql" >
 
