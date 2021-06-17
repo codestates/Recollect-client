@@ -20,6 +20,7 @@ class DelAccountPopup extends React.Component {
       })
       .then(() => {
         this.props.initState();
+        this.props.handleDelAccountPopup();
       })
       .catch((err) => {
         //탈퇴 실패시,

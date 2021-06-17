@@ -40,6 +40,7 @@ class Profile extends React.Component {
         )
         .then(() => {
           this.getProfileInfomation();
+          this.handleUserPopup();
         })
         .catch((err) => {
           console.error(err.message); //fail to edit 501
@@ -61,6 +62,7 @@ class Profile extends React.Component {
       )
       .then(() => {
         this.getProfileInfomation();
+        this.handlePwdPopup();
       })
       .catch((err) => {
         console.error(err.message); //fail to edit 501

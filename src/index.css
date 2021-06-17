@@ -63,6 +63,7 @@ body,
 
 #signBtn {
   font-weight: bold;
+  max-height: 46px;
   background-color: var(--btn-color);
   color: white;
   border-style: none;
@@ -809,7 +810,7 @@ cursor: pointer; */
   width: 85vw;
   font-size: 20px;
   text-align: right;
-  margin-top: 20px;
+  margin: 10px 0;
 }
 
 .editBtn {
@@ -829,6 +830,7 @@ cursor: pointer; */
 
 .bookmarkContainer {
   /* https://stackoverflow.com/questions/32802202/how-to-center-a-flex-container-but-left-align-flex-items */
+  min-height: 140px;
   width: 85vw;
   padding-top: 30px;
   margin-bottom: 50px;
@@ -943,6 +945,7 @@ cursor: pointer; */
 
 #profileBtn {
   background-color: var(--btn-color);
+  max-height: 46px;
   color: white;
   border-style: none;
   border-radius: 5px;
@@ -997,4 +1000,18 @@ cursor: pointer; */
 .scroll-to-top:hover {
   cursor: pointer;
   background-color: var(--btn-hover-color);
+}
+
+.defaultBookmark {
+  width: 190px;
+  height: 190px;
+  display: flex;
+  flex-direction: column;
+  border: none;
+  margin-bottom: 30px;
+  padding: 4px;
+}
+
+label {
+  font-size: 13px;
 }
