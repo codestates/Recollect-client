@@ -94,7 +94,7 @@ class SignupComp extends React.Component {
           </div>
           {
             this.props.isSocialLogin === undefined ? (
-              <div>
+              <>
                 <div>
                   <input
                     className="signupComp-input"
@@ -119,7 +119,7 @@ class SignupComp extends React.Component {
                     placeholder="Password-check"
                   />
                 </div>
-              </div>
+              </>
             ) : (
               ''
             ) //socialId 있는 경우
