@@ -5,6 +5,11 @@ import SignOutBtn from "../components/SignOutBtn";
 import ProfileBtn from "../components/ProfileBtn";
 import Alarm from "../components/Alarm";
 import BookmarkReadMode from "../components/BookmarkReadMode";
+<<<<<<< HEAD
+import CollectionEditor from "../components/CollectionEditor";
+import DefaultComp from "../components/DefaultComp";
+=======
+>>>>>>> 2a39afa81efa7064ceb43e638377a15bf6e65372
 import ScrollToTop from "../components/ScrollToTop";
 import DefaultComp from "../components/DefaultComp";
 const { setRandomColor } = require("../util/randomColor");
@@ -46,8 +51,12 @@ class Recollect extends React.Component {
         />
         <div className="nav lower"></div>
         <div className="bookmarkContainer">
+<<<<<<< HEAD
+        {this.state.bookmark.length === 0 && <DefaultComp />}
+=======
           {this.state.bookmark.length !== 0 ? "" : <DefaultComp />}
 
+>>>>>>> 2a39afa81efa7064ceb43e638377a15bf6e65372
           {this.state.bookmark.map((bookmark) => (
             <BookmarkReadMode
               accessToken={this.props.accessToken}

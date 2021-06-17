@@ -10,7 +10,11 @@ import BookmarkReadMode from "../components/BookmarkReadMode";
 import BookmarkEditMode from "../components/BookmarkEditMode";
 import DefaultComp from "../components/DefaultComp";
 import ScrollToTop from "../components/ScrollToTop";
+<<<<<<< HEAD
+import DefaultComp from "../components/DefaultComp";
+=======
 import { getbookmark } from "../util/getbookmark";
+>>>>>>> 2a39afa81efa7064ceb43e638377a15bf6e65372
 const { setRandomColor } = require("../util/randomColor");
 
 class MyPage extends React.Component {
@@ -165,6 +169,7 @@ class MyPage extends React.Component {
           isEdit: false,
           selectedInfo: {},
         });
+        this.getMypageInformation();
       })
       .catch((err) => {
         if (err.response) {
@@ -251,7 +256,11 @@ class MyPage extends React.Component {
         />
         <div>
           <div className="bookmarkContainer">
+<<<<<<< HEAD
+          {this.state.bookmark.length === 0 && <DefaultComp />}
+=======
             {this.state.bookmark.length === 0 && <DefaultComp />}
+>>>>>>> 2a39afa81efa7064ceb43e638377a15bf6e65372
             {this.state.isEdit
               ? this.state.bookmark.map((bookmark) => (
                   <BookmarkEditMode

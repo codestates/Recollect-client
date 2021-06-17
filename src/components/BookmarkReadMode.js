@@ -14,6 +14,31 @@ class BookmarkReadMode extends React.Component {
   }
 
   incrementCount() {
+<<<<<<< HEAD
+    console.log(this.props.bookmarkInfo);
+    // axios
+    //   .put(
+    //     "https://localhost:4000/bookmark",
+    //     {
+    //       bookmarkId: this.props.bookmarkInfo.id,
+    //     },
+    //     {
+    //       headers: {
+    //         Authorization: `${this.props.accessToken}`,
+    //         withCredentials: true,
+    //       },
+    //     }
+    //   )
+    //   .then(() => {
+    //     this.props.getMypageInformation();
+    //   })
+    //   .catch((err) => {
+    //     console.error(err.message);
+    //     if ((err.message = "Not Allowed")) {
+    //       this.props.getRefreshToken();
+    //     }
+    //   });
+=======
     axios
       .put(
         "https://localhost:4000/bookmark",
@@ -36,6 +61,7 @@ class BookmarkReadMode extends React.Component {
           this.props.getRefreshToken();
         }
       });
+>>>>>>> 2a39afa81efa7064ceb43e638377a15bf6e65372
   }
 
   mouseHover() {

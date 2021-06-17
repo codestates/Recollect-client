@@ -67,6 +67,7 @@ body,
 }
 #signBtn {
   font-weight: bold;
+  max-height: 46px;
   background-color: var(--btn-color);
   color: white;
   border-style: none;
@@ -834,7 +835,12 @@ cursor: pointer; */
 /* BookMark_ReadMode Start */
 
 .bookmarkContainer {
+<<<<<<< HEAD
+  /* https://stackoverflow.com/questions/32802202/how-to-center-a-flex-container-but-left-align-flex-items */
+  min-height: 140px;
+=======
   min-height: 188.3px;
+>>>>>>> 2a39afa81efa7064ceb43e638377a15bf6e65372
   width: 85vw;
   padding-top: 30px;
   margin-bottom: 50px;
@@ -961,6 +967,7 @@ cursor: pointer; */
 #profileBtn {
   height: 47px;
   background-color: var(--btn-color);
+  max-height: 46px;
   color: white;
   border-style: none;
   border-radius: 5px;
@@ -1017,3 +1024,19 @@ cursor: pointer; */
   background-color: var(--btn-hover-color);
 }
 
+<<<<<<< HEAD
+.defaultBookmark {
+  width: 190px;
+  height: 190px;
+  display: flex;
+  flex-direction: column;
+  border: none;
+  margin-bottom: 30px;
+  padding: 4px;
+}
+
+label {
+  font-size: 13px;
+}
+=======
+>>>>>>> 2a39afa81efa7064ceb43e638377a15bf6e65372
