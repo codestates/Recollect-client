@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
 class Collect extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      desc: '',
-      url: '',
+      desc: "",
+      url: "",
       emoji: [false, false, false],
     };
 
@@ -28,7 +28,7 @@ class Collect extends React.Component {
     const emojiNumStr = this.emojiBoleanToNumString(emoji);
 
     if (emojiNumStr === undefined) {
-      await this.props.addBookmark(desc, url, '');
+      await this.props.addBookmark(desc, url, "");
     } else {
       await this.props.addBookmark(desc, url, emojiNumStr);
     }
@@ -44,15 +44,14 @@ class Collect extends React.Component {
       } else {
         return acc;
       }
-    }, '');
-    console.log(emojiNumStr);
+    }, "");
     return emojiNumStr;
   }
 
   handleInitialize() {
     this.setState({
-      desc: '',
-      url: '',
+      desc: "",
+      url: "",
       emoji: [false, false, false],
     });
   }
@@ -66,18 +65,16 @@ class Collect extends React.Component {
   }
 
   handleShowEmoji() {
-    const emojiArr = ['☕️', '🔥', '🚨'];
-    console.log(this.state.emoji);
-      return this.state.emoji.map((el, idx) => {
-        console.log('이모지확인', el);
-        if (el) {
-          return (<span key={idx}>{emojiArr[idx]}</span>);
-        }
-      });
+    const emojiArr = ["☕️", "🔥", "🚨"];
+    return this.state.emoji.map((el, idx) => {
+      if (el) {
+        return <span key={idx}>{emojiArr[idx]}</span>;
+      }
+      return;
+    });
   }
 
   handleShowEditing({ descrip, icon, url }) {
-    console.log(icon);
     const emojiArr = this.emojiConverter(icon);
     this.setState({
       desc: descrip,
@@ -92,7 +89,7 @@ class Collect extends React.Component {
     const emojiNumStr = this.emojiBoleanToNumString(emoji);
 
     if (emojiNumStr === undefined) {
-      await this.props.sendEditedBookmark(desc, url, '');
+      await this.props.sendEditedBookmark(desc, url, "");
     } else {
       await this.props.sendEditedBookmark(desc, url, emojiNumStr);
     }
@@ -101,20 +98,19 @@ class Collect extends React.Component {
   }
 
   emojiConverter(emojis) {
-    const e = emojis.split('');
+    const e = emojis.split("");
     const emojisBooleanArr = [false, false, false];
     //emojis가 스트링타입일 경우
-    for ( let el of e ) {
-      console.log(el);
-      if (el === '☕' ) {
+    for (let el of e) {
+      if (el === "☕") {
         emojisBooleanArr[0] = true;
       }
 
-      if (el=== '🔥') {
+      if (el === "🔥") {
         emojisBooleanArr[1] = true;
       }
 
-      if (el === '🚨') {
+      if (el === "🚨") {
         emojisBooleanArr[2] = true;
       }
     }
@@ -139,7 +135,7 @@ class Collect extends React.Component {
             className="Collect-textinput first"
             placeholder="Describe your Collect"
             value={this.state.desc}
-            onChange={this.handleInputtextValue('desc')}
+            onChange={this.handleInputtextValue("desc")}
           />
         </div>
         <div id="Collect-showEmoji">
@@ -178,7 +174,7 @@ class Collect extends React.Component {
             className="Collect-textinput last"
             placeholder="Paste link... You can also drag texts or images here"
             value={this.state.url}
-            onChange={this.handleInputtextValue('url')}
+            onChange={this.handleInputtextValue("url")}
           />
           <div id="Collect-btn-container">
             {this.props.isEdit ? (

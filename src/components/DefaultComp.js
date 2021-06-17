@@ -45,4 +45,8 @@ function DefaultComp() {
   );
 }
 
+<<<<<<< HEAD
 export default DefaultComp;
+=======
+export default DefaultComp;
+>>>>>>> 2a39afa81efa7064ceb43e638377a15bf6e65372

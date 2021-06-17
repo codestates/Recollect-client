@@ -39,6 +39,7 @@ class Profile extends React.Component {
           }
         )
         .then(() => {
+          this.handleUserPopup();
           this.getProfileInfomation();
           this.handleUserPopup();
         })
@@ -61,6 +62,7 @@ class Profile extends React.Component {
         }
       )
       .then(() => {
+        this.handlePwdPopup();
         this.getProfileInfomation();
         this.handlePwdPopup();
       })
@@ -76,8 +78,7 @@ class Profile extends React.Component {
         withCredentials: true,
       })
       .then((res) => {
-        // 꼭 확인 해봐야 합니다.
-        console.log(res);
+        this.handlePwdPopup()
         this.setState({
           username: res.data.data.user.username,
           email: res.data.data.user.email,

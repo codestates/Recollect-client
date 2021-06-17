@@ -61,6 +61,10 @@ body,
   justify-content: flex-end;
 }
 
+#big-logo{
+  width:350px;
+  height: 280px;
+}
 #signBtn {
   font-weight: bold;
   max-height: 46px;
@@ -70,6 +74,7 @@ body,
   border-radius: 5px;
   padding: 1rem;
   margin: 1rem;
+  height: 47px;
   cursor: pointer;
 }
 
@@ -150,8 +155,9 @@ body,
 }
 
 .logo-container img {
-  width: 48%;
-  margin-bottom: 15px;
+  width: 110px;
+  height: 88px;
+  margin: 15px;
   animation: fadein 3s;
   -moz-animation: fadein 3s; /*Firefox*/
   -webkit-animation: fadein 3s; /*Safari and Chrome*/
@@ -240,7 +246,7 @@ body,
 
 #login-logo-wrap {
   max-width: 230px;
-  /* padding-top:0px; */
+  margin-bottom: 135px;
 }
 
 .LoginContainer > .mainContainer > article {
@@ -261,7 +267,7 @@ body,
   height: 40px;
   border: 1px solid var(--container-color);
   border-radius: 5px;
-  margin: 10px;
+  margin: 8px;
   color: white;
   background-color: var(--btn-color);
 }
@@ -523,7 +529,7 @@ label {
   align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   background-color: var(--container-color);
   text-align: center;
   border: 1px var(--container-color) solid;
@@ -567,7 +573,7 @@ cursor: pointer; */
   width: 260px;
   height: 40px;
   padding: 0.4rem;
-  margin: 8px 0px 8px;
+  margin: 4px 0px;
   border: 1px solid var(--container-color);
   border-radius: 5px;
   outline-style: none;
@@ -829,8 +835,12 @@ cursor: pointer; */
 /* BookMark_ReadMode Start */
 
 .bookmarkContainer {
+<<<<<<< HEAD
   /* https://stackoverflow.com/questions/32802202/how-to-center-a-flex-container-but-left-align-flex-items */
   min-height: 140px;
+=======
+  min-height: 188.3px;
+>>>>>>> 2a39afa81efa7064ceb43e638377a15bf6e65372
   width: 85vw;
   padding-top: 30px;
   margin-bottom: 50px;
@@ -842,6 +852,16 @@ cursor: pointer; */
   background-color: var(--container-color);
   box-shadow: var(--box-shadow);
   flex: 2;
+}
+
+.defaultBookmark {
+  width: 190px;
+  height: 190px;
+  display: flex;
+  flex-direction: column;
+  border: none;
+  margin-bottom: 30px;
+  padding: 4px;
 }
 
 .bookmark {
@@ -888,6 +908,7 @@ cursor: pointer; */
 
 .nav.upper {
   padding-right: 20px;
+  max-height: 78px;
   width: 100vw;
   flex: 0.5;
   justify-content: flex-end;
@@ -944,6 +965,7 @@ cursor: pointer; */
 }
 
 #profileBtn {
+  height: 47px;
   background-color: var(--btn-color);
   max-height: 46px;
   color: white;
@@ -1002,6 +1024,7 @@ cursor: pointer; */
   background-color: var(--btn-hover-color);
 }
 
+<<<<<<< HEAD
 .defaultBookmark {
   width: 190px;
   height: 190px;
@@ -1015,3 +1038,5 @@ cursor: pointer; */
 label {
   font-size: 13px;
 }
+=======
+>>>>>>> 2a39afa81efa7064ceb43e638377a15bf6e65372

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export default class ScrollToTop extends React.Component {
   constructor(props) {
@@ -13,10 +13,9 @@ export default class ScrollToTop extends React.Component {
   // Top: 0 takes us all the way back to the top of the page
   // Behavior: smooth keeps it smooth!
   scrollToTop() {
-    console.log(window.innerHeight);
-    document.querySelector('#root').scrollTo({
+    document.querySelector("#root").scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   }
 

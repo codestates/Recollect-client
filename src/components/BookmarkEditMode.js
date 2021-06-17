@@ -9,7 +9,6 @@ class BookmarkEditMode extends React.Component {
   }
 
   scrollToTop() {
-    console.log("스크롤 외않되", window);
     document.querySelector("#root").scrollTo({
       top: 0,
       behavior: "smooth",
@@ -17,7 +16,7 @@ class BookmarkEditMode extends React.Component {
   }
 
   render() {
-    const { descrip, icon, createdAt, url } = this.props.bookmarkInfo;
+    const { descrip, icon, createdAt } = this.props.bookmarkInfo;
     return (
       <div className="bookmarkEditContatiner">
         <div

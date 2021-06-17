@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 
-const { IsValidiatePassword } = require('../util/validiation');
+const { IsValidiatePassword } = require("../util/validiation");
 class PwdPopup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      errormessage: '',
-      password: '',
-      passwordcheck: '',
+      errormessage: "",
+      password: "",
+      passwordcheck: "",
     };
 
     this.handleEditBtn = this.handleEditBtn.bind(this);
@@ -19,27 +19,26 @@ class PwdPopup extends React.Component {
   };
 
   handleEditBtn() {
-    console.log('edit password', this.state);
     const { password, passwordcheck } = this.state;
     if (!password) {
       this.setState({
-        errormessage: '비밀번호를 입력하세요.',
+        errormessage: "비밀번호를 입력하세요.",
       });
       return;
     } else if (password !== passwordcheck) {
       this.setState({
-        errormessage: '비밀번호가 서로 다릅니다.',
+        errormessage: "비밀번호가 서로 다릅니다.",
       });
       return;
     } else if (!IsValidiatePassword(password)) {
       this.setState({
         errormessage:
-          '비밀번호는 최소 한 글자 이상의 영문 대소문자,숫자,특수문자(!,@,#,$,%,&,*)를 포함한 8글자 이상으로 만들어야 합니다.',
+          "비밀번호는 최소 한 글자 이상의 영문 대소문자,숫자,특수문자(!,@,#,$,%,&,*)를 포함한 8글자 이상으로 만들어야 합니다.",
       });
       return;
     } else {
       this.setState({
-        errormessage: '',
+        errormessage: "",
       });
     }
 
@@ -59,13 +58,13 @@ class PwdPopup extends React.Component {
               type="password"
               placeholder="password"
               className="edit"
-              onChange={this.handleInputValue('password')}
+              onChange={this.handleInputValue("password")}
             />
             <input
               type="password"
               placeholder="password check"
               className="edit"
-              onChange={this.handleInputValue('passwordcheck')}
+              onChange={this.handleInputValue("passwordcheck")}
             />
             <button onClick={this.handleEditBtn}>Change password</button>
             <div>

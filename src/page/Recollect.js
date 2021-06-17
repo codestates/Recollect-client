@@ -1,4 +1,3 @@
-import axios from "axios";
 import React from "react";
 import Footer from "../components/Footer";
 import BackBtn from "../components/BackBtn";
@@ -6,9 +5,13 @@ import SignOutBtn from "../components/SignOutBtn";
 import ProfileBtn from "../components/ProfileBtn";
 import Alarm from "../components/Alarm";
 import BookmarkReadMode from "../components/BookmarkReadMode";
+<<<<<<< HEAD
 import CollectionEditor from "../components/CollectionEditor";
 import DefaultComp from "../components/DefaultComp";
+=======
+>>>>>>> 2a39afa81efa7064ceb43e638377a15bf6e65372
 import ScrollToTop from "../components/ScrollToTop";
+import DefaultComp from "../components/DefaultComp";
 const { setRandomColor } = require("../util/randomColor");
 
 class Recollect extends React.Component {
@@ -16,21 +19,19 @@ class Recollect extends React.Component {
     super(props);
     this.state = {
       username: "",
-      bookmark: []
+      bookmark: [],
     };
   }
 
   componentDidMount() {
-    console.log(this.props.unreadBookmarks);
-    if(this.props.unreadBookmarks !== undefined) {
+    if (this.props.getRecollectInfo() !== undefined) {
       this.setState({
-        bookmark: this.props.unreadBookmarks,
+        bookmark: this.props.getRecollectInfo(),
       });
     }
   }
 
   render() {
-    console.log(this.state.bookmark);
     return (
       <div className="recollect-container">
         <div className="nav upper">
@@ -50,10 +51,15 @@ class Recollect extends React.Component {
         />
         <div className="nav lower"></div>
         <div className="bookmarkContainer">
+<<<<<<< HEAD
         {this.state.bookmark.length === 0 && <DefaultComp />}
+=======
+          {this.state.bookmark.length !== 0 ? "" : <DefaultComp />}
+
+>>>>>>> 2a39afa81efa7064ceb43e638377a15bf6e65372
           {this.state.bookmark.map((bookmark) => (
             <BookmarkReadMode
-              accessToken = {this.props.accessToken}
+              accessToken={this.props.accessToken}
               key={bookmark.id}
               getRefreshToken={this.props.getRefreshToken}
               bookmarkInfo={bookmark}
