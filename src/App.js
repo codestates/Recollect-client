@@ -11,7 +11,7 @@ import { getbookmark } from "./util/getbookmark";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
 require("dotenv").config();
-
+//** *//
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -47,22 +47,22 @@ class App extends React.Component {
     this.props.history.push("/");
   }
 
-  getRecollectInfo() {
-    axios
-      .get("https://localhost:4000/recollect", {
-        headers: { Authorization: `${this.state.accessToken}` },
-        withCredentials: true,
-      })
-      .then((res) => {
-        const bookmark = getbookmark(res.data.data.bookmark);
-        return bookmark;
-      })
-      .catch((err) => {
-        if (err.message === "Not Allowed") {
-          this.props.getRefreshToken();
-        }
-      });
-  }
+  // getRecollectInfo() {
+  //   axios
+  //     .get("https://localhost:4000/recollect", {
+  //       headers: { Authorization: `${this.state.accessToken}` },
+  //       withCredentials: true,
+  //     })
+  //     .then((res) => {
+  //       const bookmark = getbookmark(res.data.data.bookmark);
+  //       return bookmark;
+  //     })
+  //     .catch((err) => {
+  //       if (err.message === "Not Allowed") {
+  //         this.props.getRefreshToken();
+  //       }
+  //     });
+  // }
 
   handleLogOut() {
     axios

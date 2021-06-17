@@ -11,7 +11,6 @@ import BookmarkEditMode from "../components/BookmarkEditMode";
 import DefaultComp from "../components/DefaultComp";
 import ScrollToTop from "../components/ScrollToTop";
 import { getbookmark } from "../util/getbookmark";
-import DefaultComp from "../components/DefaultComp";
 const { setRandomColor } = require("../util/randomColor");
 
 class MyPage extends React.Component {
@@ -181,6 +180,34 @@ class MyPage extends React.Component {
           selectedInfo: {},
         });
       });
+  }
+
+  //**getRecollectInfo */
+  getRecollectInfo() {
+    axios
+      .get("https://localhost:4000/recollect", {
+        headers: { Authorization: `${this.props.accessToken}` },
+        withCredentials: true,
+      })
+      .then((res) => {
+        const bookmark = this.getbookmark(res.data.data.bookmark);
+        console.log("리콜렉트:", res);
+        this.setState({
+          unreadbookmarks: bookmark,
+        });
+      })
+      .then(() => {
+        this.props.moveUnreadBookmarks(this.state.unreadbookmarks);
+      })
+      .catch((err) => {
+        if (err.message === "Not Allowed") {
+          this.props.getRefreshToken();
+        }
+      });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log(this.state.bookmark);
   }
 
   componentDidMount(prevProps, prevState) {
