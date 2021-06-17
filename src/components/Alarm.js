@@ -23,9 +23,10 @@ class Alarm extends React.Component {
     //     innerWidth: window.innerWidth,
     //   });
     // });
-    const longContents = `There are ${this.state.unreadCount} Collects you haven't checked.
+
+    // 아래 this.props.unreadCount로 테스트해보기
+    const longContents = `There are ${this.state.unreadCount} Collects you haven't checked.  
     Start to Recollect !`;
-    const shortContents = `Check Unread Contents!`;
     return (
       <div id="alarm">
         <div id="alarm-alert">
