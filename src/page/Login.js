@@ -52,7 +52,6 @@ class Login extends React.Component {
           }
         )
         .then((res) => {
-          console.log(res);
           this.props.loginSuccess(res.headers.authorization);
         }) // Login요청 성공
         .catch(() => {

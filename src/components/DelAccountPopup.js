@@ -11,15 +11,14 @@ class DelAccountPopup extends React.Component {
   }
 
   handleDeleteBtn() {
-    console.log("delete click");
-    //회원 탈퇴
     axios
       .delete("https://localhost:4000/profile", {
         headers: { Authorization: `${this.props.accessToken}` },
-        withCredentials: true
+        withCredentials: true,
       })
       .then(() => {
         this.props.initState();
+        this.props.handleDelAccountPopup();
       })
       .catch((err) => {
         //탈퇴 실패시,
@@ -32,7 +31,6 @@ class DelAccountPopup extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     const { username, handleDelAccountPopup } = this.props;
     return (
       <div className="popup">
