@@ -216,6 +216,7 @@ class MyPage extends React.Component {
       });
   }
 
+  //**getRecollectInfo */
   getRecollectInfo() {
     axios
       .get("https://localhost:4000/recollect", {

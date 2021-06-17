@@ -10,7 +10,7 @@ import Profile from "./page/Profile";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
 require("dotenv").config();
-
+//** *//
 class App extends React.Component {
   constructor(props) {
     super(props);
