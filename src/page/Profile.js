@@ -41,6 +41,7 @@ class Profile extends React.Component {
         .then(() => {
           this.handleUserPopup();
           this.getProfileInfomation();
+          this.handleUserPopup()
         })
         .catch((err) => {
           console.error(err.message); //fail to edit 501
@@ -76,6 +77,7 @@ class Profile extends React.Component {
         withCredentials: true,
       })
       .then((res) => {
+        this.handlePwdPopup()
         this.setState({
           username: res.data.data.user.username,
           email: res.data.data.user.email,

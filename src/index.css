@@ -61,6 +61,10 @@ body,
   justify-content: flex-end;
 }
 
+#big-logo{
+  width:350px;
+  height: 280px;
+}
 #signBtn {
   font-weight: bold;
   background-color: var(--btn-color);
@@ -241,6 +245,7 @@ body,
 
 #login-logo-wrap {
   max-width: 230px;
+  margin-bottom: 135px;
 }
 
 .LoginContainer > .mainContainer > article {
@@ -1011,3 +1016,4 @@ cursor: pointer; */
   cursor: pointer;
   background-color: var(--btn-hover-color);
 }
+

@@ -15,7 +15,7 @@ class Landing extends React.Component {
           <div className="main">
             <div className="logo-container">
                 <div id="none"></div>
-                <img src="logo.png" alt="logo"/>
+                <img src="logo.png" alt="logo" id="big-logo"/>
             </div>
             <div className="intro">
               늘어만가는 수많은 북마크, 정리해보겠다고 만든 북마크 폴더들...

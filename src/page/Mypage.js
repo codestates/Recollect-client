@@ -8,6 +8,7 @@ import Alarm from "../components/Alarm";
 import CollectionEditor from "../components/CollectionEditor";
 import BookmarkReadMode from "../components/BookmarkReadMode";
 import BookmarkEditMode from "../components/BookmarkEditMode";
+import DefaultComp from "../components/DefaultComp";
 import ScrollToTop from "../components/ScrollToTop";
 import { getbookmark } from "../util/getbookmark";
 import DefaultComp from "../components/DefaultComp";
