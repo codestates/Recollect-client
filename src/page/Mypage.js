@@ -9,6 +9,8 @@ import CollectionEditor from "../components/CollectionEditor";
 import BookmarkReadMode from "../components/BookmarkReadMode";
 import BookmarkEditMode from "../components/BookmarkEditMode";
 import ScrollToTop from "../components/ScrollToTop";
+import { getbookmark } from "../util/getbookmark";
+import DefaultComp from "../components/DefaultComp";
 const { setRandomColor } = require("../util/randomColor");
 
 class MyPage extends React.Component {
@@ -30,15 +32,6 @@ class MyPage extends React.Component {
     this.deleteBookmark = this.deleteBookmark.bind(this);
     this.editBookmark = this.editBookmark.bind(this);
     this.sendEditedBookmark = this.sendEditedBookmark.bind(this);
-    this.getRecollectInfo = this.getRecollectInfo.bind(this);
-    this.scrollTopHandler = this.scrollTopHandler.bind(this);
-    this.getbookmark = this.getbookmark.bind(this);
-  }
-
-  scrollTopHandler() {
-    let location = document.querySelector("#root").offsetTop;
-    console.log(location);
-    window.scrollTo(0, 0);
   }
 
   editBtnHandler() {
@@ -93,9 +86,8 @@ class MyPage extends React.Component {
         withCredentials: true, // 여기에다가도 withCredentials true 가 들어가야함
       })
       .then((res) => {
-        console.log(res);
         const { user, bookmark } = res.data.data;
-        let result = this.getbookmark(bookmark);
+        let result = getbookmark(bookmark);
         this.setState({
           username: user.username,
           bookmark: result,
@@ -108,31 +100,6 @@ class MyPage extends React.Component {
         });
         this.props.getRefreshToken();
       });
-  }
-
-  getbookmark(bookmark) {
-    const result = [];
-
-    let cur = bookmark[0];
-    for (let i = 1; i <= bookmark.length; i++) {
-      if (!bookmark[i]) {
-        result.push(cur);
-        break;
-      }
-
-      if (bookmark[i].id === cur.id) {
-        cur = { ...cur, ...bookmark[i], icon: cur.icon + bookmark[i].icon };
-      } else {
-        result.push(cur);
-        cur = bookmark[i];
-      }
-    }
-
-    result.map((el) =>  {
-      return el.createdAt = el.createdAt.slice(0, 10);
-    });
-
-    return result;
   }
 
   addBookmark(desc, url, emoji) {
@@ -158,7 +125,7 @@ class MyPage extends React.Component {
       )
       .then(() => {
         this.getMypageInformation();
-        this.getRecollectInfo();
+        this.props.getRecollectInfo();
       })
       .catch((err) => {
         if (err.response) {
@@ -215,37 +182,10 @@ class MyPage extends React.Component {
       });
   }
 
-  getRecollectInfo() {
-    axios
-      .get("https://localhost:4000/recollect", {
-        headers: { Authorization: `${this.props.accessToken}` },
-        withCredentials: true,
-      })
-      .then((res) => {
-        const bookmark = this.getbookmark(res.data.data.bookmark);
-        console.log("리콜렉트:", res);
-        this.setState({
-          unreadbookmarks: bookmark,
-        });
-      })
-      .then(() => {
-        this.props.moveUnreadBookmarks(this.state.unreadbookmarks);
-      })
-      .catch((err) => {
-        if (err.message === "Not Allowed") {
-          this.props.getRefreshToken();
-        }
-      });
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    console.log(this.state.bookmark);
-  }
-
   componentDidMount(prevProps, prevState) {
     this.getMypageInformation();
     if (prevState !== this.state) {
-      this.getRecollectInfo();
+      this.props.getRecollectInfo();
     }
     this.props.moveUnreadBookmarks(this.state.unreadbookmarks);
   }
@@ -267,8 +207,11 @@ class MyPage extends React.Component {
           sendEditedBookmark={this.sendEditedBookmark}
         />
         <Alarm
-          //getRecollectInfo={this.getRecollectInfo}
-          unreadCount={this.getbookmark(this.state.unreadbookmarks).length}
+          unreadCount={
+            this.props.getRecollectInfo() !== undefined
+              ? this.props.getRecollectInfo().length
+              : 0
+          }
           getRefreshToken={this.props.getRefreshToken}
           color={this.props.setRandomColor}
           history={this.props.history}
@@ -280,6 +223,7 @@ class MyPage extends React.Component {
         />
         <div>
           <div className="bookmarkContainer">
+            {this.state.bookmark.length === 0 && <DefaultComp />}
             {this.state.isEdit
               ? this.state.bookmark.map((bookmark) => (
                   <BookmarkEditMode
