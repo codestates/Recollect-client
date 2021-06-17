@@ -40,7 +40,7 @@ recollect : 기억해내다, "모아서  + 다시보다" <br />
 ![clientarchi](https://user-images.githubusercontent.com/54028005/121322771-3a6e4480-c94a-11eb-8798-c96e41b80cd4.png)
 
 ### Server-Side flow chart
-// API 문서 수정 후 추가해야함
+![Recollect Wireframe](https://user-images.githubusercontent.com/54028005/122412558-a1ca6b00-cfc0-11eb-9f55-bb00050e8e78.jpg)
 
 ## 우리를 소개합니다
 
