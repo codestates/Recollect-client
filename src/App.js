@@ -7,6 +7,7 @@ import Signup from "./page/Signup";
 import Mypage from "./page/Mypage";
 import Recollect from "./page/Recollect";
 import Profile from "./page/Profile";
+import { getbookmark } from "./util/getbookmark";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
 require("dotenv").config();
@@ -30,10 +31,10 @@ class App extends React.Component {
     this.logcheck = this.logcheck.bind(this);
     this.getAccessToken = this.getAccessToken.bind(this);
     this.getRefreshToken = this.getRefreshToken.bind(this);
-
     this.handleLogOut = this.handleLogOut.bind(this);
     this.initState = this.initState.bind(this);
     this.moveUnreadBookmarks = this.moveUnreadBookmarks.bind(this);
+    this.getRecollectInfo = this.getRecollectInfo.bind(this);
   }
 
   initState() {
@@ -46,11 +47,28 @@ class App extends React.Component {
     this.props.history.push("/");
   }
 
+  getRecollectInfo() {
+    axios
+      .get("https://localhost:4000/recollect", {
+        headers: { Authorization: `${this.state.accessToken}` },
+        withCredentials: true,
+      })
+      .then((res) => {
+        const bookmark = getbookmark(res.data.data.bookmark);
+        return bookmark;
+      })
+      .catch((err) => {
+        if (err.message === "Not Allowed") {
+          this.props.getRefreshToken();
+        }
+      });
+  }
+
   handleLogOut() {
     axios
       .get("https://localhost:4000/logout", {
         headers: { Authorization: `${this.state.accessToken}` },
-        withCredentials: true
+        withCredentials: true,
       })
       .then(() => {
         this.initState();
@@ -63,7 +81,6 @@ class App extends React.Component {
 
   //// 자체 로그인 성공시 ////
   loginSuccess(accessToken) {
-    console.log(accessToken);
     this.setState({
       isLogin: true,
       accessToken: accessToken, //accessToken 할당
@@ -90,7 +107,6 @@ class App extends React.Component {
         { withCredentials: true }
       )
       .then((res) => {
-        console.log(res);
         this.setState({
           accessToken: res.data.data,
         });
@@ -121,7 +137,6 @@ class App extends React.Component {
   //* GitHub 앱이 사용자의 액세스 토큰을 사용하여 API에 액세스
   //사용자의 액세스 토큰을 사용하면 GitHub 앱이 사용자를 대신하여 API에 요청을 할 수 있음
   getGitHubUserInfo() {
-    console.log("access token ", this.state.accessToken);
     axios
       .get("https://api.github.com/user", {
         headers: {
@@ -132,7 +147,6 @@ class App extends React.Component {
         this.setState({
           socialId: res.data.id,
         });
-        console.log("데이터를 출력하겠습니다", res.data);
         this.logcheck(res.data.id);
       });
   }
@@ -151,7 +165,6 @@ class App extends React.Component {
         }
       )
       .then((res) => {
-        console.log(res);
         // login post 요청
         axios
           .post(
@@ -245,6 +258,7 @@ class App extends React.Component {
                 history={this.props.history}
                 accessToken={this.state.accessToken}
                 getRefreshToken={this.getRefreshToken}
+                getRecollectInfo={this.getRecollectInfo}
               />
             )}
           />
@@ -253,10 +267,11 @@ class App extends React.Component {
             path="/recollect"
             render={() => (
               <Recollect
-                unreadBookmarks={this.state.unreadBookmarks}
+                handleLogOut={this.handleLogOut}
                 history={this.props.history}
                 accessToken={this.state.accessToken}
                 getRefreshToken={this.getRefreshToken}
+                getRecollectInfo={this.getRecollectInfo}
               />
             )}
           />

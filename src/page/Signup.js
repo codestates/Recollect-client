@@ -23,7 +23,6 @@ class Signup extends React.Component {
         isSocialAccount: 1,
       })
       .then((res) => {
-        console.log(res); //uuid접근 다시 해보하기
         axios
           .post("https://localhost:4000/login", {
             uuid: res.data.data.userInfo.uuid, //테슼트

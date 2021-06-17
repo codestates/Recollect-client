@@ -1,20 +1,20 @@
-import React from 'react';
+import React from "react";
 
 const {
   IsValidiateUsername,
   IsValidiatePassword,
-} = require('../util/validiation');
+} = require("../util/validiation");
 
 class SignupComp extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      username: '',
-      email: '',
-      password: '',
-      passwordcheck: '',
-      errormessage: '',
+      username: "",
+      email: "",
+      password: "",
+      passwordcheck: "",
+      errormessage: "",
     };
 
     this.handleInputValue = this.handleInputValue.bind(this);
@@ -32,12 +32,12 @@ class SignupComp extends React.Component {
     if (!IsValidiateUsername(username)) {
       this.setState({
         errormessage:
-          '사용자 이름은 영문 대소문자, 숫자, 언더바, 하이픈을 사용한 4~16글자로 만들수 있습니다.',
+          "사용자 이름은 영문 대소문자, 숫자, 언더바, 하이픈을 사용한 4~16글자로 만들수 있습니다.",
       });
       return;
     } else {
       this.setState({
-        errormessage: '',
+        errormessage: "",
       });
     }
     this.props.handleCreateSocialAccount(this.state);
@@ -47,29 +47,29 @@ class SignupComp extends React.Component {
     const { username, email, password, passwordcheck } = this.state;
     if (!username || !email || !password) {
       this.setState({
-        errormessage: '모든 항목은 필수입니다.',
+        errormessage: "모든 항목은 필수입니다.",
       });
       return;
     } else if (password !== passwordcheck) {
       this.setState({
-        errormessage: '비밀번호가 서로 다릅니다.',
+        errormessage: "비밀번호가 서로 다릅니다.",
       });
       return;
     } else if (!IsValidiateUsername(this.state.username)) {
       this.setState({
         errormessage:
-          '유저네임은 영문 대소문자, 숫자, 언더바, 하이픈을 사용해 4글자이상 16글자 이하로 만들수 있습니다.',
+          "유저네임은 영문 대소문자, 숫자, 언더바, 하이픈을 사용해 4글자이상 16글자 이하로 만들수 있습니다.",
       });
       return;
     } else if (!IsValidiatePassword(this.state.password)) {
       this.setState({
         errormessage:
-          '비밀번호는 최소 한 글자 이상의 영문 대소문자, 숫/자, 특수문자(!, @, #, $, %, &, *) 를 포함한 8글자 이상으로 만들어야 합니다.',
+          "비밀번호는 최소 한 글자 이상의 영문 대소문자, 숫/자, 특수문자(!, @, #, $, %, &, *) 를 포함한 8글자 이상으로 만들어야 합니다.",
       });
       return;
     } else {
       this.setState({
-        errormessage: '',
+        errormessage: "",
       });
     }
 
@@ -88,7 +88,7 @@ class SignupComp extends React.Component {
             <input
               className="signupComp-input"
               type="text"
-              onChange={this.handleInputValue('username')}
+              onChange={this.handleInputValue("username")}
               placeholder="Username"
             />
           </div>
@@ -98,7 +98,7 @@ class SignupComp extends React.Component {
                 <div>
                   <input
                     className="signupComp-input"
-                    onChange={this.handleInputValue('email')}
+                    onChange={this.handleInputValue("email")}
                     type="email"
                     placeholder="Email"
                   />
@@ -106,7 +106,7 @@ class SignupComp extends React.Component {
                 <div>
                   <input
                     className="signupComp-input"
-                    onChange={this.handleInputValue('password')}
+                    onChange={this.handleInputValue("password")}
                     type="password"
                     placeholder="Password"
                   />
@@ -114,14 +114,14 @@ class SignupComp extends React.Component {
                 <div>
                   <input
                     className="signupComp-input"
-                    onChange={this.handleInputValue('passwordcheck')}
+                    onChange={this.handleInputValue("passwordcheck")}
                     type="password"
                     placeholder="Password-check"
                   />
                 </div>
               </>
             ) : (
-              ''
+              ""
             ) //socialId 있는 경우
           }
           <div>

@@ -1,5 +1,4 @@
 import React from "react";
-import { generateRandomColorPairArr } from "../util/randomColor";
 import axios from "axios";
 
 class BookmarkReadMode extends React.Component {
@@ -15,7 +14,6 @@ class BookmarkReadMode extends React.Component {
   }
 
   incrementCount() {
-    console.log(this.props.bookmarkInfo);
     axios
       .put(
         "https://localhost:4000/bookmark",
@@ -76,9 +74,6 @@ class BookmarkReadMode extends React.Component {
             <div> {descrip} </div>
             <div>
               {icon}
-              {/* {emojis.map((emoji) => {
-                return <span id="emoji"> {emoji} </span>;
-              })} */}
               <div id="created_at"> {createdAt} </div>
             </div>
           </div>
