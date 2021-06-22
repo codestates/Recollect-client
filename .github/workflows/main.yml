@@ -44,4 +44,4 @@ jobs:
            aws s3 cp \
            --recursive
            --region ap-northeast-2 \
-           build s3://
+           build s3://www.recollector.site
